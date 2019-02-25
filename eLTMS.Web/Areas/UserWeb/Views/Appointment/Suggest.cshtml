@@ -1,0 +1,235 @@
+﻿
+@using eLTMS.Models.Models.dto
+@{
+    ViewBag.Title = "Đặt lịch xét nghiệm";
+    HospitalSuggestionDto SuggestDto = ViewBag.SuggestDto;
+    HospitalSuggestionDto SuggestDto1 = ViewBag.SuggestDto1;
+    HospitalSuggestionDto SuggestDto2 = ViewBag.SuggestDto2;
+}
+
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Gợi ý các bệnh viện có khoa chuyên ngành</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!-- Service Area Start-->
+<div class="service_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" id="gan">
+                <a href="#" class="single_service">
+                    <h4><font color="red">Khám chuyên khoa gan</font></h4>
+                    <table>
+                        <tr><td><strong> BỆNH VIỆN NHIỆT ĐỚI</strong></td></tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Địa chỉ:
+                                </strong>764 Võ Văn Kiệt, P.1, Q.5, TP.HCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong> 028 3923 5804
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    BỆNH VIỆN BÌNH DÂN
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Địa chỉ:
+                                </strong>: 371 Điện Biên Phủ, P.4, Q.3, TP.HCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong> : 1900 7123
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    BỆNH VIỆN CHỢ RẪY
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    <p align="left">Địa chỉ:
+                                </strong> 201B Nguyễn Chí Thanh, P.12, Q.5, TP.HCM
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong>  028 3856 3534
+                            </td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+            <div class="col-md-4" id="tim">
+                <a href="#" class="single_service">
+                    <h4><font color="red">Khám chuyên khoa tim</font></h4>
+                    <table>
+                        <tr><td><strong>VIỆN TIM TP.HCM</strong></td></tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Địa chỉ:
+                                </strong>88 THÀNH THÁI, P.12, Q.10, TP.HCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong>(08)8651586
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    BỆNH VIỆN TIM TÂM ĐỨC
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <p align="left">
+                                    <strong>
+                                        Địa chỉ:
+                                    </strong>4 Nguyễn Lương Bằng, Tân Phú, Q.7, TP.HCM
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong> 0285 4110 025
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    BỆNH VIỆN NHÂN DÂN 115
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Địa chỉ:
+                                </strong> 818 Sư Vạn Hạnh, P.12, Q.10, TP.HCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong>  (028) 3865 0969
+                            </td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+            <div class="col-md-4" id="phoi">
+                <a href="#" class="single_service">
+                    <h4><font color="red">Khám chuyên khoa phổi</font></h4>
+                    <table>
+                        <tr><td><strong>BỆNH VIỆN CHỢ RẪY</strong></td></tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    <p align="left">Địa chỉ:
+                                </strong> 201B Nguyễn Chí Thanh, P.12, Q.5, TP.HCM
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong>  028 3856 3534
+                            </td>
+                        </tr>
+                        <tr><td><strong>TRUNG TÂM ĐIỀU TRỊ HÔ HẤP PHỔI VIỆT</strong></td></tr>
+                        <tr>
+                            <td style="float:left">
+                                <p align="left">
+                                    <strong>
+                                        Địa chỉ:
+                                    </strong>20 Ngô Quyền, P.5, Q.10, TP.HCM
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong>0903.903.884
+                            </td>
+                        </tr>
+                        <tr><td><strong>BỆNH VIỆN PHẠM NGỌC THẠCH</strong></td></tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Địa chỉ:
+                                </strong> 120 Hùng Vương, P.12, Quận 5, TPHCM
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left">
+                                <strong>
+                                    Điện thoại:
+                                </strong> (08) 38550207
+                            </td>
+                        </tr>
+                    </table>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<!-- Service Area End-->
+
+@section scripts {
+    <script>
+        @*function loadData() {
+            if (@(SuggestDto.HospitalPhone)) {
+            document.getElementById("tim").style.display = 'none';
+        }
+        @*if ( @(SuggestDto1.HospitalPhone)==null) {
+           document.getElementById("gan").style.display = 'none';
+        }
+        if ( @(SuggestDto2.HospitalPhone)==null) {
+           document.getElementById("phoi").style.display = 'none';
+        }
+        }
+        loadData();
+        *@
+    </script>
+}

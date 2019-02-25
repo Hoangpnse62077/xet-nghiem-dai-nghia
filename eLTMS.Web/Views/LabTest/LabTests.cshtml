@@ -1,0 +1,382 @@
+﻿
+@{
+    ViewBag.Title = "LabTests";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="content-header">
+    <h1>
+        Quản Lý Loại Xét Nghiệm
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Danh Sách Các Xét Nghiệm</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <button class="btn btn-success" id="btnAddNew">Thêm mới dịch vụ xét nghiệm</button>
+                    <button class="btn btn-success" id="btnViewSampleGroup">Nhóm xét nghiệm</button>
+                    <button class="btn btn-success" id="btnViewSample">Loại xét nghiệm</button>
+                    <br />
+                    <br />
+
+                    <input type="text" id="txtSearch" placeholder="Tìm kiếm(Tên,Mã)" />
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã xét nghiệm</th>
+                                <th>Tên xét nghiệm</th>
+                                <th>Loại xét nghiệm</th>
+                                <th>Gía</th>
+                                <th>Mô tả</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.col -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
+<div style="margin-left:35%" id="pagination" class="pagination">
+</div>
+<!--Xác nhận thao tác-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Bạn có muốn xóa</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-no">Không</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-si">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Thêm mới dịch vụ xét nghiệm</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="/action_page.php">
+
+                    <input type="hidden" class="form-control" id="txtLabTestId" name="txtLabTestId" value="0">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Mã xét nghiệm</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCode" name="txtCode">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tên xét nghiệm</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtName" name="txtName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Loại</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ddlType">
+                                <option value="">
+                                    ----- Chọn -----
+                                </option>
+                                <option value="1">
+                                    Máu
+                                </option>
+                                <option value="2">
+                                    Nước tiểu
+                                </option>
+                                <option value="3">
+                                    Tế bào học
+                                </option>
+                                <option value="4">
+                                    Phân
+                                </option>
+                                <option value="5">
+                                    Dịch
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Gía</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="txtPrice" name="txtPrice">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Mô tả</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtDescription" name="txtDescription">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Thêm mới loại xét nghiệm</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="/action_page.php">
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tên loại xét nghiệm</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtSampleName" name="txtSampleName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Nhóm xét nghiệm</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ddlSampleType">
+                                <option value="">
+                                    ----- Chọn -----
+                                </option>
+                                <option value="1">
+                                    Máu & nước tiểu
+                                </option>
+                                <option value="2">
+                                    Phân
+                                </option>
+                                <option value="3">
+                                    Tế bào
+                                </option>
+                                <option value="4">
+                                    Dịch
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Mô tả</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtSampleDescription" name="txtDescription">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="btnSaveSample" class="btn btn-success">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Thêm Mới Nhóm Xét Nghiệm</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tên Nhóm xét nghiệm</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtGroupName" name="txtGroupName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Thời gian tiến hành</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="txtTime" name="txtTime">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Bắt đầu</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="txtStart" name="txtStart">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Kết thúc</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="txtClose" name="txtClose">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="btnSaveSampleGroup" class="btn btn-success">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Danh sách các loại xét nghiệm</h4>
+            </div><br />
+            <button class="btn btn-success" id="btnAddNewSample">Thêm mới loại xét nghiệm</button>
+            <div class="modal-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên Loại xét nghiệm</th>
+                            <th>Nhóm xét nghiệm</th>
+                            <th>Mô tả</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblDataSample"></tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModal4" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Danh sách các nhóm xét nghiệm</h4>
+            </div>
+            <br />
+            <button class="btn btn-success" id="btnAddNewSampleGroup">Thêm mới nhóm xét nghiệm</button>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên Nhóm xét nghiệm</th>
+                                <th>Thời Gian tiến hành lấy mẫu</th>
+                                <th>Bắt đầu</th>
+                                <th>Kết thúc</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblDataSampleGroup"></tbody>
+                    </table>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Code}}</td>
+        <td>{{Name}}</td>
+        <td>{{Type}}</td>
+        <td>{{Price}}</td>
+        <td>{{Description}}</td>
+        <td>
+            <button class="btn btn-primary btn-edit" data-id="{{LabTestId}}"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn btn-danger btn-delete" data-id="{{LabTestId}}" onclick="homeController.checkIsDelete({{LabTestId}})"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+
+<script id="dataSample-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Name}}</td>
+        <td>{{Type}}</td>
+        <td>{{Description}}</td>
+        <td>
+            <button class="btn btn-danger btn-deleteSample" data-id="{{SampleId}}"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+<script id="dataSampleGroup-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Name}}</td>
+        <td>{{Duration}}</td>
+        <td>{{Start}}</td>
+        <td>{{Close}}</td>
+        <td>
+            <button class="btn btn-danger btn-deleteSampleGroup" data-id="{{SampleGroupId}}"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+
+
+<script src="~/Scripts/customScript/importLabTest.js"></script>

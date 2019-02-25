@@ -1,0 +1,151 @@
+﻿@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Đăng ký</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!-- register Page Start-->
+<div class="appoinment_form_area register_page_area">
+    <div class="container">
+        <form id="form" action="/UserWeb/Account/RegisterPatient" method="post">
+            @Html.AntiForgeryToken()
+            <table id="p-table" style="margin: 0 auto" cellspacing="10">
+                <tr>
+                    <td>Họ tên:</td>
+                    <td class="text-left">
+                        <input type="text" name="fullName" style="width: 230px" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Giới tính:</td>
+                    <td class="text-left">
+                        <label>
+                            <input type="radio" name="gender" value="Male" checked />
+                            Nam
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="Female" />
+                            Nữ
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ngày sinh:</td>
+                    <td class="text-left">
+                        <input type="date" name="dateOfBirth" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Số điện thoại:</td>
+                    <td class="text-left">
+                        <input type="text" name="phoneNumber" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td class="text-left">
+                        <input type="email" name="email" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu:</td>
+                    <td class="text-left">
+                        <input type="password" name="password" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nhập lại mật khẩu:</td>
+                    <td class="text-left">
+                        <input type="password" name="confirmPassword" />
+                        <div class="valid-mess"></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="button-box">
+                <button type="reset" class="custom_btn">
+                    Reset
+                </button>
+                <button id="btnSubmit" type="button" class="custom_btn">
+                    Đăng ký
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- register Page End-->
+
+@section scripts{
+    <script>
+        $('#btnSubmit').click(function(){
+            // validate
+            var valid = true;
+            
+            var fullName = $('[name=fullName]').val().trim();
+            if (fullName == null || fullName == '') {
+                valid = false;
+                $('[name=fullName] ~ .valid-mess').html('Vui lòng điền họ tên của bạn.');
+            } else if (fullName.length > 50) {
+                valid = false;
+                $('[name=fullName] ~ .valid-mess').html('Họ tên không quá 50 ký tự.');
+            }
+
+            var dateOfBirth = $('[name=dateOfBirth]').val().trim();
+            if (dateOfBirth == null || dateOfBirth == '') {
+                valid = false;
+                $('[name=dateOfBirth] ~ .valid-mess').html('Vui lòng điền ngày sinh của bạn.');
+            }
+
+            var phoneNumber = $('[name=phoneNumber]').val().trim();
+            if (phoneNumber == null || phoneNumber == '') {
+                valid = false;
+                $('[name=phoneNumber] ~ .valid-mess').html('Vui lòng điền số điện thoại của bạn.');
+            }
+
+            var email = $('[name=email]').val().trim();
+            // RFC 5322 Official Standard
+            var emailRegex = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var pattern = new RegExp(emailRegex);
+            if (email == null || email == '') {
+                valid = false;
+                $('[name=email] ~ .valid-mess').html('Vui lòng điền email của bạn.');
+            } else if (pattern.test(email) == false) {
+                valid = false;
+                $('[name=phoneNumber] ~ .valid-mess').html('Email của bạn không đúng.');
+            }
+
+            var password = $('[name=password]').val().trim();
+            var confirmPassword = $('[name=confirmPassword]').val().trim();
+            if (password == null || password == '') {
+                valid = false;
+                $('[name=password] ~ .valid-mess').html('Vui lòng điền mật khẩu của bạn.');
+            }
+            if (confirmPassword == null || confirmPassword == '') {
+                valid = false;
+                $('[name=confirmPassword] ~ .valid-mess').html('Vui lòng điền xác nhận mật khẩu của bạn.');
+            }
+            if (password != confirmPassword) {
+                valid = false;
+                $('[name=confirmPassword] ~ .valid-mess').html('Mật khẩu không khớp.');
+            }
+
+            // submit
+            if (valid) {
+                $('#form').submit();
+            }
+        });
+    </script>    
+}

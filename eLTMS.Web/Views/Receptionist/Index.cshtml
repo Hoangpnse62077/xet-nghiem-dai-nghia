@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "Hospital Receptionist";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 22px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(16px);
+        -ms-transform: translateX(16px);
+        transform: translateX(16px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 10px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+<div class="alert" role="alert" id="result" hidden></div>
+
+<section class="content-header">
+    <h1>
+        DANH SÁCH BỆNH NHÂN 
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-body">
+                    <br />
+                    <br />
+                    <label>Tìm kiếm:</label>
+                    <input type="text" id="txtSearch" placeholder="Tên/Sđt" />
+                    @*<button class="btn btn-success" id="btnSearch">Search</button>*@
+                    <label>Ngày:</label>
+                    <input type="date" class="Date" id="select-date" />
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ & tên</th>
+                                <th>Ngày sinh</th>                            
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Chi tiết cuộc hẹn</th>
+                                <th>Thanh toán</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
+<div style="margin-left:35%" id="pagination" class="pagination">
+</div>
+
+<!--Modal detail ycm-->
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Thông tin các cuộc hẹn</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example3" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            @*<th>SampleGetting ID</th>*@
+                            <th>Tên xét nghiệm</th>
+                            @*<th>Loại xét nghiệm</th>*@
+                            <th>Giờ xét nghiệm</th>
+                            <th>Ngày đặt lịch</th>
+                            <th>Giờ đặt lịch</th>
+                            <th>Trạng thái cuộc hẹn</th>
+                            <th>Xóa cuộc hẹn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblData1"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Xác nhận thao tác thanh toan-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Thực hiện thanh toán</h4>
+            </div>
+            <div>
+                <table id="checkGia" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Loại xét nghiệm</th>
+                            <th>Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblPriceData"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-no">Không</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-si">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Thanh toán-->
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{OrderNumber}}</td>
+        <td>{{FullName}}</td>
+        <td>{{DOBirth}}</td>
+        @*<td>{{ID}}</td>*@
+        <td>{{Phone}}</td>
+        <td>{{Address}}</td>
+        <td>
+            <button class="btn btn-primary btn-View" data-id="{{PatientID}}"><i class="fa fa-pencil-square-o"></i></button>
+        </td>
+        <td>
+            <label class="switch">
+                <input data-id="{{PatientID}}" id="{{PatientID}}" onclick="{{ReadOnly}}" {{Checked}} onchange="homeController.checkIsPaid({{PatientID}})" type="checkbox" ">
+                <span class="slider round"></span>
+            </label>
+        </td>
+    </tr>
+</script>
+
+<!--script load giá-->
+<script id="data-template2" type="x-tmpl-mustache">
+    <tr>
+        <td>{{OrderNumber}}</td>
+        <td>{{LabtestName}}</td>
+        <td>{{Price}}</td>
+    </tr>
+</script>
+<script id="data-template3" type="x-tmpl-mustache">
+    <tr>
+        <td></td>
+        <td>Tổng giá:</td>
+        <td>{{TotalPrice}}</td>
+    </tr>
+</script>
+
+
+<!--Modal detail app ycm-->
+<script id="data-template1" type="x-tmpl-mustache">
+    <tr>
+        <td>{{OrderNum}}</td>
+        @*<td>{{SgId}}</td>*@
+        <td>{{SampleName}}</td>
+        @*<td>{{LabTesting}}</td>*@
+        <td>{{StartTime}}</td>
+        <td>{{EnterDate}}</td>
+        <td>{{EnterTime}}</td>
+        <td>{{Status}}</td>
+        <td align="center">
+            <button class="btn btn-danger btn-deleteSG" data-id="{{SgId}}"><i class="fa fa-close"></i></button>
+        </td>
+    </tr>
+</script>
+<script src="~/Scripts/customScript/receptionist.js"></script>
+
+

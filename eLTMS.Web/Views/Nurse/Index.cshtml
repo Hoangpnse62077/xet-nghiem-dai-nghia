@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Nurse Page";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 22px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 15px;
+            width: 15px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(16px);
+        -ms-transform: translateX(16px);
+        transform: translateX(16px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 10px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+<!--Xác nhận thao tác-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Bạn có muốn thay đổi</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-no">Không</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-si">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert" role="alert" id="result" hidden></div>
+
+<section class="content-header">
+    <h1>
+        DANH SÁCH LẤY MẪU
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-body">
+
+                    <br />
+                    <br />
+                    <label>Tìm kiếm:</label>
+                    <input type="text" id="txtSearch" placeholder="Tên bệnh nhân" />
+                    @*<button class="btn btn-success" id="btnSearch">Search</button>*@
+                    <label>Loại xét nghiệm:</label>
+                    <select class="Sample" id="select-sample">
+                        <option value="1">Máu & Nước tiểu</option>
+                        <option value="3">Tế bào học</option>
+                        <option value="4">Phân</option>
+                        <option value="5">Dịch</option>
+                    </select>
+                    <label>Ngày:</label>
+                    <input type="date" class="Date" id="select-date" />
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ & tên</th>
+                                <th>Ngày sinh</th>
+                                <th>Loại xét nghiệm</th>
+                                <th>Mã ống nghiệm</th>
+                                <th>LabTesting ID</th>
+                                <th>Giờ xét nghiệm</th>
+                                <th>Đã lấy mẫu</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
+<div style="margin-left:35%" id="pagination" class="pagination">
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{OrderNumber}}</td>
+        <td>{{FullName}}</td>
+        <td>{{DOB}}</td>
+        <td>{{SampleName}}</td>
+        <td>{{SgId}}</td>
+        <td>{{LtIds}}</td>
+        <td>{{StartTime}}</td>
+        <td>
+            <label class="switch">
+                <input id="{{SampleGettingId}}" onclick="{{ReadOnly}}" {{Checked}} onchange="homeController.checkIsGot({{SgId}})" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+
+        </td>
+
+    </tr>
+</script>
+
+<script src="~/Scripts/customScript/nurseChangeSttScript.js"></script>
+
+

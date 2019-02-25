@@ -1,0 +1,200 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A simple, clean, and responsive HTML invoice template</title>
+
+    <style>
+        .invoice-box {
+            max-width: 100%;
+            margin: auto;
+            /*padding: 5px;*/
+            /*border: 1px solid #eee;*/
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            /*font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;*/
+            font-family: "Times New Roman", Times, serif;
+            color: black;
+        }
+
+            .invoice-box table {
+                width: 100%;
+                line-height: inherit;
+                text-align: left;
+            }
+
+                .invoice-box table td {
+                    padding-top: 3px;
+                    padding-bottom: -3px;
+                    vertical-align: top;
+                }
+
+                .invoice-box table tr td:nth-child(2) {
+                    text-align: center;
+                }
+
+                .invoice-box table tr.top table td {
+                    /*padding-bottom: 10px;*/
+                }
+
+                    .invoice-box table tr.top table td.title {
+                        font-size: 45px;
+                        line-height: 45px;
+                        color: #333;
+                    }
+
+                .invoice-box table tr.information table td {
+                    padding-bottom: 10px;
+                }
+
+                .invoice-box table tr.heading td {
+                    background: #eee;
+                    border-bottom: 1px solid #ddd;
+                    font-weight: bold;
+                    padding-bottom:0px;
+                }
+
+                .invoice-box table tr.details td {
+                    padding-bottom: 10px;
+                }
+
+                .invoice-box table tr.item td {
+                    /*/border-bottom: 1px solid #eee;*/
+                    font-size : 13px;
+                    padding-left:10px;
+                }
+                .invoice-box table tr.item.last {
+                    border-bottom: none;
+                    background-color: red;
+                }
+                .invoice-box table tr.item.last td {
+                    border-bottom: none;
+                    background-color:red;
+                }
+
+                .invoice-box table tr.total td:nth-child(2) {
+                    border-top: 2px solid #eee;
+                    font-weight: bold;
+                }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+            .rtl table {
+                text-align: right;
+            }
+
+                .rtl table tr td:nth-child(2) {
+                    text-align: left;
+                }
+        #detail{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-box">
+        <h3 style="margin-bottom:0px;margin-top:-12px; text-align:center">PHÒNG KHÁM ĐA KHOA HƯƠNG BÌNH</h3>
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="3">
+                    <table>
+                        <tr>
+                            <td>
+                                Địa chỉ: Đường Hùng Vương - Thị Trấn Kiến Giang - Lệ Thủy - Quảng Bình
+                                <br /> ĐT: 0982.961.769/ 0913 058 769
+
+                            </td>
+                        </tr>
+
+                    </table>
+                    <p style="margin-left:35%;margin-top:-1px">
+                        Họ và tên: <b>{{PatientName}}</b> &nbsp;&nbsp;&nbsp;   Tuổi: {{Age}}   &nbsp;&nbsp;&nbsp;   Giới tính: {{Gender}}
+                        <br />
+                        Địa chỉ: {{HomeAddress}} <br />
+                        Chẩn đoán: Khám SK  &nbsp;&nbsp;&nbsp;
+                        <br />
+                        Ngày xét nghiệm:  {{CreatedDate}}
+                    </p>
+                    <h2 style="text-align:center;margin-top:-100px">KẾT QUẢ {{LabTestType}}</h2>
+                </td>
+            </tr>
+            <tr style="border-collapse: collapse;border: 1px solid black;margin-left:50px">
+                <th style="border-collapse: collapse;border: 1px solid black;">
+                    Chỉ số
+                </th>
+
+                <th style="border-collapse: collapse;border: 1px solid black;">
+
+                    Kết quả
+                </th>
+                <th style="border-collapse: collapse;border: 1px solid black;">
+
+                    Trị số bình thường
+                </th>
+            </tr>
+                            {{LabTestDetails}}
+                            <tr class="">
+                                <td></td>
+
+                                <td colspan="2">
+                                    </tdcolspan="3">
+
+                            </tr>
+                    </p>
+
+                </td>
+            </tr>
+
+            <tr class="">
+                <td colspan="3">
+                    <table style="padding-top:2px">
+                        <tr></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <p style="padding-left:0px;">
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+            &nbsp;  &nbsp;&nbsp;&nbsp;
+            &nbsp; BÁC SĨ KHÁM BỆNH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+            &nbsp;
+
+            &nbsp;
+
+            &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TRƯỞNG PHÒNG XÉT NGHIỆM
+        </p>
+        <p style="padding-left:100px;max-width:100px">
+
+            
+        </p>
+
+    </div>
+</body>
+</html>

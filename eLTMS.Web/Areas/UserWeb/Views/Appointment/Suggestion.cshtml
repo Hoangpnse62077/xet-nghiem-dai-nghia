@@ -1,0 +1,114 @@
+﻿@using eLTMS.Models.Models.dto
+@{
+    ViewBag.Title = "Đặt lịch xét nghiệm";
+    ResultOfAppointmentDto resultDto = ViewBag.ResultDto;
+}
+@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Bệnh viện Đề Nghị</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<div class="appointment_result_area p100">
+    <div class="container">
+        <div class="content-box">
+            <div class="container">
+                <h2>Form control: inline radio buttons</h2>
+                <p>The form below contains three inline radio buttons:</p>
+                <form>
+                    <form>
+                        <div class="checkbox">
+                            <div><input type="checkbox" value="" onclick="myFunctionTim()">Tim</div>
+                            <div id="tim">
+                                <p>
+                                    <text style="color:red">[TIM]</text> VIỆN TIM TP.HCM
+                                    Địa chỉ: 88 THÀNH THÁI, P.12, Q.10, TP. HCM
+                                    Điện thoại: (08)8651586
+                                </p>
+                                <p>
+                                    <text style="color:red">[TIM]</text>BỆNH VIỆN TIM TÂM ĐỨC
+                                    Địa chỉ: 4 Nguyễn Lương Bằng, khu đô thị mới Phú Mỹ Hưng,
+                                    Tân Phú, Quận 7, Hồ ChíMinh
+                                    Điện thoại: 0285 4110 025
+                                </p>
+                                <p>
+                                    <text style="color:red">[TIM]</text> BỆNH VIỆN NHÂN DÂN 115
+                                    Địa chỉ: 818 Sư Vạn Hạnh (nối dài), phường 12, quận 10, TP.
+                                    HCM
+                                    Điện thoại: (028) 3865 0969
+                                </p>
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <div><input type="checkbox" value="" onclick="myFunctionGan()">Gan</div>
+                            <div id="gan">
+                                <p>
+                                    <text style="color:red">[GAN]</text> BỆNH VIỆN NHIỆT ĐỚI
+                                    Địa chỉ: 764 Võ Văn Kiệt, P.1, Q.5, TP.HCM
+                                    Điện thoại: 028 3923 5804
+                                </p>
+                                <p>
+                                    <text style="color:red">[GAN]</text>BỆNH VIỆN BÌNH DÂN
+                                    Địa chỉ: 371 Điện Biên Phủ, P.4, Q.3, TP.HCM
+                                    Điện thoại: 028 3923 5804
+                                </p>
+                                <p>
+                                    <text style="color:red">[GAN]</text>  BỆNH VIỆN CHỢ RẪY
+                                    Địa chỉ: 201B Nguyễn Chí Thanh, P. 12, Q.5, TP.HCM
+                                    Điện thoại: 028 3856 3534
+                                </p>
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <div><input type="checkbox" value="" onclick="myFunctionGan()">Phoi</div>
+                            <div id="phoi">
+                                Thong tin
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+            <h2 class="result-title">
+                Chuyên Khoa
+            </h2>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    function myFunctionTim() {
+        var x = document.getElementById("tim");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function myFunctionGan() {
+        var x = document.getElementById("gan");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function myFunctionPhoi() {
+        var x = document.getElementById("phoi");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

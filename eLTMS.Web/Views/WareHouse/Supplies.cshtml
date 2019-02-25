@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Supplies";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<section class="content-header">
+    <h1>
+        Quản Lý Vật Tư
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+
+                <div class="box-body">
+                    <button class="btn btn-success" id="btnAddNew">Thêm mới</button>
+                    <br />
+                    <br />
+
+                    <input type="text" id="txtSearch" placeholder="Tìm kiếm(Tên,Mã vật tư)" />
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã vật tư</th>
+                                <th>Tên vật tư</th>
+                                <th>Loại vật tư</th>
+                                <th>Số lượng</th>
+                                <th>Đơn vị</th>
+                                <th>Ghi chú</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
+<div style="margin-left:35%" id="pagination" class="pagination">
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Mã vật tư</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="/action_page.php">
+
+                    <input type="hidden" class="form-control" id="txtSupplyId" name="txtSupplyId" value="0">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Mã vật tư</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCode" name="txtCode">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tên vật tư</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtName" name="txtName">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Loại vật tư</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ddlSupplyType">
+                                <option value="">
+                                    ----- Chọn loại vật tư  -----
+                                </option>
+                                <option value="1">
+                                    Hóa chất
+                                </option>
+                                <option value="2">
+                                    Dụng cụ
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Đơn vị</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ddlSupplyUnit">
+                                <option value="">
+                                    ----- Chọn loại đơn vị  -----
+                                </option>
+                                <option value="Cái">
+                                    Cái
+                                </option>
+                                <option value="Hộp">
+                                    Hộp
+                                </option>
+                                <option value="Lọ">
+                                    Lọ
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Ghi chú</label>
+                        <div class="col-sm-10">
+                            <textarea rows="4" id="txtNote" cols="50" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--Xác nhận thao tác-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Bạn có muốn thay đổi</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="modal-btn-no">Không</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-si">Có</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{SuppliesCode}}</td>
+        <td>{{SupplyName}}</td>
+        <td>{{SupplyTypeName}}</td>
+        <td>{{Quantity}}</td>
+        <td>{{Unit}}</td>
+        <td>{{Note}}</td>
+        <td>
+            <button class="btn btn-primary btn-edit" data-id="{{SupplyId}}"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn btn-danger btn-delete" data-id="{{SupplyId}}" onclick="homeController.checkIsDelete({{SupplyId}})"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+
+
+
+
+
+
+<script src="~/Scripts/customScript/allSupplies.js"></script>

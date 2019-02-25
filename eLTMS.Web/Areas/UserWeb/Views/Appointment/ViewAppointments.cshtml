@@ -1,0 +1,164 @@
+﻿@using eLTMS.DataAccess.Models
+@using eLTMS.Models
+@{
+    ViewBag.Title = "Danh sách cuộc hẹn";
+    var account = (Account)Session[ConstantManager.SESSION_PATIENT_ACCOUNT];
+    var accountId = -1;
+    if (account != null)
+    {
+        accountId = account.AccountId;
+    }
+}
+@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Danh sách cuộc hẹn</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!-- appoinment Page Start-->
+<div class="view_appointments_area p50">
+    <div class="container">
+        <div class="content-box">
+
+            <div class="text-right">
+                <b>Lọc theo trạng thái:</b>
+
+                <div class="pretty p-icon p-smooth p-bigger">
+                    <input type="checkbox" id="chkNew" />
+                    <div class="state p-danger">
+                        <i class="icon fa fa-check"></i>
+                        <label>mới tạo</label>
+                    </div>
+                </div>
+                <div class="pretty p-icon p-smooth p-bigger">
+                    <input type="checkbox" id="chkProcess" />
+                    <div class="state p-danger">
+                        <i class="icon fa fa-check"></i>
+                        <label>đang xử lí</label>
+                    </div>
+                </div>
+                <div class="pretty p-icon p-smooth p-bigger">
+                    <input type="checkbox" id="chkDone" />
+                    <div class="state p-danger">
+                        <i class="icon fa fa-check"></i>
+                        <label>hoàn tất</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-nodata" class="text-center" style="display: none">
+                Không có cuộc hẹn nào.
+            </div>
+
+            <div id="content-result" style="display: none">
+
+                @*<div class="text-center" style="margin-bottom: 30px" hidden>
+                <p>
+                    <b>Tên bệnh nhân:</b>
+                    <span id="patient-name"></span>
+                </p>
+                <p>
+                    <b>Ngày sinh:</b>
+                    <span id="patient-dob"></span>
+                </p>
+                <p>
+                    <b>Số điện thoại:</b>
+                    <span id="patient-phone"></span>
+                </p>
+            </div>*@
+
+                @*<div style="margin: 25px 0 25px 35%" id="pagination" class="div-pagination">
+            </div>*@
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 145px">Mã cuộc hẹn</th>
+                            <th>Bệnh nhân</th>
+                            <th>Thời gian lấy mẫu</th>
+                            <th>Các loại xét nghiệm</th>
+                            <th style="min-width: 120px">Trạng thái</th>
+                            <th style="min-width: 110px">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblData"></tbody>
+                </table>
+
+                <div id="pagination" class="div-pagination">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{AppointmentCode}}</td>
+        <td>{{PatientName}}</td>
+        <td>
+            <ul>
+                {{#SampleGettings}}
+                <li>
+                    <span class="sample-name">{{SampleName}}:</span>
+                    ngày
+                    <span class="sg-date">{{GettingDate}}</span>
+                    lúc
+                    <span class="sg-time">{{FmStartTime}} - {{FmFinishTime}}</span>
+                </li>
+                {{/SampleGettings}}
+            </ul>
+        </td>
+        <td>
+            <ul>
+                {{#LabTests}}
+                <li>
+                    {{LabTestName}}:
+                    <span class="price">{{sPrice}} đ</span>
+                </li>
+                {{/LabTests}}
+            </ul>
+            <span class="title-total-price">Tổng chi phí:</span>
+            <span class="price">{{TotalPrice}} đ</span>
+        </td>
+        <td>
+            {{#IsNew}}
+            <spane class="stt-tag stt-new">mới tạo</spane>
+            {{/IsNew}}
+            {{#IsDone}}
+            <spane class="stt-tag stt-done">hoàn tất</spane>
+            {{/IsDone}}
+            {{#IsProcess}}
+            <spane class="stt-tag stt-process">đang xử lí</spane>
+            {{/IsProcess}}
+        </td>
+        <td>
+            {{#IsNew}}
+            <a href="/UserWeb/Appointment/Edit?appointmentId={{AppointmentId}}" target="_self" tooltips class="btn btn-primary btn-edit" data-id="{{AppointmentId}}"><i class="fa fa-edit"></i></a>
+            <button class="btn btn-danger btn-delete" data-id="{{AppointmentId}}"><i class="fa fa-trash-alt"></i></button>
+            {{/IsNew}}
+            {{#IsDone}}
+            <a href="/UserWeb/Appointment/Result?appointmentId={{AppointmentId}}" target="_blank" class="btn btn-success btn-result" data-id="{{AppointmentId}}">
+                <i class="fa fa-eye"></i>
+            </a>
+            {{/IsDone}}
+        </td>
+    </tr>
+</script>
+
+@section scripts{
+    <script>
+        accountId = @accountId;
+    </script>
+    <script src="~/Areas/UserWeb/Scripts/Appointment/ViewAppointments.js"></script>
+}

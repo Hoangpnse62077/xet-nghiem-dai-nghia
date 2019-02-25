@@ -1,0 +1,58 @@
+﻿@{ 
+    var returnUrl = ViewBag.ReturnUrl;
+    var errorMessage = ViewBag.ErrorMessage;
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Đăng nhập</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+<!-- login Page Start-->
+<div class="appoinment_form_area login_page_area">
+    <div class="container">
+        <form action="@Url.Action("CheckLoginPatient", "Account")" method="post">
+            <input name="returnUrl" type="hidden" value="@returnUrl" />
+            <table style="margin: 0 auto" cellspacing="10">
+                <tr>
+                    <td>Số điện thoại:</td>
+                    <td class="text-left">
+                        <input type="text" name="phoneNumber" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu:</td>
+                    <td class="text-left">
+                        <input type="password" name="password" />
+                    </td>
+                </tr>
+            </table>
+            <div class="error-message">
+                @errorMessage
+            </div>
+            <div class="button-box">
+                <button type="reset" class="custom_btn">
+                    Reset
+                </button>
+                <button type="submit" class="custom_btn">
+                    Đăng nhập
+                </button>
+            </div>
+            <div class="text-center">
+                Bạn chưa có tài khoản?
+                <a href="/UserWeb/HomePage/Register">Đăng ký</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- login Page End-->

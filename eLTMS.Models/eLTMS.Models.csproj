@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{26DC2CF1-D4E0-4BBE-99DF-EA0D33375D99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eLTMS.Models</RootNamespace>
+    <AssemblyName>eLTMS.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConstantManager.cs" />
+    <Compile Include="Enums\RoleEnum.cs" />
+    <Compile Include="Mapping\AutoMapperConfiguration.cs" />
+    <Compile Include="Models\dto\LabTestResultSearchDto.cs" />
+    <Compile Include="Models\dto\RegisterDto.cs" />
+    <Compile Include="Models\dto\PriceListItemDto.cs" />
+    <Compile Include="Models\dto\PriceListDto.cs" />
+    <Compile Include="Models\dto\PatientGetByDateTestingDto.cs" />
+    <Compile Include="Models\dto\ResponseObjectDto.cs" />
+    <Compile Include="Models\dto\SampleGettingForNurseBySampleDto.cs" />
+    <Compile Include="Models\dto\SlotOptionDto.cs" />
+    <Compile Include="Models\dto\AccountDto.cs" />
+    <Compile Include="Models\dto\AccountLoginDto.cs" />
+    <Compile Include="Models\dto\AppointmentAddDto.cs" />
+    <Compile Include="Models\dto\ResultOfLabTestingIndexDtos.cs" />
+    <Compile Include="Models\dto\ResultOfLabTestingDtos.cs" />
+    <Compile Include="Models\dto\ResultOfSampleGettingDto.cs" />
+    <Compile Include="Models\dto\ResultOfAppointmentDto.cs" />
+    <Compile Include="Models\dto\AppointmentGetAllDto.cs" />
+    <Compile Include="Models\dto\AppointmentGetByPhoneDto.cs" />
+    <Compile Include="Models\dto\AppointmentGetBySampleDto.cs" />
+    <Compile Include="Models\dto\AppointmentGetResultDto.cs" />
+    <Compile Include="Models\dto\AppointmentDto.cs" />
+    <Compile Include="Models\dto\AppointmentUpdateDto.cs" />
+    <Compile Include="Models\dto\FeedbackDto.cs" />
+    <Compile Include="Models\dto\EmployeeDto.cs" />
+    <Compile Include="Models\dto\ExportPaperDetailDto.cs" />
+    <Compile Include="Models\dto\ExportPaperDto.cs" />
+    <Compile Include="Models\dto\ImportPaperDetailDto.cs" />
+    <Compile Include="Models\dto\ImportPaperDto.cs" />
+    <Compile Include="Models\dto\HospitalSuggestionDto.cs" />
+    <Compile Include="Models\dto\LabTestDto.cs" />
+    <Compile Include="Models\dto\LabTestingDto.cs" />
+    <Compile Include="Models\dto\LabTestingIndexDto.cs" />
+    <Compile Include="Models\dto\PatientDto.cs" />
+    <Compile Include="Models\dto\SampleGettingForNurseDto.cs" />
+    <Compile Include="Models\dto\SampleGettingForReceptionistDto.cs" />
+    <Compile Include="Models\dto\SlotUsageDto.cs" />
+    <Compile Include="Models\dto\TokenDto.cs" />
+    <Compile Include="Models\dto\SlotDto.cs" />
+    <Compile Include="Models\dto\FileUploadModel.cs" />
+    <Compile Include="Models\dto\SampleGroupDto.cs" />
+    <Compile Include="Models\dto\SampleDto.cs" />
+    <Compile Include="Models\dto\SampleGettingDto.cs" />
+    <Compile Include="Models\dto\SupplyDto.cs" />
+    <Compile Include="Models\dto\LoginDto.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\DateTimeUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\eLTMS.DataAccess\eLTMS.DataAccess.csproj">
+      <Project>{81e344ad-370a-4aa6-98f5-8151677d2533}</Project>
+      <Name>eLTMS.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

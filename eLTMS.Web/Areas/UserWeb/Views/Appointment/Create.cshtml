@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Đặt lịch xét nghiệm";
+    var appDto = ViewBag.appDto;
+    var now = DateTime.Now;
+    var today = now.ToString("yyyy-MM-dd");
+    var tomorrow = now.AddDays(1).ToString("yyyy-MM-dd");
+    var maxDate = now.AddDays(7).ToString("yyyy-MM-dd");
+}
+
+
+@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Đặt lịch xét nghiệm</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+
+@(Html.Partial("_AppointmentForm"))
+
+@section scripts{
+    <script>
+        AppointDto = null;
+        Today = '@today';
+        Tomorrow = '@tomorrow';
+        MaxGettingDate = '@maxDate';
+    </script>
+    <script src="~/Areas/UserWeb/Scripts/Appointment/_AppointmentSuggestor.js"></script>
+    <script src="~/Areas/UserWeb/Scripts/Appointment/_AppointmentForm.js"></script>
+}

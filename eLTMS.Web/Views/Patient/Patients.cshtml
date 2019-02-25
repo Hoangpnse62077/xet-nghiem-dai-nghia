@@ -1,0 +1,284 @@
+﻿
+@{
+    ViewBag.Title = "Quản lí bệnh nhân";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section styles{
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">*@
+
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_editor.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_style.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/code_view.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/draggable.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/colors.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/emoticons.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image_manager.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/line_breaker.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/table.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/char_counter.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/video.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/fullscreen.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/file.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/quick_insert.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/help.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/third_party/spell_checker.css">
+    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/special_characters.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+
+    <style>
+        .modal {
+            overflow: auto !important;
+        }
+    </style>
+}
+
+<section class="content-header">
+    <h1>
+        Quản lí bệnh nhân
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Danh sách bệnh nhân</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <button class="btn btn-success" id="btnAddNew">Thêm mới</button>
+                    <br />
+                    <br />
+
+                    <input type="text" id="txtSearch" placeholder="Tìm kiếm" />
+                    <input type="text" id="txtSearchCode" placeholder="Mã xét nghiệm" />
+                    <table id="example2" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Mã bệnh nhân</th>
+                                <th>Tên bệnh nhân</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.col -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
+<div style="margin-left:35%" id="pagination" class="pagination">
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Mã bệnh nhân</h4>
+            </div>
+            <button class="btn btn-success" id="btnHistory">Lịch sử</button>
+            <div class="modal-body">
+                <div class="form-horizontal">
+
+                    <input type="hidden" class="form-control" id="txtPatientId" name="txtPatientId" value="0">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Mã bệnh nhân</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCode" name="txtCode" value="@ViewBag.BN" readonly>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Account ID</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtName" name="txtName">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Số chứng minh nhân dân</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCmnd" name="txtCmnd">
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Giới tính</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="ddlGender">
+                                <option value="">
+                                    ----- Chọn -----
+                                </option>
+                                <option value="Male">
+                                    Nam
+                                </option>
+                                <option value="Female">
+                                    Nữ
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Tuổi</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtPhoneNumber" name="txtName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Địa chỉ nhà</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtHomeAddress" name="txtName">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Địa chỉ công ty</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txtCompanyAddress" name="txtName">
+                        </div>
+                    </div>*@
+                    <!--<input type="file" id="FileUpload1" />
+                    <input type="button" id="btnUpload" value="Upload Files" />
+                    <img src="" id="avatar" width="160px" height="250px" style="display:block; margin-left:auto; margin-right:auto" />
+                                       -->
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="button" id="btnSave" class="btn btn-success">Lưu</button>
+                            <button type="button" class="btn btn-default" id="btnClose" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="myModal1" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">CHỈNH SỬA NHẬN XÉT</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" class="form-control" id="txtAppCode" name="txtAppCode" value="0">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Chẩn đoán:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="txtResult" name="txtResult">
+                    </div>
+                    <br /><label class="control-label col-sm-2" for="email">Ghi chú: </label><br />
+                    <div style="padding: 0 15px">
+                        <div id="txtCMTPT" style="margin-top: 30px"></div>
+                    </div>
+                </div>
+
+
+
+                @*<div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" id="btnSaveResult" class="btn btn-success">Lưu</button>
+                    </div>
+                </div>*@
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSaveResult" class="btn btn-success">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="myModalHistory" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Danh sách các kết quả xét nghiệm</h4>
+            </div>
+            <div class="modal-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã lịch hẹn</th>
+                            <th>Ngày xét nghiệm</th>
+                            <th>Kết luận xét nghiệm</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblDataLabTestingResult"></tbody>
+                </table>
+                <div style="margin-left:35%" id="pagination" class="pagination"></div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{PatientCode}}</td>
+        <td>{{FullName}}</td>
+        <td>{{PhoneNumber}}</td>
+        <td>{{HomeAddress}}</td>
+        <td>
+            <button class="btn btn-primary btn-edit" data-id="{{PatientId}}"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn btn-danger btn-delete" data-id="{{PatientId}}"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+<form target="_blank" action="/LabTest/ViewDetailOnWeb" style="display:none" id="hiddenFormView" method="post"> <input type="text" class="form-control" id="txtResultCodeView" name="code"></form>
+<form action="/LabTest/ExportOrderDetailToPdf" style="display:none" id="hiddenForm" method="post"> <input type="text" class="form-control" id="txtResultCode" name="code"></form>
+<script id="dataLabTestingResult-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{Getting}}</td>
+        <td>{{Name}}</td>
+        <td>{{Group}}</td>
+        <td>{{Status}}</td>
+
+        <td>
+            <button class="btn btn-primary btn-editResult" data-id="{{Getting}}"><i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn btn-success btn-viewResult" data-id="{{Getting}}"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-success btn-printResult" data-id="{{Getting}}"><i class="fa fa-print"></i></button>
+
+        </td>
+    </tr>
+</script>
+
+
+<script src="~/Scripts/customScript/importPatients.js"></script>

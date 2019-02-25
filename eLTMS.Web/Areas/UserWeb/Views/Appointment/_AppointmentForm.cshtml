@@ -1,0 +1,313 @@
+﻿<!-- appoinment Page Start-->
+<div class="appoinment_form_area create_appointment_area p100">
+    <div class="container">
+        <div class="step-box" id="step-0">
+            <h2 class="text-center">
+                <b><span>Bước 1/3</span>: Nhập thông tin bệnh nhân:</b>
+            </h2>
+            <div id="alert-patient" class="alert alert-danger" role="alert">
+                Xin quý khách vui lòng điền đủ thông tin!
+            </div>
+            <div class="text-center">
+                <style>
+                    #p-table td {
+                        border: none;
+                        vertical-align: top;
+                        padding-bottom: 10px;
+                    }
+                    #p-table label {
+                        margin-bottom: 0;
+                    }
+                    .valid-mess {
+                        color: red;
+                    }
+                </style>
+                <table id="p-table" style="margin: 0 auto" cellspacing="10">
+                    <tr>
+                        <td>Họ tên:</td>
+                        <td class="text-left">
+                            <input type="text" name="p-name" style="width: 230px" />
+                            <div class="valid-mess"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giới tính:</td>
+                        <td class="text-left">
+                            <label>
+                                <input type="radio" name="p-gender" value="Male" checked />
+                                Nam
+                            </label>
+                            <label>
+                                <input type="radio" name="p-gender" value="Female" />
+                                Nữ
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ngày sinh:</td>
+                        <td class="text-left">
+                            <input type="date" name="p-dob" />
+                            <div class="valid-mess"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Số điện thoại:</td>
+                        <td class="text-left">
+                            <input type="text" name="p-phone"/>
+                            <div class="valid-mess"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td class="text-left">
+                            <textarea type="text" name="p-address" rows="4" style="width: 300px"></textarea>
+                            <div class="valid-mess"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="button-box">
+                <button id="btn-next-01" type="button" class="custom_btn next_btn">
+                    <span>Bước 2</span>
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div> <!-- end step 1 -->
+        <div class="step-box" id="step-1" style="display: none">
+            <h2 class="text-center">
+                <b><span>Bước 2/3</span>: Chọn loại xét nghiệm:</b>
+            </h2>
+            <div id="alert-required-labtests" class="alert alert-danger" role="alert">
+                Xin quý khách vui lòng chọn các loại xét nghiệm cần làm!
+            </div>
+            <div id="step-1-form">
+            </div>
+            <div class="button-box">
+                <button id="btn-prev-10" type="button" class="custom_btn prev_btn">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Bước 1</span>
+                </button>
+                <button id="btn-next-12" type="button" class="custom_btn next_btn">
+                    <span>Bước 3</span>
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+            </div>
+        </div> <!-- end step 1 -->
+        <div class="step-box step-box-2" id="step-2" style="display: none">
+            <h2>
+                <b><span>Bước 3/3</span>: Chọn thời gian lấy mẫu:</b>
+            </h2>
+            <div id="alert-required-datetime" class="alert alert-danger" role="alert">
+                Xin quý khách vui lòng điền đầy đủ thông tin: ngày, giờ
+            </div>
+            <div id="step-2-form">
+            </div>
+
+            <div class="button-box text-center">
+                <button id="btn-prev-21" type="button" class="custom_btn prev_btn">
+                    <i class="fa fa-arrow-left"></i>
+                    <span>Bước 2</span>
+                </button>
+                <button id="btn-submit" type="button" class="custom_btn submit_btn">
+                    <span>Đặt lịch</span>
+                    <i class="fa fa-clock"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- appoinment Page End-->
+
+
+
+<!-- Modal -->
+<div id="verify-phone-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text text-center out-message">
+                    <p>
+                        Mã xác nhận đã được gửi đến số điện thoại
+                    </p>
+                    <p style="text-align:center; font-size: 30px; font-weight:bold">
+                        039 562 0718
+                    </p>
+                    <p>
+                        Quý khách vui lòng 
+                        <span style="font-weight: bold; color: red">nhập mã xác nhận</span>
+                        vào đây để tiếp tục đặt lịch:
+                    </p>
+                    <p>
+                        <input type="text" name="p-verify-code" style="margin-top:15px; text-align: center;color: #0a408a;font-weight: bold;font-size: 22px;width: 150px;" />
+                    </p>
+                    <p>
+                        <button id="btn-retake-code" class="btn btn-danger" style="margin-top: 10px">
+                            Xác nhận
+                        </button>
+                    </p>
+                    <p>
+                        <button id="btn-retake-code" class="btn btn-link" style="font-size: 12px">
+                            Nhận lại mã xác nhận
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="success-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text text-center out-message">Đặt lịch thành công!</div>
+            </div>
+            <div class="modal-footer">
+                <div class="button-box">
+                    <a href="/UserWeb/Appointment/ViewAppointments" class="btn btn-link">Xem danh sách lịch hẹn</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="fail-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text text-center out-message">
+                    Có lỗi xảy ra.
+                    Xin quý khách vui lòng thử lại.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="button-box">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->
+<div id="processing-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box-loader">
+                    <img class="img-loader" src="~/Areas/UserWeb/Images/color-dots-loader.gif" />
+                </div>
+                <div class="text text-center out-message">
+                    Hệ thống đang xử lí.<br />
+                    Xin quý khách vui lòng chờ trong giây lát...
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script id="step-1-template" type="x-tmpl-mustache">
+    {{#Samples}}
+    <div class="sample-box">
+        <h3>{{SampleName}}</h3>
+        <div data-sample-index="{{Index}}" class="row">
+            {{#LabTests}}
+            <div class="col-md-3">
+                <div class="pretty p-icon p-smooth p-bigger">
+                    <input type="checkbox" data-labtest-index="{{Index}}" data-labtest-id="{{LabTestId}}"
+                           {{#IsSelected}} checked{{/IsSelected}} />
+                    <div class="state p-danger">
+                        <i class="icon fa fa-check"></i>
+                        <label>{{LabTestName}}</label>
+                    </div>
+                </div>
+            </div>
+            {{/LabTests}}
+        </div>
+    </div>
+    {{/Samples}}
+</script>
+
+<script id="step-2-template" type="x-tmpl-mustache">
+    <table id="table-step2">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Lấy mẫu</th>
+                <th>Loại xét nghiệm</th>
+                <th>Giá (vnđ)</th>
+                <th>Ngày</th>
+                <th>Giờ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#Samples}}
+            {{#IsSelected}}
+            <tr data-sample-index="{{Index}}" data-sample-id="{{SampleId}}">
+                <td></td>
+                <td>{{SampleName}}</td>
+                <td>
+                    <ul class="text-left">
+                        {{#LabTests}}
+                        {{#IsChecked}}
+                        <li>{{LabTestName}}</li>
+                        {{/IsChecked}}
+                        {{/LabTests}}
+                    </ul>
+                </td>
+                <td>
+                    <ul class="ul-price text-right">
+                        {{#LabTests}}
+                        {{#IsChecked}}
+                        <li>{{FmPrice}}</li>
+                        {{/IsChecked}}
+                        {{/LabTests}}
+                    </ul>
+                </td>
+                <td>
+                    <input type="date" value="{{GettingDate}}" min="" max="" />
+                </td>
+                <td>
+                    <select style="overflow-y: scroll"></select>
+                </td>
+            </tr>
+            {{/IsSelected}}
+            {{/Samples}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td><b>Tổng cộng:</b></td>
+                <td id="total-price" class="text-right"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+
+
+<script id="options-template" type="x-tmpl-mustache">
+    <option value="">-- Vui lòng chọn một ca --</option>
+    {{#SlotOptions}}
+    <option value="{{SlotId}}" data-start-time="{{StartTime}}" {{#IsUnavailable}} disabled {{/IsUnavailable}}>
+        {{FmStartTime}}-{{FmFinishTime}}
+        {{#IsUnavailable}}
+        (hết chỗ)
+        {{/IsUnavailable}}
+    </option>
+    {{/SlotOptions}}
+</script>

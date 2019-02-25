@@ -1,0 +1,1549 @@
+    /*
+================+/+/+/+/+/+/+/+/+/=================
+                    large
+================+/+/+/+/+/+/+/+/+/=================
+*/
+
+    @media only screen and (min-width: 1200px) and (max-width: 1500px) {
+        .w_man {
+            top: 0;
+            bottom: auto;
+        }
+        .single_welcome_slide {
+            min-height: 820px;
+        }
+    }
+    /*
+================+/+/+/+/+/+/+/+/+/=================
+                    medium
+================+/+/+/+/+/+/+/+/+/=================
+*/
+
+    @media only screen and (min-width: 992px) and (max-width: 1200px) {
+        ul.main_menu>li>a {
+            padding: 10px 7px;
+        }
+
+        .about_slide {
+            width: 45%;
+        }
+
+        .about_righ_content {
+            padding-left: 45%;
+        }
+        .about_content li {
+            font-size: 98%;
+        }
+        ul.main_menu>li ul {
+            min-width: 166px;
+        }
+        .welcome_slider.with_form .contact_form2 {
+            margin-left: 166px;
+        }
+        .welcome_area.v3 img {
+            height: auto;
+            width: 42%;
+            top: 100px;
+        }
+        .baby_care_area:after {
+            display: none;
+        }
+
+        .welcome_area.v4 .welcome_slider .owl-nav .owl-prev {
+            margin-left: 0;
+            left: 60px;
+        }
+
+        .welcome_area.v4 .welcome_slider .owl-nav .owl-next {
+            margin-right: 0;
+            right: 60px;
+        }
+
+        .v4_service_slider .owl-nav>.owl-next {
+            right: -35px;
+        }
+
+        .v4_service_slider .owl-nav>.owl-left {
+            left: -40px;
+        }
+
+        .v4_service_slider .owl-nav>.owl-prev {
+            left: -35px;
+        }
+        .v4.welcome_area .welcome_slider.v5 .owl-nav>.owl-prev {
+            left: 0;
+        }
+
+        .v4.welcome_area .welcome_slider.v5 .owl-nav>.owl-next {
+            right: 0;
+        }
+        .v5_testimonial_slider .owl-nav {
+            left: -239px;
+        }
+        .single_about_img:nth-child(2) {
+            -webkit-transform: translatex(-30%);
+                -ms-transform: translatex(-30%);
+                    transform: translatex(-30%);
+        }
+    }
+    /*
+================+/+/+/+/+/+/+/+/+/=================
+                     tab
+================+/+/+/+/+/+/+/+/+/=================
+*/
+
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        body {
+            font-size: 90%;
+        }
+        .main_menu {
+            display: none;
+        }
+        .slicknav_menu {
+            background: transparent;
+            display: block;
+            position: absolute;
+            top: -4px;
+            right: 0;
+            z-index: 2;
+        }
+
+        ul.slicknav_nav {
+            background: #44A6F0;
+            width: 269px;
+            text-align: left;
+            top: 12px;
+            position: relative;
+        }
+
+        .slicknav_btn {
+            background: transparent;
+        }
+
+        .slicknav_menu .slicknav_icon-bar {
+            background: #222;
+            width: 27px;
+            margin-bottom: 5px;
+            height: 2px;
+        }
+
+        .slicknav_nav .slicknav_row:hover,
+        .slicknav_nav a:hover {
+            background: #f1f1f1;
+            color: #222;
+            border-radius: 0;
+        }
+        form.search_form {
+            top: 3px;
+            right: 54px;
+            z-index: 12;
+        }
+
+        .search_form input {
+            position: absolute;
+            border: 1px solid #ddd;
+            right: 0;
+            top: 37px;
+            text-indent: 10px;
+            -webkit-transition: .3s linear;
+            -o-transition: .3s linear;
+            transition: .3s linear;
+            width: 180px;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .search_form.activw input {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        form.search_form.active input {
+            visibility: visible;
+            opacity: 1;
+        }
+        .htl {
+            text-align: center;
+        }
+
+        .htr {
+            text-align: center;
+        }
+
+        .welcome_content h1 {
+            font-size: 35px;
+        }
+
+        .welcome_content p {
+            font-size: 15px;
+        }
+
+        .w_man {
+            width: 382px;
+            bottom: auto;
+            top: 0
+        }
+        .single_welcome_slider {
+            max-height: 820px;
+        }
+        .welcome_slider .owl-nav .owl-prev {
+            left: -26px;
+        }
+
+        .welcome_slider .owl-nav .owl-next {
+            right: -20px;
+        }
+
+        .single_cbox {
+            padding: 17px;
+        }
+
+        .cbox_icon {
+            width: 30px;
+            height: 30px;
+            left: 28px;
+        }
+
+        .cbox_title h4 {
+            padding-left: 40px;
+        }
+
+        .cbox_title {
+            margin-bottom: 10px;
+        }
+
+        .call_btn a {
+            font-size: 80%;
+        }
+
+        .about_content {
+            margin-bottom: 50px;
+        }
+        .custom_col {
+            -webkit-box-flex: 0;
+                -ms-flex: 0 0 25%;
+                    flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .doctor_area:after {
+            left: 0;
+            -webkit-transform: translatex(0)translatey(61px);
+                -ms-transform: translatex(0)translatey(61px);
+                    transform: translatex(0)translatey(61px);
+            top: 0;
+        }
+
+        .news_area .section_title {
+            padding-right: 0;
+        }
+
+        .news_area .section_title h1 {
+            font-size: 30px;
+        }
+        a.single_latest_news,
+        .single_latest_news {
+            padding-left: 162px;
+        }
+
+        .l_img {
+            width: 150px;
+        }
+
+        .contact_form input,
+        .contact_form textarea {
+            margin-bottom: 15px;
+        }
+        .footer_content_box {
+            margin-bottom: 30px;
+        }
+
+
+
+        a.video_popup {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        a.video_popup img {
+            width: 100%;
+        }
+
+        a.video_popup:after {
+            right: -28px;
+        }
+
+        .single_about_box {
+            padding: 28px 17px;
+        }
+
+        .single_about_box h4 {
+            margin-bottom: 14px;
+        }
+
+        .about_page .about_content {
+            padding: 0 30px 50px;
+        }
+        .dept_search_bar input {
+            width: 221px;
+        }
+        .working_box {
+            margin-top: 30px;
+        }
+        .recent_post>ul>li>a {
+            font-size: 16px;
+            margin-right: 14px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .recent_post>ul>li:last-child>a {
+            margin-right: 0;
+        }
+
+        .single_recent_post .rp_img {
+            width: 60px;
+        }
+
+        a.single_recent_post {
+            padding-left: 71px;
+        }
+
+        .error_content h1 {
+            font-size: 150px;
+        }
+        .item_details_tab_bar a.nav-link {
+            min-width: 201px;
+        }
+        .shop_preview_item .item_preview_img {
+            height: 298px;
+        }
+        .testimonial_secondary .current.owl-item .sec_testimonial_img {
+            width: 70px;
+            height: 70px;
+        }
+        .welcome_slider.with_form .contact_form2 {
+            margin-left: 0;
+        }
+
+        .welcome_areaa.home2 {
+            background-position: left;
+        }
+        .single_cbox2 {
+            padding: 30px 16px;
+        }
+        .about_content.home_2 {
+            padding-right: 0;
+            margin-bottom: 0;
+        }
+        .single_counter2>span {
+            font-size: 17px;
+        }
+        .welcome_area.v3 img {
+            height: 336px;
+            top: 173px;
+        }
+
+        .welcome_area.v3 .owl-dots {
+            margin-left: 0;
+            -webkit-transform: translatex(-50%);
+                -ms-transform: translatex(-50%);
+                    transform: translatex(-50%);
+        }
+        .cart_search {
+            position: relative;
+            -webkit-transform: translate(0);
+                -ms-transform: translate(0);
+                    transform: translate(0);
+        }
+
+        .cart_search .h_cart {
+            position: relative;
+            top: 6px;
+            right: 20px;
+        }
+
+        .cart_search form.search_form {
+            position: absolute;
+            top: 0;
+            left: 96px;
+        }
+        .cart_search .h_cart {
+            right: auto;
+            left: 164px;
+        }
+        .welcome_area.v3 .single_welcome_slider {
+            min-height: auto;
+            height: 650px;
+        }
+
+        .welcome_area.v3 .owl-dots {
+            bottom: 0;
+        }
+        .about_area.v3:after {
+            background-size: 262%;
+            width: 43%;
+        }
+
+        .about_content.v3 {
+            padding-left: 30px;
+            margin-bottom: 0;
+        }
+
+        .about_content.v3 h5 {
+            margin-bottom: 30px;
+        }
+
+        a.video_popup.about_btn.v3 {
+            margin-bottom: 0;
+        }
+
+        .eye_shop_slider .owl-nav .owl-next {
+            right: -40px;
+        }
+
+        .eye_shop_slider .owl-nav .owl-prev {
+            left: -40px;
+        }
+
+        .v3_testimoonial_slide .owl-nav.disabled .owl-next {
+            right: -35px;
+        }
+
+        .v3_testimoonial_slide .owl-nav.disabled .owl-prev {
+            LEFT: -35PX;
+        }
+
+        form.news_letter_form {
+            padding-left: 20px;
+        }
+
+        .news_letter_form input {
+            width: 300px;
+        }
+
+        .news_letter_form .custom_btn2 {
+            margin-left: 0;
+            min-width: 150px;
+            font-size: 15px;
+        }
+        .welcome_area.v4 .welcome_slider .owl-nav .owl-prev {
+            margin-left: 0;
+            left: 0;
+        }
+
+        .welcome_area.v4 .welcome_slider .owl-nav .owl-next {
+            margin-right: 0;
+            right: 0;
+        }
+
+        .v4.welcome_area.v4 a {
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+        }
+
+        .v4_service_slider .owl-nav>.owl-prev {
+            left: 0;
+        }
+
+        .v4_service_slider .owl-nav>.owl-next {
+            right: 0;
+            -webkit-transform: translatex(138%);
+                -ms-transform: translatex(138%);
+                    transform: translatex(138%);
+        }
+
+        .v4_service_slider .owl-nav>.owl-prev {
+            -webkit-transform: translatex(-138%);
+                -ms-transform: translatex(-138%);
+                    transform: translatex(-138%);
+            left: 0;
+        }
+
+        .v4_service_slider .owl-nav>div {
+            padding: 0;
+        }
+
+        .baby_care_area:after {
+            display: none;
+        }
+
+        .right-arrow {
+            right: 0;
+        }
+
+        .left-arrow {
+            left: 0;
+        }
+
+        .v4_testimonial_1 i {
+            bottom: -12px;
+        }
+
+        .v4_testimonial_2 {
+            padding: 0 19px;
+        }
+        .header_area.v5 .cart_search .custom_btn {
+            display: none;
+        }
+
+        .v5.header_area .cart_search {
+            right: 66px;
+            position: absolute;
+            top: 22px;
+        }
+
+        .header_area.v5 .slicknav_menu .slicknav_icon-bar {
+            background: #fff;
+        }
+
+        .v5.header_area ul.slicknav_nav {
+            background: #2ECC71;
+        }
+        .v5.about_img_wrap {
+            display: none;
+        }
+        .v5_single_count {
+            margin-bottom: 10px;
+        }
+        .v5_testimonial_slider .owl-nav {
+            left: 0;
+            top: -51px;
+        }
+    }
+    /*
+================+/+/+/+/+/+/+/+/+/=================
+                    Mobile
+================+/+/+/+/+/+/+/+/+/=================
+*/
+
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+
+        body {
+            font-size: 80%;
+        }
+
+        .htl {
+            text-align: center;
+        }
+
+        .htr {
+            text-align: center;
+        }
+
+        .htl,
+        .htr a,
+        .htr_language>li a {
+            font-size: 86%;
+        }
+
+        a.htr_single_contact {
+            border: none;
+        }
+        .main_menu {
+            display: none;
+        }
+        nav.menu_bar {
+            padding-right: 0;
+        }
+
+
+        .slicknav_menu {
+            background: transparent;
+            display: block;
+            position: absolute;
+            top: -4px;
+            right: 0;
+            z-index: 6;
+        }
+
+        ul.slicknav_nav {
+            background: #44A6F0;
+            width: 269px;
+            text-align: left;
+            top: 12px;
+            position: relative;
+        }
+
+        .slicknav_btn {
+            background: transparent;
+        }
+
+        .slicknav_menu .slicknav_icon-bar {
+            background: #222;
+            width: 27px;
+            margin-bottom: 5px;
+            height: 2px;
+        }
+
+        .slicknav_nav .slicknav_row:hover,
+        .slicknav_nav a:hover {
+            background: #f1f1f1;
+            color: #222;
+            border-radius: 0;
+        }
+        form.search_form {
+            top: 3px;
+            right: 54px;
+            z-index: 12;
+        }
+
+        .search_form input {
+            position: absolute;
+            border: 1px solid #ddd;
+            right: 0;
+            top: 37px;
+            text-indent: 10px;
+            -webkit-transition: .3s linear;
+            -o-transition: .3s linear;
+            transition: .3s linear;
+            width: 180px;
+            visibility: hidden;
+            opacity: 0;
+            background:  #fff;
+        }
+
+        .search_form.activw input {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        form.search_form.active input {
+            visibility: visible;
+            opacity: 1;
+        }
+        .welcome_content h1, .v3.welcome_area .welcome_content h1,.v4.welcome_area.v4 .welcome_content h1 {
+            font-size: 35px;
+            line-height: 1.5;
+        }
+
+        .welcome_content {
+            padding-right: 0;
+        }
+
+        .welcome_content p {
+            font-size: 100%;
+        }
+
+        .single_welcome_slider .w_man img {
+            display: none;
+        }
+
+        .custom_btn {
+            min-width: 150px;
+            padding: 13px 0;
+            text-align: center;
+        }
+
+        .welcome_areaa {
+            background-position: center;
+            background-color: #F0F8FE;
+            background-image: none!important;
+        }
+
+        .single_welcome_slider {
+            min-height: 400px;
+            height: calc(100vh - 200px);
+        }
+
+        .cbox_area {
+            padding: 60px 0;
+        }
+        .welcome_slider .owl-nav {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: 129px;
+        }
+
+        .welcome_slider .owl-nav>div {
+            position: static;
+            margin: 0 3px;
+            display: inline-block;
+        }
+
+        .welcome_slider .owl-nav>div:hover {
+            padding: 0;
+        }
+        .cbox_title h4 {
+            font-size: 18px;
+        }
+        .about_area {
+            padding: 60px 0 80px;
+        }
+
+        .about_content h1 {
+            font-size: 31px;
+        }
+
+        .about_content li i {
+            top: 15px;
+        }
+
+
+        .about_content {
+            margin-bottom: 30px;
+        }
+
+        .about_slide {
+            position: static;
+            width: 100%;
+            height: 300px;
+            display: block;
+            position: relative;
+            padding-right: 0;
+        }
+
+        .about_righ_content {
+            padding-left: 0;
+        }
+
+        .depertment_area {
+            padding: 60px 0;
+        }
+
+        .section_title h1 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section_title {
+            margin-bottom: 40px;
+        }
+        .custom_col {
+            -webkit-box-flex: 0;
+                -ms-flex: 0 0 50%;
+                    flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .single_dept a {
+            font-size: 16px;
+        }
+        .counter_area {
+            padding: 60px 0 50px;
+        }
+
+        .single_counter h1 {
+            font-size: 30px;
+        }
+
+        .single_counter {
+            margin-bottom: 10px;
+        }
+
+        .doctor_area {
+            padding: 60px 0 60px;
+        }
+
+
+        .doctor_area:after {
+            top: 79px;
+            left: 0;
+            -webkit-transform: translate(0);
+                -ms-transform: translate(0);
+                    transform: translate(0);
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+        }
+        .about_slide .owl-dots {
+            bottom: 0;
+            z-index: 50;
+        }
+        .single_doctor {
+            margin-bottom: 10px;
+        }
+
+        .news_area {
+            padding: 0 0 60px;
+        }
+
+        .news_area .section_title {
+            text-align: center;
+            padding-right: 0;
+        }
+
+        form.contact_form {
+            margin-bottom: 40px;
+        }
+
+        a.single_latest_news,
+        .single_latest_news {
+            padding-left: 97px;
+        }
+
+        .l_img {
+            width: 87px;
+        }
+        .footer_area {
+            padding: 50px 0 40px;
+        }
+
+        .footer_content_box {
+            margin-bottom: 30px;
+        }
+
+        .footer_logo {
+            margin-bottom: 15px;
+        }
+
+        .footer_contact_inf {
+            margin-top: 15px;
+        }
+
+        .footer_area li {
+            margin-bottom: 5px;
+        }
+
+        .footer_widget h4 {
+            margin-bottom: 25px;
+        }
+
+        .footer_widget {
+            margin-bottom: 20px;
+        }
+
+
+        .about_page {
+            padding: 60px 0;
+        }
+
+        a.video_popup:after {
+            right: 16px!important;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .about_video_content {
+            margin-bottom: 30px;
+        }
+
+        .about_page .about_content {
+            padding-right: 0;
+            padding-bottom: 60px;
+        }
+
+        .about_page .about_content h1 {
+            margin-bottom: 20px;
+        }
+        .single_about_box {
+            margin-bottom: 14px;
+        }
+
+        .doctor_content {
+            margin-bottom: 20px;
+        }
+        a.single_service {
+            padding: 19px 18px;
+        }
+        .depertment_title h4 {
+            margin-bottom: 18px;
+        }
+
+        .dept_search_bar input {
+            width: 187px;
+        }
+
+        form.dept_search_bar {
+            text-align: center;
+        }
+
+        .title_bar {
+            text-align: center;
+        }
+        .dept_details_page {
+            padding: 60px 0;
+        }
+
+        .dept_details_page img {
+            margin-bottom: 30px;
+        }
+
+        .dept_fee_area {
+            padding-top: 60px;
+        }
+
+        .treatment_fee_wraper h4 {
+            margin-bottom: 22px;
+        }
+
+        .treatment_fee_wraper {
+            margin-bottom: 30px;
+        }
+        .doctor_page {
+            padding: 60px 0 30px;
+        }
+
+        .doctor_page .single_doctor {
+            margin-bottom: 30px;
+        }
+
+        .doctor_details_area {
+            padding: 60px 0 30px;
+        }
+
+        .doctor_profile {
+            margin-bottom: 30px;
+        }
+
+        ul.doctor_data li {
+            padding-bottom: 13px;
+        }
+
+        .service_area {
+            padding: 60px 0 30px;
+        }
+        .service_details_wraper img {
+            margin-bottom: 30px;
+        }
+
+        .service_details_area {
+            padding: 60px 0;
+        }
+
+        .service_details_wraper {
+            margin-bottom: 30px;
+        }
+
+        .more_service_area h1 {
+            font-size: 38px;
+        }
+        .blog_area {
+            padding: 60px 0;
+        }
+        .widget_raper {
+            margin-top: 50px;
+        }
+
+        .single_comment .user_photo {
+            width: 70px;
+            height: 70px;
+        }
+
+        .comment_content {
+            padding-left: 100px;
+        }
+
+        .single_comment>.single_comment {
+            margin-left: 30px;
+        }
+
+        .comment_wraper {
+            margin-bottom: 40px;
+        }
+
+
+        .blog_full_content .blog_quote {
+            padding: 17px 20px 17px 45px;
+        }
+
+        .blog_full_content .blog_quote i {
+            left: 12px;
+            font-size: 30px;
+            top: 14px;
+        }
+
+        .tag_and_social_bar {
+            text-align: center;
+        }
+        .error_img {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .error_img img {
+            height: 281px;
+        }
+
+        .error_content h1 {
+            font-size: 132px;
+        }
+
+        .error_content h4 {
+            font-size: 30px;
+        }
+
+        .error_content {
+            text-align: center;
+        }
+        .shop_page_area {
+            padding: 60px 0;
+        }
+
+        .filter_bar {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .single_shop {
+            margin-bottom: 40px;
+        }
+        .shop_preview_item .item_preview_img {
+            height: 300px;
+        }
+
+        ul.shop_preview_item_bar {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .addition_inf_area {
+            margin-top: 50px;
+            padding-top: 50px;
+            PADDING-BOTTOM: 40PX;
+        }
+
+        .item_details_tab_bar {
+            text-align: center;
+            MARGIN-BOTTOM: 30PX;
+        }
+
+        .item_details_tab_bar li {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .item_details_tab_bar a.nav-link:after {
+            DISPLAY: NONE;
+        }
+
+        .related_product_area {
+            padding: 50px 0 0;
+        }
+
+        .related_product_area h3 {
+            margin-bottom: 30px;
+        }
+        .shop_details_page {
+            padding-top: 60px;
+        }
+        .cart_btn_option input {
+            width: 171px;
+            margin-right: 0;
+        }
+        .custom_btn {
+            min-width: 150px;
+            padding: 13px 0;
+            text-align: center;
+            margin-left: 3px;
+        }
+        .total_order li {
+            padding-right: 0;
+        }
+
+        .fc-toolbar .fc-right {
+            display: inline-block;
+            width: auto;
+            margin-top: 10px;
+            float: left;
+            overflow: hidden;
+        }
+
+        .fc-center h2 {
+            font-size: 23px;
+            line-height: 50px;
+            margin-top: 10px;
+        }
+
+        .fc-toolbar .fc-left {
+            float: none;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+        }
+        .time_table_area {
+            padding: 60px 0;
+        }
+        .pricing_area {
+            padding: 60px 0 30px;
+        }
+
+        .testimonial_section_title {
+            margin-bottom: 40px;
+        }
+
+        .sec_single_price,
+        .primary_single_price {
+            margin-bottom: 30px;
+        }
+        .testimonial_page_area {
+            padding: 60px 0;
+        }
+
+        .secondary_testimonial_area {
+            padding: 60px 0;
+        }
+
+        .testimonial_content {
+            padding: 0 9PX 60px;
+        }
+        nav.auto-hide-filter {
+            position: static;
+            margin-bottom: 10px;
+        }
+        .faq_page_area {
+            padding: 60px 0;
+        }
+        .isotope_menu a {
+            margin-bottom: 10px;
+        }
+
+        ul.isotope_menu {
+            text-align: center;
+        }
+        .gallery_area {
+            padding: 60px 0;
+        }
+
+        .contact_page_area {
+            padding: 60px 0;
+        }
+        .map {
+            height: 300px;
+        }
+        .welcome_slider.with_form .single_welcome_slider {
+            height: 500px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome_areaa.home2:after {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #F0F8FE;
+            content: "";
+            top: 0;
+            opacity: .9;
+            left: 0;
+        }
+
+        .welcome_areaa.home2 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome_areaa.home2 .welcome_slider .owl-nav {
+            margin-top: 118px;
+        }
+
+        .welcome_areaa.home2 .welcome_slider .owl-nav>div {
+            margin: 0 5px;
+        }
+
+        .single_cbox2 {
+            padding: 20px 0;
+        }
+
+
+        .about_righ_content.home_2 {
+            margin-bottom: 10px;
+        }
+
+        .about_content.home_2 h1 {
+            font-size: 25px;
+            line-height: 1.5;
+        }
+
+        .about_content.home_2 {
+            padding-right: 0;
+            margin-bottom: 0;
+        }
+
+        .about_area.pb_none {
+            padding-bottom: 0;
+        }
+
+        .doctor_slider .owl-nav>.owl-next {
+            RIGHT: 0;
+        }
+
+        .doctor_slider .owl-nav>.owl-prev {
+            left: 0;
+        }
+
+        .single_counter2>span {
+            font-size: 17px;
+        }
+
+        .single_counter2 {
+            border-right: none;
+            margin-bottom: 5px;
+        }
+
+        .counter_area2 {
+            padding: 60px 0;
+        }
+
+        .single_counter2 h1 {
+            font-size: 36px;
+        }
+
+        ul.tc_list li {
+            font-size: 13px;
+        }
+
+        .tc_masonry {
+            width: 100%;
+        }
+
+        .opening_time {
+            position: relative;
+            width: 100%;
+        }
+
+        .tc_masonry.row {
+            MARGIN: 0 -5px;
+        }
+        .primary_testimonial_slider.home2 {
+            MARGIN: 0;
+        }
+        header .col-md-5.pl {
+            padding-left: 0;
+        }
+
+        .cart_search {
+            position: relative;
+            -webkit-transform: translate(0);
+                -ms-transform: translate(0);
+                    transform: translate(0);
+            z-index:  2;
+        }
+
+        .cart_search .h_cart {
+            position: relative;
+            top: 6px;
+            right: 20px;
+        }
+
+        .cart_search form.search_form {
+            position: absolute;
+            top: 0;
+            left: -58px;
+        }
+
+        .welcome_area.v3 img {
+            opacity: .1;
+            height: auto;
+            display: none!important;
+        }
+
+        .welcome_area.v3 .owl-dots {
+            bottom: 0;
+            left: 50%;
+            margin-left: 0;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            -webkit-transform: translatex(-50%);
+                -ms-transform: translatex(-50%);
+                    transform: translatex(-50%);
+        }
+
+        .about_area.v3:after {
+             display:none;
+        }
+
+        .about_content.v3 h5 {
+            margin-bottom: 24px;
+        }
+
+        .eye_service_area {
+            padding: 60px 0;
+        }
+
+        .single_eye_service {
+            margin-bottom: 30px;
+        }
+
+        .eye_service_area .mt100 {
+            margin-top: 0;
+        }
+        .lenses_area {
+            padding-bottom: 60px;
+        }
+
+        .v3_docotor_area {
+            padding: 60px 0;
+        }
+
+        .v3_testimoonial_slide .owl-nav.disabled .owl-prev {
+            left: -15px;
+        }
+
+        .v3_testimoonial_slide .owl-nav.disabled .owl-next {
+            right: 0;
+        }
+
+        .primary_testimonial_slider.v3_testimoonial_slide {
+            margin: 0;
+        }
+
+        .v3_testimoonial_slide .owl-nav.disabled .owl-next {
+            right: -15px;
+        }
+        .eye_shop_slider .owl-nav .owl-next {
+            right: -15px;
+        }
+
+        .eye_shop_slider .owl-nav .owl-prev {
+            left: -15px;
+        }
+
+        .news_letter_form input {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter_title {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .news_letter_form .custom_btn2 {
+            margin-left: 0;
+        }
+
+        form.news_letter_form {
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .v3_testimonial_area {
+            padding: 0 0 60px;
+        }
+
+        .newsletter_area {
+            padding-bottom: 66px;
+        }
+        .news_lentter_content {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+        }
+        .single_welcome_slider {
+            height: 433px;
+        }
+        .h_cart span {
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            right: -10px;
+        }
+
+        .cart_search {
+            top: 4px;
+        }
+        .v4.welcome_area .welcome_slider .owl-nav>.owl-prev {
+            margin-left: 0;
+            left: 0;
+        }
+
+        .v4.welcome_area .welcome_slider .owl-nav>.owl-next {
+            margin-right: 0;
+        }
+
+        .welcome_area.v4 .welcome_slider .owl-nav {
+            bottom: 0;
+            top: auto;
+            left: 50%;
+            -webkit-transform: translatex(-50%);
+                -ms-transform: translatex(-50%);
+                    transform: translatex(-50%);
+            text-align: center;
+        }
+        .v4_service_area {
+            padding: 60px 0 0;
+        }
+
+        .baby_care_gallery .img.height_2 {
+            height: 200px;
+        }
+
+        .baby_care_area {
+            padding-bottom: 40px;
+        }
+
+        .procedures_tab li {
+            display: inline-block;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+        }
+
+        .procedures_tab a,
+        .nav-tabs .nav-link {
+            padding: 5px 7px;
+        }
+
+        .procedures_tab {
+            text-align: center;
+            width: 100%;
+            display: block;
+        }
+
+        .procedures_content_wraper .img {
+            height: 200px;
+        }
+
+        .appoinment_form_area {
+            padding: 60px 0;
+        }
+
+        .v4_testimonial_2 {
+            padding: 0;
+        }
+
+        .single_content {
+            font-size: 15px;
+        }
+
+        .single_content span {
+            font-size: 18px;
+        }
+
+        .testimonial_v4 {
+            padding-bottom: 60px 0;
+        }
+
+        .v4_testimonial_1 .left-arrow {
+            left: 0;
+        }
+
+        .v4_testimonial_1 .right-arrow {
+            right: 0;
+        }
+
+        .v4_testimonial_1 i {
+            bottom: -19px;
+        }
+
+        .v4_single_news {
+            margin-bottom: 30px;
+        }
+
+        .v4_news_area {
+            padding-bottom: 30px;
+        }
+
+        .v4_service_slider .owl-nav>.owl-next {
+            right: 0;
+        }
+
+        .v4_service_slider .owl-nav>.owl-prev {
+            left: 0;
+        }
+
+        .v4_service_slider .owl-nav>div {
+            -webkit-transform: translatey(0);
+                -ms-transform: translatey(0);
+                    transform: translatey(0);
+        }
+
+        .baby_care_area:after {
+            display: none;
+        }
+        .header_area.v5 .cart_search .custom_btn {
+            display: none;
+        }
+
+        .header_area.v5 a.h_cart {
+            top: 7px;
+            left: 0;
+        }
+
+        .header_area.v5 .slicknav_menu .slicknav_icon-bar {
+            background: #fff;
+        }
+
+        .v5.header_area ul.slicknav_nav {
+            background: #2ECC71;
+        }
+        .v5.about_img_wrap {
+            display: none;
+        }
+
+        .v5_section_title {
+            margin-bottom: 50px;
+        }
+
+        ul.service_tab {
+            display: block;
+            width: 100%;
+        }
+
+        ul.service_tab li {
+            display: inline-block;
+            width: 50%;
+            margin-left: -5px;
+        }
+
+        .v5_service_area a.custom_btn.v5 {
+            position: static;
+            -webkit-transform: translate(0);
+                -ms-transform: translate(0);
+                    transform: translate(0);
+        }
+
+        .v5_testimonial_slider .owl-nav {
+            left: 0;
+            top: -51px;
+        }
+        .service_tab a {
+            padding: 20px 18px;
+            width: -webkit-fit-content;
+            width: -moz-fit-content;
+            width: fit-content;
+            display: inline-block;
+        }
+        .cart_search form.search_form button {
+            right:  12px;
+        }
+        .welcome_area.v3 .welcome_content {
+            margin-bottom: 0;
+        }
+        .v5_opeining_timte_area {
+            padding: 60px 0;
+        }
+
+        a.v5_single_opt, .v5_single_opt {
+            background-size:  contain;
+        }
+        .welcome_slider.v5 .single_welcome_slider {
+            padding:  150px 0 100px;
+            height:  -webkit-fit-content;
+            height:  -moz-fit-content;
+            height:  fit-content;
+        }
+        .breadvroumb_area {
+            background-image:  none;
+            background-color:  #EAF6FF;
+            padding:  50px 0;
+        }
+    }
+    /*
+================+/+/+/+/+/+/+/+/+/=================
+                    wid device
+================+/+/+/+/+/+/+/+/+/=================
+*/
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+        .container {
+            width: 400px;
+        }
+        table.cart_table {
+            overflow-x: auto;
+            width: 100%;
+            display: block;
+        }
+
+        .cart_btn_option input {
+            width: 213px;
+            height: 52px;
+        }
+    }

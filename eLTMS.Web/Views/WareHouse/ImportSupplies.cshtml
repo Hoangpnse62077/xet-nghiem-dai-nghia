@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "ImportSupplies";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Quản Lý Nhập Kho
+    </h1>
+   </section>
+<section class="content">
+    @*<div class="form-group">
+            <label for="exampleInputFile">Import Excel</label>
+            <input type="file" id="exampleInputFile">
+
+            <p class="help-block">Example block-level help text here.</p>
+        </div>*@
+
+    <div class="box">
+       
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div style="border:1px solid #cccccc ">
+                <br />
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-1 col-form-label"></label>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label">Số phiếu</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txtImportCode" value="@ViewBag.PNK" readonly>
+                    </div>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label"></label>
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Ngày nhập</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="txtCreateDate" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-1 col-form-label"></label>
+                    <label for="inputEmail3" class="col-sm-1 col-form-label">Ghi chú</label>
+                    <div class="col-sm-9">
+                        <textarea rows="4" id="txtNote" cols="50" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-9 col-form-label"></label>
+
+                    <div class="col-sm-3">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary" id="btnSaveImport">Lưu phiếu</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <br />
+            <button class="btn btn-success" id="btnAddNew">Thêm mới</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-success" id="btnView">Xem phiếu</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-danger" id="btnDownload">Tải tập tin mẫu </button>
+            <br />
+            <br />
+            <input type="file" id="input" class="btn btn-info" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+            <br />
+            <table style="width:100%" class="table table-bordered">
+                <thead>
+                    <tr>
+                        @*<th>#</th>*@
+                        <th>Mã Sản Phẩm</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Vị</th>
+                        <th>Ghi Chú</th>
+                    </tr>
+                </thead>
+                <tbody id="tblData">
+
+                    <tr id="template-row" style="display:none;">
+                        @*<td class="colIndex"></td>*@
+                        <td class="colCode"></td>
+                        <td class="colName"></td>
+                        <td class="colQuantity"><input type="number" min="1" class="txtQuantity form-control" value="" /></td>
+                        <td class="colUnit"></td>
+                        <td class="colNote"><input type="text" class="txtNote form-control" value="" /></td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</section>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="lblPopupTitle">Mã vật tư</h4>
+            </div>
+            <div class="modal-body">
+                <input type="date" id="txtSearch" placeholder="Ngày nhập phiếu" />
+                <button class="btn btn-success" id="btnSearch">Search</button>
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã phiếu</th>
+                            <th>Ngày nhập phiếu</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblData1"></tbody>
+                </table>
+                <div style="margin-left:35%" id="pagination" class="pagination">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<form action="/WareHouse/DownloadImportPaperTemplate" style="display:none" id="hiddenForm">
+
+</form>
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ImportPaperCode}}</td>
+        <td>{{CreateDate}}</td>
+
+        <td>
+            <button class="btn btn-primary btn-edit" data-id="{{ImportPaperId}}"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-danger btn-delete" data-id="{{ImportPaperId}}"><i class="fa fa-trash"></i></button>
+
+        </td>
+    </tr>
+</script>
+<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/infragistics.core.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/infragistics.lob.js"></script>
+
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_core.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_collections.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_text.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_io.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_ui.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_ui.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.documents.core_core.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_collectionsextended.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.excel_core.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_threading.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.ext_web.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.xml.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.documents.core_openxml.js"></script>
+<script type="text/javascript" src="http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/modules/infragistics.excel_serialization_openxml.js"></script>
+<script src="~/Scripts/customScript/importSupplies.js"></script>

@@ -1,0 +1,130 @@
+﻿@using eLTMS.Models.Models.dto
+@{
+    ViewBag.Title = "Kết quả xét nghiệm";
+    ResultOfAppointmentDto resultDto = ViewBag.ResultDto;
+}
+
+
+@section styles {
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Appointment/Appointment.css">
+}
+
+<!-- breadcroumb Area Start-->
+<div class="breadvroumb_area">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1>Kết quả xét nghiệm</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcroumb Area End-->
+
+<div class="appointment_result_area p50">
+    <div class="container">
+        <div class="content-box">
+            <h2 class="result-title">
+                Phiếu kết quả xét nghiệm
+            </h2>
+            <table class="table">
+                <tr>
+                    <td>
+                        <b>Họ tên:</b> @(resultDto.PatientName)<br />
+                        <b>Địa chỉ:</b> @(resultDto.PatientAddress)
+                    </td>
+                    <td>
+                        <b>Năm sinh:</b> @(resultDto.PatientBirthYear)<br />
+                        <b>Phái:</b> @(resultDto.PatientGender == "Male" ? "Nam" : "Nữ")
+                    </td>
+                    <td>
+                        <b>Ngày ĐK:</b> @(resultDto.EnterTime.ToString("dd-MM-yyyy"))<br />
+                        <b>Giờ ĐK:</b> @(resultDto.EnterTime.ToString("HH:mm:ss"))
+                    </td>
+                </tr>
+            </table>
+            <table class="table table-result">
+                <thead>
+                    <tr>
+                        <th>Tên xét nghiệm</th>
+                        <th>Kết quả</th>
+                        <th>Chỉ số bình thường</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sample in resultDto.SampleGettings)
+                    {
+                        foreach (var labTesting in sample.LabTestings)
+                        {
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    <br />
+                                    @(labTesting.LabTestName)
+                                </td>
+                                <td><br />*</td>
+                                <td></td>
+                            </tr>
+                            foreach (var index in labTesting.LabTestingIndexes)
+                            {
+                                <tr>
+                                    <td>@(index.IndexName)</td>
+                                    @{
+                                        var classStatus = "";
+                                        if (index.LowNormalHigh == "L")
+                                        {
+                                            classStatus = "result-low";
+                                        }
+                                        else if (index.LowNormalHigh == "H")
+                                        {
+                                            classStatus = "result-high";
+                                        }
+                                    }
+                                    <td class="@(classStatus)">@(index.IndexValue)</td>
+                                    <td>(@(index.NormalRange))@(index.Unit)</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+            <div>
+                <p>
+                    <b>Kết luận:</b> @(resultDto.Conclusion)
+                </p>
+                <p>
+                    <b>Nhận xét của bác sĩ:</b>
+                </p>
+                @Html.Raw(resultDto.DoctorComment)
+            </div>
+            <div class="return-time">
+                Ngày trả: @(resultDto.ReturnTime.ToString("dd-MM-yyyy"))
+            </div>
+        </div>
+
+        @*<div class="text-center" style="margin-top: 15px;">
+            <a href="/UserWeb/Appointment/Suggest" target="_blank">
+                <i class="fa fa-link"></i>
+                Gợi ý các bệnh viện có khoa chuyên ngành
+            </a>
+        </div>*@
+
+        <div class="text-center">
+            <button class="btn btn-link text text-danger" id="btn-print-pdf">
+                <img src="~/Areas/UserWeb/Images/pdf-icon.png" width="60" />Tải tập tin PDF
+            </button>
+        </div>
+    </div>
+</div>
+
+<form action="/LabTest/ExportDetailToPdf" style="display:none" id="hiddenForm" method="post"> 
+    <input type="text" class="form-control" id="txtResultCode" name="code" value="@(resultDto.AppointmentCode)">
+</form>
+
+@section scripts{
+    <script>
+        $("#btn-print-pdf").click(function () {
+            console.log("click");
+            $("#hiddenForm").submit();
+        })
+    </script>
+}

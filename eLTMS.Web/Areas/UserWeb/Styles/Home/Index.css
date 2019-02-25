@@ -1,0 +1,75 @@
+/*
+    Author: DucBM
+*/
+
+.section_title h1 {
+  margin-bottom: 5px;
+}
+
+
+/* Home */
+.welcome_content a.custom_btn {
+  background-color: red;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.single_welcome_slider {
+  height: 350px;
+}
+
+.about_area .about_content h1{
+  font-size: 42px;
+}
+
+.about_area .about_content h1 span{
+  font-size: 28px;
+}
+
+.about_area .about_content .box-download {
+  text-align: center;
+}
+.about_area .about_content .box-download h3 {
+  font-weight: bold;
+  color: red;
+  margin-bottom: 7px;
+}
+
+.about_area .about_righ_content {
+  padding-left: 0;
+}
+
+.about_area .about_righ_content .about_slide {
+  width: 100%;
+}
+
+.about_area .about_righ_content .owl-dots {
+  text-align: center;
+}
+
+.counter_area {
+  background-image: url('../../Images/our-team.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.counter_area .count {
+  font-size: 66px;
+}
+
+.counter_area .note {
+  font-size: 24px;
+}
+
+.news_area .section_title {
+  margin-bottom: 40px !important;
+}
+
+.news_area {
+  margin-bottom: 30px;
+}
+
+.depertment_area .dept_img {
+  width: 120px;
+}

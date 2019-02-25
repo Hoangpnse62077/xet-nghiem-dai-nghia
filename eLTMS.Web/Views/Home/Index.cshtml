@@ -1,0 +1,288 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    var appDto = ViewBag.appDto;
+}
+
+@section styles {
+    <!-- === customized css for Index Page === -->
+    <link rel="stylesheet" href="~/Areas/UserWeb/Styles/Home/Index.css">
+}
+
+<!-- Welcome Area Start-->
+<div class="welcome_areaa" style="background-image: url(/Areas/UserWeb/Assets/img/welcome_shap.png);">
+    <div class="container">
+        <div class="welcome_slider owl-carousel">
+            <div class="single_welcome_slider">
+                <div class="w_man"><img src="~/Areas/UserWeb/Images/y-ta.jpg" alt="" style="max-width: 600px"></div>
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="welcome_content">
+                            <h1>Phòng khám xét nghiệm ĐẠI NGHĨA</h1>
+                            <p>Tiết kiệm thời gian chờ đợi của quý khách</p>
+                            <p>Được báo giá trước khi đến phòng xét nghiệm</p>
+                            @*<a href="/UserWeb/Appointment/Create" class="custom_btn">Trải nghiệm ngay</a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="single_welcome_slider">
+                <div class="w_man"><img src="~/Areas/UserWeb/Images/result-search.jpg" alt=""></div>
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="welcome_content">
+                            <h1>Tra cứu kết quả</h1>
+                            <p>Kết quả luôn được lưu trữ</p>
+                            <p>Quý khách có thể xem và in bất cứ khi nào</p>
+                            <a href="#" class="custom_btn">Trải nghiệm ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Welcome Area End-->
+<!-- Cbox Area Start-->
+<div class="cbox_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/Areas/UserWeb/Assets/img/icon1.png" alt=""></div>
+                        <h4>Trường hợp khẩn cấp</h4>
+                    </div>
+                    <p>Gọi ngay cho chúng tôi trong trường hợp khẩn cấp</p>
+                    <div class="call_btn">
+                        <span>Hotline:</span>
+                        <a href="tel:02839270284">(028) 39 27 02 84</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/Areas/UserWeb/Assets/img/icon3.png" alt=""></div>
+                        <h4>Chất lượng phục vụ</h4>
+                    </div>
+                    <p>+ Chúng tôi luôn cố gắng để hoàn thiện chất lượng phục vụ</p>
+                    <p>+ Chúng tôi trân trọng sự đóng góp ý kiến của khách hàng </p>
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single_cbox">
+                    <div class="cbox_title">
+                        <div class="cbox_icon"><img src="~/Areas/UserWeb/Assets/img/icon2.png" alt=""></div>
+                        <h4>Phục vụ 7 ngày một tuần</h4>
+                    </div>
+                    <p>Ngày thường: 4 giờ sáng - 7 giờ tối</p>
+                    <p>Lễ, Tết, Chủ nhật: 4 giờ sáng - 12 giờ trưa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cbox Area end-->
+<!-- About Area Start-->
+<div class="about_area background_grey">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="about_content">
+                    <h1>
+                        Ứng dụng di động<span class="regular">Đặt hẹn nhanh chóng và dễ dàng</span>
+                    </h1>
+                    <p>
+                        Nhằm đáp ứng nhu cầu xét nghiệm và chăm sóc sức khỏe của đông đảo quý khách.
+                        Chúng tôi phát triển ứng dụng trên nền tảng di động.
+                        Giúp quý khách ở khắp các tỉnh/thành có thể:
+                    </p>
+                    <ul>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> Đặt lịch hẹn để đến Medic Lab lấy mẫu xét nghiệm, chuẩn đoán hình ảnh.
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> Đặt lịch hẹn để y sĩ của chúng tôi đến tận địa chỉ mà quý khách cung cấp, lẫy mẫu xét nghiệm và tư vấn tận tình.
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> Linh hoạt đổi và hủy cuộc hẹn.
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> Xem kết quả xét nghiệm và lưu trữ.
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-play-circle"></i> Nhận đề xuất đến thăm khám tại bệnh viện gần nhất.
+                        </li>
+                    </ul>
+                    <div class="box-download">
+                        <h3>Tải ngay:</h3>
+                        <a href="#"><img width="200px" src="~/Areas/UserWeb/Images/download-android.png" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="about_righ_content">
+                    <div class="about_slide owl-carousel">
+                        <div class="single_about_slide" style="background-image: url(/Areas/UserWeb/Images/app-demo.jpg);"></div>
+                        <div class="single_about_slide" style="background-image: url(/Areas/UserWeb/Images/app-demo.jpg);"></div>
+                        <div class="single_about_slide" style="background-image: url(/Areas/UserWeb/Images/app-demo.jpg);"></div>
+                    </div>
+                    <div style="height: 472px; width: 0;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Area End-->
+<!-- depertment Area Start-->
+<div class="depertment_area">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-lg-6 col-md-8 text-center">
+                <div class="section_title">
+                    <h1>Đối tác của chúng tôi</h1>
+                    <p>
+                        Chúng tôi rất vinh dự được cộng tác cùng các quý đơn vị tổ chức:
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="custom_row text-center justify-content-center">
+            <div class="custom_col">
+                <div class="single_dept">
+                    <a href="#">Bệnh viện Chợ Rẫy</a>
+                    <div class="dept_img">
+                        <img src="/Areas/UserWeb/Images/cho-ray.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="custom_col">
+                <div class="single_dept">
+                    <a href="#">Bệnh viện 108</a>
+                    <div class="dept_img">
+                        <img src="/Areas/UserWeb/Images/Benh_vien_108.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="custom_col">
+                <div class="single_dept">
+                    <a href="#">Nhi Đồng 1</a>
+                    <div class="dept_img">
+                        <img src="/Areas/UserWeb/Images/nhi-dong-1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="custom_col">
+                <div class="single_dept">
+                    <a href="#">Nhi Đồng 2</a>
+                    <div class="dept_img">
+                        <img src="/Areas/UserWeb/Images/nhi-dong-2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="custom_col">
+                <div class="single_dept">
+                    <a href="#">Bệnh Viện Từ Dũ</a>
+                    <div class="dept_img">
+                        <img src="/Areas/UserWeb/Images/tu-du.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- depertment Area end-->
+<!-- Counter Area Start-->
+<div class="counter_area">
+    <div class="container">
+        <div class="row text-center justify-content-center">
+            <div class="col-md-3 col-6">
+                <div class="single_counter">
+                    <h1><span class="count">108</span></h1>
+                    <span class="note">Nhân viên</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="single_counter">
+                    <h1><span class="count">20</span>+</h1>
+                    <span class="note">Năm kinh nghiệm</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="single_counter">
+                    <h1><span class="count">1450</span></h1>
+                    <span class="note">Bệnh nhân đã được phục vụ</span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="single_counter">
+                    <h1><span class="count">12</span></h1>
+                    <span class="note">Giải thưởng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Counter Area End-->
+<!-- News Area Start-->
+<div class="news_area">
+    <div class="container">
+        <div class="section_title">
+            <h1>Tin tức sức khỏe - y tế</h1>
+            <p>Kiến thức về chăm sóc sức khỏe, lối sống lành mạnh, phòng và chữa bệnh.</p>
+        </div>
+        <div class="latest_news row">
+            <div class="col-md-6">
+                <a href="http://doanhnghiepvn.vn/doi-song/neu-ban-luoi-uong-nuoc-thi-day-chinh-la-giai-phap-bo-sung-nuoc-day-du-cho-co-the-ban/20181021025532300" class="single_latest_news">
+                    <span class="l_img" style="background-image: url(http://media.doanhnghiepvn.vn/Images/Uploaded/Share/2018/10/21/Neu-ban-luoi-uong-nuoc-thi-day-chinh-la-giai-phap-bo-sung-nuoc-day-du-cho-co-the-ban!_1.jpg);"></span>
+                    <h5>Nếu bạn lười uống nước thì đây chính là giải pháp cho bạn!</h5>
+                    <span>21-10-2018</span>
+                    <p>Rất nhiều người vẫn luôn khổ sở với suy nghĩ không thích uống nước thì phải làm sao để cấp nước cho cơ thể đầy đủ?</p>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="http://thegioitiepthi.vn/p/dau-hieu-dien-hinh-canh-bao-nguy-co-ung-thu-15693.html" class="single_latest_news">
+                    <span class="l_img" style="background-image: url(http://thegioitiepthi.vn/img_data/images/An%20An/dau-hieu-dien-hinh-cho-thay-nguy-co-mac-ung-thu.jpg);"></span>
+                    <h5>Dấu hiệu điển hình cảnh báo nguy cơ ung thư</h5>
+                    <span>21-10-2018</span>
+                    <p>Dưới đây là hàng loạt dấu hiệu biểu hiện nguy cơ mắc bệnh ung thư. Dù không chính xác tuyệt đối nhưng đó cũng là những thông tin quan trọng...</p>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://thanhnien.vn/suc-khoe/thuoc-la-dien-tu-khien-vet-thuong-kho-lanh-1015361.html" class="single_latest_news">
+                    <span class="l_img" style="background-image: url(https://image.thanhnien.vn/665/uploaded/hoangnam/2018_08_17/girl-vape-670x447_bxax.jpg);"></span>
+                    <h5>Thuốc lá điện tử khiến vết thương khó lành</h5>
+                    <span>21-10-2018</span>
+                    <p>Luồng hơi từ thuốc lá điện tử ảnh hưởng tiêu cực đến việc chữa lành vết thương ở da, gây tổn hại cho da tương tự hút thuốc lá truyền thống.</p>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://motthegioi.vn/phai-dep-c-86/lam-dep-c-148/tac-hai-cua-viec-gian-doan-tap-the-duc-99182.html" class="single_latest_news">
+                    <span class="l_img" style="background-image: url(https://images.motthegioi.vn:8443/media/lahuong/8_9_2018/01_10_2018/14_10_2018/bHVvaXRhcHRoZWR1Yw==.jpg);"></span>
+                    <h5>Tác hại của việc gián đoạn tập thể dục</h5>
+                    <span>21-10-2018</span>
+                    <p>Tổng trọng lượng của họ tăng trung bình nửa kg, trong khi khối lượng cơ mất khoảng 360 gram. Các bài kiểm tra cho thấy chức năng tim mạch và hô hấp cũng kém hơn.</p>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://www.giadinhmoi.vn/nen-an-uong-nhu-the-nao-khi-bi-dot-quy-nao-d14577.html" class="single_latest_news">
+                    <span class="l_img" style="background-image: url(https://media.giadinhmoi.vn/files/lylinh/2018/10/21/dinh-duong-benh-dot-quy-1116.jpg);"></span>
+                    <h5>Nên ăn uống như thế nào khi bị đột quỵ não?</h5>
+                    <span>21-10-2018</span>
+                    <p>Đột quỵ não gây tổn thương chức năng thần kinh với các biểu hiện đột ngột như hôn mê, liệt nửa người, nói ngọng, nuốt bị sặc…</p>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="https://motthegioi.vn/phai-dep-c-86/lam-dep-c-148/tac-hai-cua-viec-gian-doan-tap-the-duc-99182.html" class="single_latest_news">
+                    <h5>Đi, đứng và ngồi ảnh hưởng đến não bộ như thế nào?</h5>
+                    <span class="l_img" style="background-image: url(https://image.thanhnien.vn/665/uploaded/minhnguyet/2018_10_20/theduc_evnv.jpg);"></span>
+                    <span>21-10-2018</span>
+                    <p>Nghiên cứu từ năm ngoái thậm chí còn gợi ý rằng đi bộ 4.000 bước mỗi ngày có thể tăng cường chức năng nhận thức ở người lớn tuổi.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- News Area End-->

@@ -1,0 +1,311 @@
+﻿<html>
+<head>
+    <title>Phiếu kết quả xét nghiệm</title>
+    <style>
+        /* Base CSS styles DO NOT CHANGE OR REMOVE */
+        body {
+            margin: 0;
+            padding: 0;
+            font: 62.5%/1.5 Helvetica, Arial, Verdana, sans-serif;
+
+        }
+
+        ul, ul li, p, div, ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #invoice {
+            margin: 0 12pt;
+            width: 660px;
+            padding: 10px 20px;
+            margin: 1em auto;
+            clear: both;
+            position: relative;
+            overflow: hidden;
+            background: #fff
+        }
+        h3 {
+            font-size: 20px;
+            color: #FF0000;
+
+        }
+        h1 {
+            font-size: 35px;
+            color: #000080;
+        }
+        h4 {
+            font-size: 10px;
+            color: #9C9C9C;
+        }
+            #invoice.cancelled {
+                background: #fff url(/images/cancelled.gif) top left
+            }
+
+        /*Invoice Simple TemplateCreated by Ed Molyneux*/
+        /*=========================== TYPOGRAPHY =========================*/
+        #invoice {
+            font-family: Helvetica, Arial, Verdana, sans-serif !important
+        }
+
+            #invoice h2 {
+                margin: 10px 0;
+                font-size: 14pt;
+            }
+
+        #invoice-amount td, th {
+            font-size: 9pt;
+        }
+
+        #invoice-header #company-address {
+            text-align: left;
+            font-size: 11pt;
+            line-height: 14pt;
+        }
+
+        #invoice-header #company-img {
+            text-align: right;
+        }
+
+        #invoice #client-details, #invoice-info p, #invoice #invoice-other, #invoice #payment-details {
+            font-size: 15pt;
+            line-height: 12pt;
+        }
+
+        #invoice-info h2, #invoice-info h3 {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        #invoice-info h2 {
+            text-transform: uppercase
+        }
+
+        #invoice-info h3 {
+            font-size: 12pt;
+        }
+
+        #comments {
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 10pt
+        }
+
+        /*=========================== LAYOUT =========================*/
+        #invoice {
+            padding: 0 1cm 1cm 1cm;
+        }
+
+        #invoice-header .logo {
+            float: left;
+        }
+
+        #invoice-header {
+            margin-top: 0.3cm;
+            border-bottom: 4px solid #000;
+            padding-bottom: 10px;
+            overflow: hidden
+        }
+
+        #invoice-info {
+            margin: 0.7cm 0 20px 0;
+            width: 250px;
+            float: right;
+            text-align: right
+        }
+
+        #client-details {
+            margin: 0.7cm 0 20px 2.5cm;
+            float: left;
+            width: 250px
+        }
+
+        /* Positioned to appear in a standard envelope window when printed */
+        #invoice-other {
+            text-align: right;
+            float: right;
+            width: 250px;
+        }
+
+        #invoice #payment-details {
+            float: left;
+            width: 450px;
+        }
+
+        #invoice-amount {
+            margin: 1em 0;
+            clear: both;
+        }
+
+        #comments {
+            clear: both;
+            padding-top: 0.5cm
+        }
+
+        /*=========================== TABLES =========================*/
+        #invoice table#invoice-amount {
+            border-collapse: collapse;
+            width: 100%;
+            clear: both;
+        }
+
+        #invoice-amount th {
+            text-align: left;
+            white-space: nowrap;
+            padding: 1px 2px 0 5px;
+            font-weight: bold;
+            background: #FFF;
+            border-bottom: solid 1px #444;
+        }
+
+        #invoice-amount td.item_r {
+            text-align: right;
+        }
+
+        #invoice-amount colName {
+            text-align: left;
+        }
+
+        #invoice-amount td.total {
+            text-align: right;
+            font-weight: bold
+        }
+
+        #invoice-amount .index_th {
+            width: 5%
+        }
+
+        #invoice-amount .details_th {
+            width: 54%
+        }
+
+        #invoice-amount .details_notax_th {
+            width: 62%
+        }
+
+        #invoice-amount .quantity_th {
+            width: 13%;text-align:center;
+        }
+
+        #invoice-amount .subtotal_th {
+            width: 30%;
+        }
+
+        #invoice-amount .unitprice_th {
+            width: 15%;
+            text-align:center;
+        }
+
+        #invoice-amount .colValue {
+            width: 13%
+        }
+
+        #invoice-amount .colStatus {
+            width: 15%;
+        }
+
+        #invoice-amount .colUnit {
+            width: 30%;
+            text-align: center;
+        }
+
+        #invoice-amount .colNomal {
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div id="invoice">
+
+        <div id="invoice-header">
+            <div class="vcard" id="company-address">
+                <div class="fn org"><h1><strong>Medic Lab</strong></h1></div>
+                <div class="adr">
+                    <div class="street-address">
+                        Địa chỉ: 254 Hòa Hảo, Quận 10, TP Hồ Chí Minh
+                    </div>
+                </div>
+                <div class="email">
+                    Website: mediclab.com.vn
+                </div>
+                <div class="email">
+                    ĐT: 0285 4110 025
+                </div>
+            </div>
+            <div class="vcard" id="company-img">
+                <img src="/Areas/UserWeb/Images/logo.JPG" width="50" height="50">
+            </div>
+        </div>
+
+        <!-- #invoice-header -->
+        <div id="invoice-info">
+            <h1>Phiếu kết quả xét nghiệm</h1>
+            <h2>{{InvoiceDate}}</h2>
+        </div>
+
+        <!-- #invoice-info -->
+        <div class="vcard" id="client-details">
+            <div class="fn"> <table>{{DataResult2}}</table></div>
+        </div>
+
+        <!-- #client-details vcard -->
+        <table id="invoice-amount">
+            <thead>
+                <tr id="header_row">
+                    <th class="left details_th">Tên</th>
+                    <th class="quantity_th">Gía Trị</th>
+                    <th class="unitprice_th">Trạng Thái</th>
+                    <th class="subtotal_th">Mức Trung Bình</th>
+                    <th class="subtotal_th">Đơn Vị</th>
+                </tr>
+            </thead>
+            <tbody id="tblDataResult">
+                {{DataResult}}
+            </tbody>
+            <tfoot>
+                <tr id="total_tr">
+                    <td class="total"><h4>Ghi chú trạng thái(L-thấp, N-bình thường, H-cao)</h4></td>
+                </tr>
+            </tfoot>
+            
+        </table>
+
+        <!-- invoice-amount -->
+        <div id="invoice-other">
+            <h2>Bác sĩ ký tên</h2>
+        </div>
+
+        <!-- invoice-other -->
+        <div id="payment-details">
+            <h2>Chẩn đoán:  {{Con}}</h2>
+            <h2>Ghi chú của bác sĩ:</h2>
+            <div>{{Cmt}}</div>
+            <h2>Gợi ý các bệnh viện chuyên khoa:</h2>
+    <div id="iban">
+        <table>
+            {{DataResult1}}
+        </table>
+    </div>
+            <!--<h2><a href="http://localhost:52406/UserWeb/appointment/suggest">Danh sách các bệnh viện chuyên khoa</a></h2>-->
+
+        </div>
+
+        <!-- payment-details -->
+        <div id="comments">Lưu ý: Bệnh viện chỉ chịu trách nhiệm với phiếu có chữ ký của bác sĩ và mộc của bệnh viện.</div>
+        <!-- comments -->
+
+    </div>
+</body>
+</html>
+<script id="dataResult-template" type="x-tmpl-mustache">
+    <tr>
+        <td class="colId">{{LabTestingId}}</td>
+        <td>{{Name}}</td>
+        <td>{{Value}}</td>
+        <td class="unitprice_th" style="{{changeColor}}">{{Status}}</td>
+        <td>{{Nomal}}</td>
+        <td>{{Unit}}</td>
+
+    </tr>
+</script>

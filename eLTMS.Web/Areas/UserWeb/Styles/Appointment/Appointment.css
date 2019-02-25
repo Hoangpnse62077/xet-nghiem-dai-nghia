@@ -1,0 +1,359 @@
+﻿/*
+    Author: DucBM
+*/
+
+.appoinment_form_area {
+    padding-top: 35px;
+    color: black;
+}
+
+    .appoinment_form_area .sample-box {
+        border: 1px solid gray;
+        padding: 0 15px 15px 15px;
+        margin-bottom: 10px;
+    }
+
+    .appoinment_form_area .pretty label::before {
+        border-color: darkblue;
+    }
+
+    .appoinment_form_area .alert {
+        border-radius: 0;
+    }
+
+    .appoinment_form_area h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0 0 20px;
+    }
+
+    .appoinment_form_area h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 20px 0 10px;
+    }
+
+    .appoinment_form_area .custom_btn {
+        font-weight: bold;
+        text-transform: uppercase;
+        background: #0a408a; /*blue*/
+    }
+
+        .appoinment_form_area .custom_btn i {
+            font-size: 12px;
+        }
+
+    .appoinment_form_area .button-box {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+        .appoinment_form_area .button-box button {
+            display: inline-block;
+        }
+
+.box-loader {
+    display: block;
+    text-align: center;
+}
+
+.img-loader {
+    display: inline-block;
+    max-width: 120px;
+}
+
+
+.step-box {
+    background: white;
+    padding: 35px 25px;
+}
+
+.modal .button-box {
+    width: 100%;
+    text-align: center;
+}
+
+    .modal .button-box button {
+        display: inline-block;
+    }
+
+/* Create Appointment */
+.create_appointment_area .button-box {
+    margin-top: 35px;
+}
+
+.create_appointment_area .alert {
+    display: none;
+}
+
+.create_appointment_area input[type="date"] {
+    border: 1px solid rgb(169,169,169);
+}
+
+.create_appointment_area select {
+    height: 29px;
+}
+
+.create_appointment_area .step-box-2 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Current Appointment */
+.current_appointment_area .step-box {
+    margin: 0 auto;
+    width: 750px;
+    padding: 15px 70px;
+    border: 1px solid gray;
+}
+
+.current_appointment_area h2 {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+    .current_appointment_area h2.first_h2 {
+        margin-top: 40px;
+    }
+
+.current_appointment_area h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.current_appointment_area em {
+    font-weight: bold;
+    color: blue;
+}
+
+.appoinment_form_area table {
+    margin: 0 auto 80px;
+}
+
+    .appoinment_form_area table th {
+        text-align: center;
+    }
+
+    .appoinment_form_area table th,
+    .appoinment_form_area table td {
+        border: 1px solid lightgray;
+    }
+
+    .appoinment_form_area table th,
+    .appoinment_form_area table td {
+        padding: 0 15px;
+    }
+
+        .appoinment_form_area table td:nth-child(1),
+        .appoinment_form_area table td:nth-child(3) {
+            text-align: right;
+        }
+
+.create_appointment_area table {
+    margin-left: 0;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+    .create_appointment_area table ul {
+        list-style-type: inherit;
+        margin-left: 15px;
+    }
+
+        .create_appointment_area table ul.ul-price {
+            list-style-type: none;
+        }
+
+.current_appointment_area .custom_btn,
+.create_appointment_area .custom_btn {
+    background: #0a408a; /*blue*/
+}
+
+.current_appointment_area .cancel_btn,
+.create_appointment_area .submit_btn {
+    /*background: #da251c;*/ /*red*/
+    background: #0a408a; /*blue*/
+}
+
+
+/* View Appointments */
+.view_appointments_area .content-box {
+    margin: 0 auto;
+    color: black;
+}
+
+.view_appointments_area table {
+    margin-top: 15px;
+}
+
+    .view_appointments_area table th {
+        padding: 5px 10px;
+        border-color: lightgray;
+    }
+
+    .view_appointments_area table td {
+        padding: 10px;
+        border-color: lightgray;
+    }
+
+.view_appointments_area .btn-edit {
+    background: #0a408a;
+}
+
+.view_appointments_area .btn-delete {
+    background: #da251c;
+}
+
+.view_appointments_area .btn-success {
+    background: #00923f;
+}
+
+.view_appointments_area table ul {
+    list-style-type: circle;
+    padding-left: 20px;
+}
+
+.view_appointments_area table .sg-date,
+.view_appointments_area table .sg-time {
+    color: red;
+    font-weight: bold;
+}
+
+.view_appointments_area table .stt-tag {
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.view_appointments_area table .stt-new {
+    background: green;
+    color: white;
+}
+
+.view_appointments_area table .stt-done {
+    background: orange;
+    color: white;
+}
+
+.view_appointments_area table .stt-process {
+    background: gray;
+    color: white;
+}
+
+.view_appointments_area table .price {
+    color: blue;
+    font-weight: bold;
+}
+
+.view_appointments_area table .title-total-price {
+    font-weight: bold;
+}
+
+.view_appointments_area table .sample-name {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.view_appointments_area .pagination {
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Appointment Result */
+.appointment_result_area {
+    /*background: lightgray;*/
+}
+
+    .appointment_result_area .content-box {
+        max-width: 700px;
+        margin: 0 auto;
+        background: white;
+        border: 1px solid gray;
+        padding: 25px;
+        color: black;
+    }
+
+    .appointment_result_area table td {
+        border: none;
+    }
+
+    .appointment_result_area .result-title {
+        text-transform: uppercase;
+        color: #0a408a;
+        font-size: 26px;
+        font-weight: bolder;
+        text-align: center;
+    }
+
+    .appointment_result_area table.table-result {
+        border: none;
+    }
+
+        .appointment_result_area table.table-result thead {
+            border-bottom: 2px solid black;
+            text-transform: uppercase;
+        }
+
+        .appointment_result_area table.table-result th,
+        .appointment_result_area table.table-result td {
+            padding: 0 5px;
+            border: none;
+        }
+
+            .appointment_result_area table.table-result th:nth-child(1),
+            .appointment_result_area table.table-result td:nth-child(1) {
+                text-align: right;
+            }
+
+            .appointment_result_area table.table-result th:nth-child(2),
+            .appointment_result_area table.table-result td:nth-child(2) {
+                font-weight: bold;
+                text-align: center;
+            }
+
+                .appointment_result_area table.table-result td:nth-child(2).result-high {
+                    text-decoration: underline;
+                    font-style: italic;
+                    text-align: right;
+                }
+
+                .appointment_result_area table.table-result td:nth-child(2).result-low {
+                    text-decoration: underline;
+                    font-style: italic;
+                    text-align: left;
+                }
+
+            .appointment_result_area table.table-result th:nth-child(3),
+            .appointment_result_area table.table-result td:nth-child(3) {
+                text-align: left;
+            }
+
+    .appointment_result_area .return-time {
+        border-top: 2px solid black;
+        font-weight: bold;
+        text-align: right;
+        max-width: 200px;
+        margin: 0 0 0 auto;
+    }
+
+
+/* Login page */
+.login_page_area table td {
+    border: none !important;
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+
+.login_page_area .error-message {
+    color: red;
+    text-align: center;
+}
+
+/* Register page */
+.register_page_area table td {
+    border: none !important;
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+

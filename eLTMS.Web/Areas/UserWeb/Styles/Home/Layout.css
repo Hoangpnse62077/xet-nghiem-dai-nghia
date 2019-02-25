@@ -1,0 +1,59 @@
+/*
+    Author: DucBM
+
+    Brand's Colors
+    - Blue: #0a408a
+    - Green: #00923f
+    - Red: #da251c
+    - Yellow: #fff500
+*/
+
+/* Layout */
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "Muli" !important;
+}
+
+.header_area .site_logo {
+	width: 120px;
+}
+
+.copyright_area a {
+	text-decoration: underline;
+}
+
+.copyright_area a i {
+	color: white;
+}
+
+.footer_area .footer_logo img {
+	width: 120px;	
+}
+
+.login_area {	
+    position: absolute;
+    right: 0;
+    top: 50%;
+    line-height: 40px;
+    transform: translatey(-50%);
+    width: 240px;
+}
+
+.breadvroumb_area {
+    padding-bottom: 45px;
+}
+
+.p50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.login_area {
+    text-align: right;
+}
+.user-welcome {
+    line-height: 20px;
+}
+
+.valid-mess {
+    color: red;
+}

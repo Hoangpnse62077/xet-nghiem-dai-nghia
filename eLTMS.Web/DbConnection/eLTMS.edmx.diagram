@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="137cfbfc0a90481f8a9048fa5c308820" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Account" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Appointment" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Department" Width="1.5" PointX="10.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ExportPaper" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ExportPaperDetail" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="8.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Hospital" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HospitalDepartment" Width="1.5" PointX="13" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.HospitalSuggesting" Width="1.5" PointX="13" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ImportPaper" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ImportPaperDetail" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LabTest" Width="1.5" PointX="10.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LabTesting" Width="1.5" PointX="12.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LabTestingIndex" Width="1.5" PointX="15" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Patient" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Sample" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SampleGetting" Width="1.5" PointX="10.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SampleGroup" Width="1.5" PointX="6" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Supply" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SupplyType" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="12.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.database_firewall_rules" Width="1.5" PointX="12.75" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Employee__Accoun__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Patient_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Appointment_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Appointment_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SampleGetting_Appointment" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__HospitalF__Facul__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__HospitalS__Facul__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Feedback__Employ__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ExportProposurePaperDetail_ExportProposurePaper" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ExportProposurePaperDetail_Supplies" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Feedback__Patien__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__HospitalF__Hospi__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__HospitalS__Hospi__00200768" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ImportPaperDetail_ImportPaper" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ImportPaperDetail_Supplies" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__LabTest__SampleI__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_LabTesting_LabTest" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_LabTesting_SampleGetting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_LabTestingIndex_LabTesting" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Sample_SampleGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SampleGetting_Sample" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supplies_SuppliesType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
