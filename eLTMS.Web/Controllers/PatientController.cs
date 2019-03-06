@@ -43,11 +43,11 @@ namespace eLTMS.Web.Controllers
                 var patient = _patientService.GetAllPatients("").LastOrDefault();
                 if (patient != null)
                 {
-                    ViewBag.BN = "BN" + (patient.PatientId + 1);
+                    ViewBag.BN = DateTime.Now.ToString("ddMMyyHHmmss");
                 }
                 else
                 {
-                    ViewBag.BN = "BN1";
+                ViewBag.BN = DateTime.Now.ToString("ddMMyyHHmmss");
                 }
                 return View();
            

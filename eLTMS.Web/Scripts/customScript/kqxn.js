@@ -322,7 +322,13 @@ var homeController = {
                     var labTestResultDetails = data.LabTestResultDetails;
                     $('#txtComment').val(data.Comment);
                     $.each(labTestResultDetails, function (i, item) {
-                        $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value);
+                        if (item.IsCombobox) {
+                            $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value).change();
+                        }
+                        else {
+                            $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value);
+                        }
+                        
                     });
                 }
                 else {
@@ -341,6 +347,7 @@ var homeController = {
         $('#txtComment').val('');
         $('#ddlPatients').prop("disabled", false);
         $('#patienDiv').show();
+        $('.txtLabTestDetail.dropdown').val('').change();
     },
     loadAppResult: function (id, changePageSize) {
         $.ajax({

@@ -24,6 +24,7 @@ namespace eLTMS.DataAccess.Repositories
         {
             var result = DbSet.AsQueryable()
                 .Where(x => (x.PhoneNumber.Contains(phoneNumber) || x.PatientId.ToString().Contains(phoneNumber) || x.FullName.Contains(phoneNumber) || x.PatientCode.Contains(phoneNumber) || x.HomeAddress.Contains(phoneNumber)) && x.IsDeleted == false)
+                .OrderByDescending(x => x.PatientId)
                 .ToList();
             return result;
         }

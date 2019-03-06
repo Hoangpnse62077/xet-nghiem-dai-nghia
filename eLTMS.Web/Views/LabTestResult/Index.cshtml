@@ -197,6 +197,22 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <input type="hidden" class="form-control" id="txtLabTestResultId" name="txtPatientId" value="0">
+                    <div class="form-group" id="patienDiv">
+                        <label class="control-label col-sm-2" for="email">Chọn bệnh nhân</label>
+                        <div class="col-sm-10">
+                            <div class="row-fluid">
+                                <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatients" data-live-search="true">
+                                    <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
+                                    @foreach (var item in allPatient)
+                                    {
+                                        <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                                    }
+
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Mã bệnh nhân</label>
                         <div class="col-sm-10">
@@ -210,22 +226,7 @@
                                 <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
                             </div>
                         </div>*@
-                    <div class="form-group" id="patienDiv">
-                        <label class="control-label col-sm-2" for="email">Chọn bệnh nhân</label>
-                        <div class="col-sm-10" >
-                            <div class="row-fluid">
-                                <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatients" data-live-search="true">
-                                    <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
-                                    @foreach (var item in allPatient)
-                                    {
-                                        <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                                    }
-                                    
-                                </select>
-                              
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                             <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
                             <div class="col-sm-10">
@@ -279,31 +280,118 @@
                                         <div class="col-lg-12">
                                             <br />
                                             <ul class="nav nav-tabs">
-                                                <li class="active"><a data-toggle="tab" href="#home">Xét nghiệm Huyết Học</a></li>
+                                                <li class="active"><a data-toggle="tab" href="#home">Xét nghiệm máu</a></li>
                                                 <li><a data-toggle="tab" href="#menu1">Xét nghiệm Nước Tiểu</a></li>
-                                                <li><a data-toggle="tab" href="#menu2">Xét nghiệm Sinh Hóa</a></li>
+                                                
                                             </ul>
 
                                             <div class="tab-content">
                                                 <div id="home" class="tab-pane fade in active">
                                                     <br />
+                                                    <div class="info-box bg-red">
+                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text"><h3>Huyết học</h3></span>
+
+
+                                                        </div>
+                                                        <!-- /.info-box-content -->
+                                                    </div>
+                                                    <br />
                                                     @foreach (var item in huyethocLabTest)
                                                     {
                                                         <div class="col-md-4 customize-column">
                                                             <label class="control-label col-sm-4 lblTitle" for="email">@item.Name.Trim()</label>
-                                                            <div class="col-sm-8">
-                                                                <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                            <div class="col-sm-6">
+                                                                @{
+                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                    {
+                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                            <option value="">--Chọn --</option>
+                                                                            <option value="Âm tính">Âm tính</option>
+                                                                            <option value="Dương tính">Dương tính</option>
+                                                                        </select>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                    }
+                                                                }
+
                                                             </div>
                                                         </div>
                                                     }
-                                                        <div hidden class="col-md-12 divExport" style="text-align:end">
-                                                            <br />
-                                                            <form id="exportHuyetHoc" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                                <button type="button" id="btnExportHuyetHoc" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả huyết học
-                                                                <input type="text" hidden name="labTestTypeId" value="1" />
-                                                                <input type="text" hidden id="lbllabTestResultId" name="labTestResultId" value="0" />
-                                                            </form>
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <div class="info-box bg-green">
+                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text"><h3>Sinh hóa</h3></span>
+
                                                         </div>
+                                                        <!-- /.info-box-content -->
+                                                    </div>
+                                                    @foreach (var item in sinhHoaLabTest)
+                                                    {
+                                                        <div class="col-md-4 customize-column">
+                                                            <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
+                                                            <div class="col-sm-8">
+
+                                                                @{
+                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                    {
+                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                            <option value="">--Chọn --</option>
+                                                                            <option value="Âm tính">Âm tính</option>
+                                                                            <option value="Dương tính">Dương tính</option>
+                                                                        </select>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                    }
+                                                                }
+
+                                                            </div>
+
+                                                        </div>
+                                                    }
+
+                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                        <br />
+                                                        <form id="exportHuyetHoc" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                            <button type="button" id="btnExportHuyetHoc" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm máu
+                                                            <input type="text" hidden name="labTestTypeId" value="1" />
+                                                            <input type="text" hidden id="lbllabTestResultId" name="labTestResultId" value="0" />
+                                                        </form>
+                                                    </div>
 
 
 
@@ -316,7 +404,20 @@
                                                             <div class="col-md-4 customize-column">
                                                                 <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
                                                                 <div class="col-sm-8">
+                                                                    @{
+                                                                        if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                        {
+                                                                    <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                        <option value="">--Chọn --</option>
+                                                                        <option value="Âm tính">Âm tính</option>
+                                                                        <option value="Dương tính">Dương tính</option>
+                                                                    </select>
+                                                                    }
+                                                                    else
+                                                                    {
                                                                     <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                    }
+                                                                    }
 
                                                                 </div>
                                                             </div>
@@ -335,26 +436,20 @@
 
                                                 <div id="menu2" class="tab-pane fade">
                                                     <div id="home" class="tab-pane fade in active">
-                                                        <br />
-                                                        @foreach (var item in sinhHoaLabTest)
-                                                        {
-                                                            <div class="col-md-4 customize-column">
-                                                                <label class="control-label col-sm-6 lblTitle" for="email">@item.Name.Trim()</label>
-                                                                <div class="col-sm-6">
-                                                                    <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                </div>
-                                                            </div>
-                                                        }
-
+                                                        
                                                     </div>
-                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                    @*<div hidden class="col-md-12 divExport" style="text-align:end">
                                                         <br />
                                                         <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
                                                             <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
                                                             <input type="text" hidden name="labTestTypeId" value="3" />
                                                             <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
                                                         </form>
-                                                    </div>
+                                                    </div>*@
+                                                </div>
+
+                                                       
+                                                    
                                                 </div>
                                             </div>
 

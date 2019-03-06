@@ -22,6 +22,10 @@ namespace eLTMS.Web.Controllers
             this._labTestResultService = labTestResultService;
             this._patientService = patientService;
         }
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var account = Session[ConstantManager.SESSION_ACCOUNT];
@@ -49,7 +53,11 @@ namespace eLTMS.Web.Controllers
             }
             return View();
         }
-
+        /// <summary>
+        /// Gets all lab test.
+        /// </summary>
+        /// <param name="searchDto">The search dto.</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult GetAllLabTest(LabTestResultSearchDto searchDto)
         {
@@ -77,7 +85,10 @@ namespace eLTMS.Web.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-
+        /// <summary>
+        /// Gets the type of all lab test.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult GetAllLabTestType()
         {
@@ -102,7 +113,11 @@ namespace eLTMS.Web.Controllers
             var tempList = new List<LabTestType>();
             return result;
         }
-
+        /// <summary>
+        /// Adds the lab test result.
+        /// </summary>
+        /// <param name="labTestResult">The lab test result.</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult AddLabTestResult(LabTestResult labTestResult)
         {
@@ -139,15 +154,21 @@ namespace eLTMS.Web.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Gets the lab test result detail.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult GetLabTestResultDetail(int id)
         {
             var result = _labTestResultService.GetLabTestResultById(id);
-            result.LabTestResultDetails.ToList().ForEach(x =>
-            {
-                x.LabTestResult = null;
-                x.LabTestDetail = null;
-            });
+            //result.LabTestResultDetails.ToList().ForEach(x =>
+            //{
+            //    x.LabTestResult = null;
+            //    x.LabTestDetail = null;
+            //});
             var data = new
             {
                 LabTestResultId = result.LabTestResultId,
@@ -158,7 +179,11 @@ namespace eLTMS.Web.Controllers
                 //PhoneNumber = result.Patient.PhoneNumber,
                 //Gender = result.Patient.Gender,
                 // DateOfBirth = result.Patient.DateOfBirth.Value.
-                LabTestResultDetails = result.LabTestResultDetails.ToList(),
+                LabTestResultDetails = result.LabTestResultDetails.Select(x => new {
+                    x.LabTestDetailId,x.LabTestResultId,
+                    Value = (x.Value != null ? x.Value : "") ,
+                    IsCombobox = x.LabTestDetail.AverageValue?.Contains("Âm tính")
+                }).ToList(),
                 CreatedDate = result.CreatedDate.Value.ToString("dd-MM-yyyy HH:mm")
             };
             return Json(new
@@ -167,6 +192,11 @@ namespace eLTMS.Web.Controllers
                 data = data,
             }, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// Updates the lab test result.
+        /// </summary>
+        /// <param name="labTestResult">The lab test result.</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult UpdateLabTestResult(LabTestResult labTestResult)
         {
@@ -189,7 +219,7 @@ namespace eLTMS.Web.Controllers
 
             }
 
-        }
+        }///
         public ActionResult ExportLabTestResultToPdf(int labTestResultId, int labTestTypeId)
         {
             var allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result.html"));
@@ -202,17 +232,42 @@ namespace eLTMS.Web.Controllers
             allData = allData.Replace("{{HomeAddress}}", homeAddress);
             allData = allData.Replace("{{Gender}}", gender == "Male" ? "Nam" : "Nữ");
             allData = allData.Replace("{{CreatedDate}}", createdDate);
-            allData = allData.Replace("{{LabTestType}}", labTestResult.LabTestResultDetails.FirstOrDefault(x => x.LabTestDetail.LabTestTypeId == labTestTypeId).LabTestDetail.LabTestType.Name.ToUpper());
-            allData = allData.Replace(" {{Age}}",  " " +  labTestResult.Patient.Age.Value.ToString());
+            
+            allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age.Value.ToString());
             StringBuilder sb = new StringBuilder();
-            foreach (var item in labTestResult.LabTestResultDetails.Where(x=>x.LabTestDetail.LabTestTypeId == labTestTypeId))
+            if (labTestTypeId == 1 || labTestTypeId == 3)
             {
-                sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
-                sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
-                sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
-                sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                sb.AppendLine("</tr>");
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM MÁU");
+                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 1))
+                {
+                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
+                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                    sb.AppendLine("</tr>");
+                }
+                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 3))
+                {
+                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
+                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                    sb.AppendLine("</tr>");
+                }
             }
+            else
+            {
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
+                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 2))
+                {
+                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
+                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
+                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                    sb.AppendLine("</tr>");
+                }
+            }
+
             allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
             Byte[] res = null;
             using (MemoryStream ms = new MemoryStream())
@@ -225,7 +280,7 @@ namespace eLTMS.Web.Controllers
 
             Response.Clear();
             Response.ContentType = "application/pdf";
-            Response.AddHeader("Content-Disposition", $"attachment;filename=\"Result.pdf\"");
+            Response.AddHeader("Content-Disposition", $"attachment;filename=\"KET_QUA_XET_NGHIEM_{patientName}.pdf\"");
             
             Response.BinaryWrite(res);
             Response.Flush();
