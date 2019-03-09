@@ -235,39 +235,26 @@ namespace eLTMS.Web.Controllers
             
             allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age.Value.ToString());
             StringBuilder sb = new StringBuilder();
-            if (labTestTypeId == 1 || labTestTypeId == 3)
+            if (labTestTypeId == 1)
             {
-                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM MÁU");
-                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 1))
-                {
-                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
-                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                    sb.AppendLine("</tr>");
-                }
-                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 3))
-                {
-                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
-                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                    sb.AppendLine("</tr>");
-                }
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM HUYẾT HỌC");
+            }
+            else  if (labTestTypeId == 2)
+            {
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
             }
             else
             {
-                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
-                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == 2))
-                {
-                    sb.AppendLine("<tr class='item' style='border: 1px solid black;'> ");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.LabTestDetail.Name}</td>");
-                    sb.AppendLine($"<td align='center' style='border: 1px solid black;'>{item.Value}</td>");
-                    sb.AppendLine($"<td  align='center' style='border: 1px solid black;' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                    sb.AppendLine("</tr>");
-                }
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM SINH HÓA");
             }
-
+            foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
+            {
+                sb.AppendLine("<tr class='item'> ");
+                sb.AppendLine($"<td align='center'>{item.LabTestDetail.Name}</td>");
+                sb.AppendLine($"<td align='center'>{item.Value}</td>");
+                sb.AppendLine($"<td  align='center' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                sb.AppendLine("</tr>");
+            }
             allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
             Byte[] res = null;
             using (MemoryStream ms = new MemoryStream())
