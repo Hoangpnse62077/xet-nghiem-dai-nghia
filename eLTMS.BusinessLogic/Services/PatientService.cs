@@ -152,7 +152,9 @@ namespace eLTMS.BusinessLogic.Services
         public List<Patient> GetAllPatientByName(string phoneNumber)
         {
             var allPatients = UnitOfWork.Context.Set<Patient>().AsQueryable();
-            var data = allPatients.Where(x => x.FullName.Contains(phoneNumber) && x.IsDeleted == false).ToList();
+            var data = allPatients.Where(x => x.FullName.Contains(phoneNumber) && x.IsDeleted == false)
+                .OrderByDescending(x => x.PatientId)
+                .ToList();
             return data;
         }
     }

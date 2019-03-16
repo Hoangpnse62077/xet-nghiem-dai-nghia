@@ -376,7 +376,7 @@ namespace eLTMS.DataAccess.Models
         public bool? IsDeleted { get; set; } // IsDeleted
         public bool? IsOnline { get; set; } // IsOnline
         public string IdentityCardNumber { get; set; } // IdentityCardNumber (length: 20)
-        public int? Age { get; set; } // Age
+        public string Age { get; set; } // Age (length: 50)
 
         // Reverse navigation
 
@@ -399,10 +399,10 @@ namespace eLTMS.DataAccess.Models
 
         public Patient()
         {
-            Appointments = new System.Collections.Generic.List<Appointment>();
-            Feedbacks = new System.Collections.Generic.List<Feedback>();
-            LabTestResults = new System.Collections.Generic.List<LabTestResult>();
             PatientAccounts = new System.Collections.Generic.List<PatientAccount>();
+            LabTestResults = new System.Collections.Generic.List<LabTestResult>();
+            Feedbacks = new System.Collections.Generic.List<Feedback>();
+            Appointments = new System.Collections.Generic.List<Appointment>();
         }
     }
 
@@ -1366,7 +1366,7 @@ namespace eLTMS.DataAccess.Models
             Property(x => x.IsDeleted).HasColumnName(@"IsDeleted").HasColumnType("bit").IsOptional();
             Property(x => x.IsOnline).HasColumnName(@"IsOnline").HasColumnType("bit").IsOptional();
             Property(x => x.IdentityCardNumber).HasColumnName(@"IdentityCardNumber").HasColumnType("nvarchar").IsOptional().HasMaxLength(20);
-            Property(x => x.Age).HasColumnName(@"Age").HasColumnType("int").IsOptional();
+            Property(x => x.Age).HasColumnName(@"Age").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
         }
     }
 

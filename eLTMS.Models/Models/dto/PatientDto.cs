@@ -21,6 +21,6 @@ namespace eLTMS.Models.Models.dto
         public string AppCode { get; set; } // PatientCode (length: 20)
 
         public string IdentityCardNumber { get; set; } // IdentityCardNumber (length: 20)
-        public int? Age { get; set; }
+        public string Age { get; set; }
     }
 }

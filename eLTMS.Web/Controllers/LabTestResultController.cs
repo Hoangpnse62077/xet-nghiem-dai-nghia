@@ -233,7 +233,7 @@ namespace eLTMS.Web.Controllers
             allData = allData.Replace("{{Gender}}", gender == "Male" ? "Nam" : "Nữ");
             allData = allData.Replace("{{CreatedDate}}", createdDate);
             
-            allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age.Value.ToString());
+            allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age);
             StringBuilder sb = new StringBuilder();
             if (labTestTypeId == 1)
             {
