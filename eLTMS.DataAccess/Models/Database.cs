@@ -434,7 +434,7 @@ namespace eLTMS.DataAccess.Models
         public int LabTestResultDetail_ { get; set; } // LabTestResultDetail (Primary key)
         public int LabTestResultId { get; set; } // LabTestResultId
         public int? LabTestDetailId { get; set; } // LabTestDetailId
-        public string Value { get; set; } // Value (length: 50)
+        public string Value { get; set; } // Value
 
         // Foreign keys
 
@@ -1312,7 +1312,7 @@ namespace eLTMS.DataAccess.Models
             Property(x => x.LabTestResultDetail_).HasColumnName(@"LabTestResultDetail").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.LabTestResultId).HasColumnName(@"LabTestResultId").HasColumnType("int").IsRequired();
             Property(x => x.LabTestDetailId).HasColumnName(@"LabTestDetailId").HasColumnType("int").IsOptional();
-            Property(x => x.Value).HasColumnName(@"Value").HasColumnType("nvarchar").IsRequired().HasMaxLength(50);
+            Property(x => x.Value).HasColumnName(@"Value").HasColumnType("nvarchar(max)").IsRequired();
 
             // Foreign keys
             HasOptional(a => a.LabTestDetail).WithMany(b => b.LabTestResultDetails).HasForeignKey(c => c.LabTestDetailId).WillCascadeOnDelete(false); // FK_LabTestResultDetail_LabTestDetail

@@ -119,6 +119,7 @@ namespace eLTMS.Web.Controllers
         /// <param name="labTestResult">The lab test result.</param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult AddLabTestResult(LabTestResult labTestResult)
         {
             try
@@ -198,6 +199,7 @@ namespace eLTMS.Web.Controllers
         /// <param name="labTestResult">The lab test result.</param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult UpdateLabTestResult(LabTestResult labTestResult)
         {
             try
@@ -222,7 +224,16 @@ namespace eLTMS.Web.Controllers
         }///
         public ActionResult ExportLabTestResultToPdf(int labTestResultId, int labTestTypeId)
         {
-            var allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result.html"));
+            var allData = string.Empty;
+            if (labTestTypeId != 4)
+            {
+                allData =  System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result.html"));
+            }
+            else
+            {
+                allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result-other.html"));
+            }
+             
             var labTestResult = this._labTestResultService.GetLabTestResultById(labTestResultId);
             var patientName = labTestResult.Patient.FullName;
             var homeAddress = labTestResult.Patient.HomeAddress;
@@ -235,27 +246,38 @@ namespace eLTMS.Web.Controllers
             
             allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age);
             StringBuilder sb = new StringBuilder();
-            if (labTestTypeId == 1)
+            //if (labTestTypeId == 1)
+            //{
+            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM HUYẾT HỌC");
+            //}
+            //else  if (labTestTypeId == 2)
+            //{
+            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
+            //}
+            //else
+            //{
+            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM SINH HÓA");
+            //}
+
+            allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM");
+            if (labTestTypeId != 4)
             {
-                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM HUYẾT HỌC");
-            }
-            else  if (labTestTypeId == 2)
-            {
-                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
+                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
+                {
+                    sb.AppendLine("<tr class='item' style='font-size:16px'>");
+                    sb.AppendLine($"<td align='center' style='font-size:16px'>{item.LabTestDetail.Name}</td>");
+                    sb.AppendLine($"<td align='center' style='font-size:16px'>{item.Value}</td>");
+                    sb.AppendLine($"<td  align='center' style='font-size:16px'>{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                    sb.AppendLine("</tr>");
+                }
+                allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
             }
             else
-            {
-                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM SINH HÓA");
+            {;
+                var comment = labTestResult.LabTestResultDetails.FirstOrDefault(x => x.LabTestDetail.LabTestTypeId == labTestTypeId);
+                allData = allData.Replace("{{LabTestDetails}}", comment?.Value);
             }
-            foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
-            {
-                sb.AppendLine("<tr class='item'> ");
-                sb.AppendLine($"<td align='center'>{item.LabTestDetail.Name}</td>");
-                sb.AppendLine($"<td align='center'>{item.Value}</td>");
-                sb.AppendLine($"<td  align='center' >{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                sb.AppendLine("</tr>");
-            }
-            allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
+           
             Byte[] res = null;
             using (MemoryStream ms = new MemoryStream())
             {

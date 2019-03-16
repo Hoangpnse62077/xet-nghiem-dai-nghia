@@ -1,4 +1,6 @@
-﻿var homeconfig = {
+﻿
+
+var homeconfig = {
     pageSize: 10,
     pageIndex: 1,
     allLabTestType: {}
@@ -39,6 +41,15 @@ var homeController = {
                 $('#exportSinhHoa').submit();
             }
         });
+
+        $('#btnExportLoaiKhac').off('click').on('click', function () {
+            var id = $('#txtLabTestResultId').val();
+            if (id != 0) {
+                $('#lbllabTestResultIdLoaiKhac').val(id);
+                $('#exportLoaiKhac').submit();
+            }
+        });
+
         $('#ddlPatients').off('change').on('change', function () {
             var id = $(this).val();
             if (id != 0) {
@@ -181,6 +192,11 @@ var homeController = {
                 labTestItem.Name = $(item).data('name');
                 labTestDetails.push(labTestItem);
             });
+            var labTestItem = {};
+            labTestItem.LabTestDetailId = 77;
+            labTestItem.Value = $('#txtCMTPT').froalaEditor('html.get');
+            labTestDetails.push(labTestItem);
+
             console.log(labTestDetails);
             var labTestResult = {
                 LabTestResultId: $('#txtLabTestResultId').val(),
@@ -326,7 +342,11 @@ var homeController = {
                             $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value).change();
                         }
                         else {
-                            $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value);
+                            if (item.LabTestDetailId === 77) {
+                                $('#txtCMTPT').froalaEditor('html.set', item.Value);
+                            } else {
+                                $('.txtLabTestDetail[data-id="' + item.LabTestDetailId + '"]').val(item.Value);
+                            }  
                         }
                         
                     });

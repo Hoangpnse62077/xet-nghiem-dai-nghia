@@ -282,7 +282,8 @@
                                             <ul class="nav nav-tabs">
                                                 <li class="active"><a data-toggle="tab" href="#home">Xét nghiệm máu</a></li>
                                                 <li><a data-toggle="tab" href="#menu1">Xét nghiệm Nước Tiểu</a></li>
-                                                
+                                                <li><a data-toggle="tab" href="#menu3">Xét nghiệm khác </a></li>
+
                                             </ul>
 
                                             <div class="tab-content">
@@ -453,7 +454,24 @@
                                                         </form>
                                                     </div>*@
                                                 </div>
+                                                <div id="menu3" class="tab-pane fade">
 
+                                                    <div class="form-group">
+                                                        <div style="padding: 0 15px">
+                                                            <div id="txtCMTPT" style="margin-top: 30px"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                        <br />
+                                                        
+                                                        <form id="exportLoaiKhac" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                            <button type="button" id="btnExportLoaiKhac" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả loại khác
+                                                            <input type="text" hidden name="labTestTypeId" value="4" />
+                                                            <input type="text" hidden id="lbllabTestResultIdLoaiKhac" name="labTestResultId" value="0" />
+                                                        </form>
+                                                    </div>
+                                                </div>
                                                        
                                                     
                                                 </div>
