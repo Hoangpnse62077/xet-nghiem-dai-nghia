@@ -265,9 +265,9 @@ namespace eLTMS.Web.Controllers
                 foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
                 {
                     sb.AppendLine("<tr class='item' style='font-size:16px'>");
-                    sb.AppendLine($"<td align='center' style='font-size:16px'>{item.LabTestDetail.Name}</td>");
+                    sb.AppendLine($"<td align='right' style='font-size:16px'>{item.LabTestDetail.Name}</td>");
                     sb.AppendLine($"<td align='center' style='font-size:16px'>{item.Value}</td>");
-                    sb.AppendLine($"<td  align='center' style='font-size:16px'>{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                    sb.AppendLine($"<td  align='left' style='font-size:16px'>{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
                     sb.AppendLine("</tr>");
                 }
                 allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());

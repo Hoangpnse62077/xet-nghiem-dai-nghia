@@ -20,6 +20,7 @@ namespace eLTMS.BusinessLogic.Services
         bool Delete(int id);
         // bool UpdatePatient(Patient dto);
         List<Patient> GetAllPatientByName(string phoneNumber);
+        string GetPatientId();
     }
     public class PatientService : IPatientService
     {
@@ -156,6 +157,14 @@ namespace eLTMS.BusinessLogic.Services
                 .OrderByDescending(x => x.PatientId)
                 .ToList();
             return data;
+        }
+
+        public string GetPatientId()
+        {
+            var currentDate = DateTime.Now.ToString("ddMMyy");
+            var data = UnitOfWork.Context.Set<Patient>().Count(x => x.PatientCode.Contains(currentDate));
+            var res = DateTime.Now.ToString("ddMMyy") + "_" + (++data);
+            return res;
         }
     }
 }

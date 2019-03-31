@@ -40,16 +40,8 @@ namespace eLTMS.Web.Controllers
             }
 
 
-                var patient = _patientService.GetAllPatients("").LastOrDefault();
-                if (patient != null)
-                {
-                    ViewBag.BN = DateTime.Now.ToString("ddMMyyHHmmss");
-                }
-                else
-                {
-                ViewBag.BN = DateTime.Now.ToString("ddMMyyHHmmss");
-                }
-                return View();
+            ViewBag.BN = _patientService.GetPatientId();
+            return View();
            
         }
         public ActionResult Appointment()
