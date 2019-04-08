@@ -62,26 +62,12 @@ namespace eLTMS.Web.Controllers
         public JsonResult GetAllLabTest(LabTestResultSearchDto searchDto)
         {
             var result = _labTestResultService.GetAllLabTestResult(searchDto);
-            var data = result.ToList()
-                .Skip((searchDto.PageIndex - 1) * searchDto.PageSize)
-                .Take(searchDto.PageSize)
-                .Select(x => new
-            {
-                LabTestResultId = x.LabTestResultId,
-                PatientCode = x.Patient.PatientCode,
-                PatientId = x.PatientId,
-                PatientName = x.Patient.FullName,
-                Address = x.Patient.HomeAddress,
-                PhoneNumber = x.Patient.PhoneNumber,
-                Comment = x.Comment,
-                Age = x.Patient.Age,
-                CreatedDate = x.CreatedDate.Value.ToString("dd-MM-yyyy HH:mm")
-            }).ToList();
+            
             return Json(new
             {
                 success = true,
-                data = data,
-                total = result.Count()
+                data = result,
+                total = result[0].TotalCount
             }, JsonRequestBehavior.AllowGet);
         }
 

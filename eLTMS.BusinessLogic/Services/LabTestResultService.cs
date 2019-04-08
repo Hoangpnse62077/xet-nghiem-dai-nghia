@@ -12,7 +12,7 @@ namespace eLTMS.BusinessLogic.Services
 {
     public interface ILabTestResultService
     {
-        List<LabTestResult> GetAllLabTestResult(LabTestResultSearchDto searchDto);
+        List<LabTestResultDto> GetAllLabTestResult(LabTestResultSearchDto searchDto);
         List<LabTestType> GetLabTestTypes();
         LabTestResult AddLabTestResult(LabTestResult labTestResult);
         LabTestResult GetLabTestResultById(int id);
@@ -97,14 +97,31 @@ namespace eLTMS.BusinessLogic.Services
             }
         }
 
-        public List<LabTestResult> GetAllLabTestResult(LabTestResultSearchDto searchDto)
+        public List<LabTestResultDto> GetAllLabTestResult(LabTestResultSearchDto searchDto)
         {
             var unitOfWork = RepositoryHelper.GetUnitOfWork();
-            var labTest = unitOfWork.Context.Set<LabTestResult>().AsQueryable()
-                .Include(x => x.Patient)
-                .Where(x => (searchDto.PatientId == null || x.PatientId == searchDto.PatientId))
-                .OrderByDescending(x => x.CreatedDate).ToList();
-            return labTest;
+            var sql = @"select a.LabTestResultId, 
+                               b.FullName as PatientName,
+                               b.PatientCode, 
+                               a.Comment,
+                               b.Age,
+                               b.PhoneNumber, 
+                               b.HomeAddress as Address , 
+                               a.CreatedDate as CreateDateTmp, 
+                               TotalCount = COUNT(*) OVER() 
+                          from LabTestResult a
+                          inner join Patient b 
+                          on a.PatientId = b.PatientID ";
+                if (searchDto.PatientId.HasValue)
+                {
+                    sql += "where b.PatientId = @p0 ";
+                }
+              
+              sql += @"ORDER BY LabTestResultId desc
+              OFFSET @p1 ROWS
+              FETCH NEXT @p2 ROWS ONLY;";
+            var data = unitOfWork.Context.Database.SqlQuery<LabTestResultDto>(sql, searchDto.PatientId,(searchDto.PageIndex -1 ) * searchDto.PageSize, searchDto.PageSize).ToList();
+            return data;
         }
 
         public LabTestResult GetLabTestResultById(int id)
