@@ -5,6 +5,7 @@ using eLTMS.Models.Enums;
 using eLTMS.Models.Models.dto;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -156,6 +157,9 @@ namespace eLTMS.Web.Controllers
             //    x.LabTestResult = null;
             //    x.LabTestDetail = null;
             //});
+
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");   // try with "en-US"
+
             var data = new
             {
                 LabTestResultId = result.LabTestResultId,
@@ -168,7 +172,9 @@ namespace eLTMS.Web.Controllers
                 // DateOfBirth = result.Patient.DateOfBirth.Value.
                 LabTestResultDetails = result.LabTestResultDetails.Select(x => new {
                     x.LabTestDetailId,x.LabTestResultId,
-                    Value = (x.Value != null ? x.Value : "") ,
+                    Name = x.LabTestDetail.Name,
+                    Value = (x.Value != null ? x.Value : ""),
+                    Price = x.Price.GetValueOrDefault().ToString("#,###", cul.NumberFormat),
                     IsCombobox = x.LabTestDetail.AverageValue?.Contains("Âm tính")
                 }).ToList(),
                 CreatedDate = result.CreatedDate.Value.ToString("dd-MM-yyyy HH:mm")
@@ -177,6 +183,7 @@ namespace eLTMS.Web.Controllers
             {
                 success = true,
                 data = data,
+                totalMoney = result.TotalPrice.GetValueOrDefault().ToString("#,###", cul.NumberFormat)
             }, JsonRequestBehavior.AllowGet);
         }
         /// <summary>

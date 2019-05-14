@@ -240,6 +240,7 @@ var homeController = {
                         }
                         else {
                             toastr.success("Cập nhật thành công.");
+                            homeController.loadDetail(labTestResult.LabTestResultId);
                             homeController.loadData();
                         }
                         $('#btnSave').button('reset');
@@ -350,11 +351,24 @@ var homeController = {
                         }
                         
                     });
+
+                    var stringS = "";
+                    $.each(labTestResultDetails, function (i, item) {
+                        stringS += "<tr>" +
+                            "<td colSpan >" + ( i + 1 )+ "</td >" +
+                            "<td>" + item.Name +"</td > " + "<td>" + item.Price+ " </td></tr>";
+                    });
+
+                    stringS += "<tr>" +
+                        "<td colspan='2' ><b>Tổng</b></td >" +
+                        "<td><b>" + response.totalMoney + "</b></td></tr>";
+                    $('#priceDetail').html(stringS);
+                    $('#money').show();
                 }
                 else {
                     bootbox.alert(response.message);
                 }
-            },
+            }
         });
     },
     resetForm: function () {
@@ -368,6 +382,7 @@ var homeController = {
         $('#ddlPatients').prop("disabled", false);
         $('#patienDiv').show();
         $('.txtLabTestDetail.dropdown').val('').change();
+        $('#money').hide();
     },
     loadAppResult: function (id, changePageSize) {
         $.ajax({

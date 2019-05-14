@@ -435,6 +435,7 @@ namespace eLTMS.DataAccess.Models
         public int LabTestResultId { get; set; } // LabTestResultId
         public int? LabTestDetailId { get; set; } // LabTestDetailId
         public string Value { get; set; } // Value
+        public decimal? Price { get; set; } // Price
 
         // Foreign keys
 
@@ -457,6 +458,7 @@ namespace eLTMS.DataAccess.Models
         public int? PatientId { get; set; } // PatientId
         public System.DateTime? CreatedDate { get; set; } // CreatedDate
         public string Comment { get; set; } // Comment
+        public decimal? TotalPrice { get; set; } // TotalPrice
 
         // Reverse navigation
 
@@ -544,6 +546,7 @@ namespace eLTMS.DataAccess.Models
         public int? LabTestTypeId { get; set; } // LabTestTypeId
         public string AverageValue { get; set; } // AverageValue (length: 50)
         public string Unit { get; set; } // Unit (length: 50)
+        public decimal? Price { get; set; } // Price
 
         // Reverse navigation
 
@@ -1210,6 +1213,7 @@ namespace eLTMS.DataAccess.Models
             Property(x => x.LabTestTypeId).HasColumnName(@"LabTestTypeId").HasColumnType("int").IsOptional();
             Property(x => x.AverageValue).HasColumnName(@"AverageValue").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
             Property(x => x.Unit).HasColumnName(@"Unit").HasColumnType("nvarchar").IsOptional().HasMaxLength(50);
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
 
             // Foreign keys
             HasOptional(a => a.LabTestType).WithMany(b => b.LabTestDetails).HasForeignKey(c => c.LabTestTypeId).WillCascadeOnDelete(false); // FK_LabTestDetail_LabTestType
@@ -1289,6 +1293,7 @@ namespace eLTMS.DataAccess.Models
             Property(x => x.PatientId).HasColumnName(@"PatientId").HasColumnType("int").IsOptional();
             Property(x => x.CreatedDate).HasColumnName(@"CreatedDate").HasColumnType("datetime").IsOptional();
             Property(x => x.Comment).HasColumnName(@"Comment").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.TotalPrice).HasColumnName(@"TotalPrice").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
 
             // Foreign keys
             HasOptional(a => a.Patient).WithMany(b => b.LabTestResults).HasForeignKey(c => c.PatientId).WillCascadeOnDelete(false); // FK_LabTestResult_Patient1
@@ -1313,6 +1318,7 @@ namespace eLTMS.DataAccess.Models
             Property(x => x.LabTestResultId).HasColumnName(@"LabTestResultId").HasColumnType("int").IsRequired();
             Property(x => x.LabTestDetailId).HasColumnName(@"LabTestDetailId").HasColumnType("int").IsOptional();
             Property(x => x.Value).HasColumnName(@"Value").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
 
             // Foreign keys
             HasOptional(a => a.LabTestDetail).WithMany(b => b.LabTestResultDetails).HasForeignKey(c => c.LabTestDetailId).WillCascadeOnDelete(false); // FK_LabTestResultDetail_LabTestDetail

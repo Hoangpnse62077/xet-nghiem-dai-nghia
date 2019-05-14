@@ -54,11 +54,15 @@ namespace eLTMS.BusinessLogic.Services
                     }
 
                     var labTestResultDetails = labTestResult.LabTestResultDetails.Where(x => !String.IsNullOrEmpty(x.Value)).ToList();
+                    var listIds = labTestResultDetails.Select(y => y.LabTestDetailId).ToList();
+                    var allLabTest = context.Set<LabTestDetail>().Where(x => listIds.Contains(x.LabTestDetailId)).ToList();
                     labTestResultDetails.ForEach(x =>
                     {
                         x.LabTestResultId = labTestResultTmp.LabTestResultId;
+                        x.Price = allLabTest.FirstOrDefault(y => y.LabTestDetailId == x.LabTestDetailId).Price;
                     });
                     context.Set<LabTestResultDetail>().AddRange(labTestResultDetails);
+                    labTestResultTmp.TotalPrice = labTestResultDetails.Sum(x => x.Price.GetValueOrDefault());
                     result = unitOfWork.SaveChanges();
                     if (result.Any())
                     {
@@ -157,8 +161,18 @@ namespace eLTMS.BusinessLogic.Services
                 labTest.Comment = labTestResult.Comment;
                 context.Set<LabTestResultDetail>().RemoveRange(labTest.LabTestResultDetails);
                 var labTestResultDetails = labTestResult.LabTestResultDetails.Where(x => !String.IsNullOrEmpty(x.Value)).ToList();
-                labTest.LabTestResultDetails = labTestResultDetails;
                 
+                var listIds = labTestResultDetails.Select(y => y.LabTestDetailId).ToList();
+                var allLabTest = context.Set<LabTestDetail>().Where(x => listIds.Contains(x.LabTestDetailId)).ToList();
+                labTestResultDetails.ForEach(x =>
+                {                    
+                    x.Price = allLabTest.FirstOrDefault(y => y.LabTestDetailId == x.LabTestDetailId).Price;
+                });
+                labTest.TotalPrice = labTestResultDetails.Sum(x => x.Price.GetValueOrDefault());
+                labTest.LabTestResultDetails = labTestResultDetails;
+
+
+
                 var result = unitOfWork.SaveChanges();
                 if (result.Any())
                 {

@@ -218,25 +218,25 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="txtCode" name="txtCode" value="@ViewBag.BN" readonly>
                         </div>
-                       
+
                     </div>
                     @*<div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Account ID</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
-                            </div>
-                        </div>*@
-                    
+                <label class="control-label col-sm-2" for="email">Account ID</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
+                </div>
+            </div>*@
+
                     <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" readonly id="txtPatientName" name="txtCmnd">
-                            </div>
+                        <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" readonly id="txtPatientName" name="txtCmnd">
                         </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="pwd">Giới tính</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="ddlGender" disabled >
+                            <select class="form-control" id="ddlGender" disabled>
                                 <option value="">
                                     ----- Chọn -----
                                 </option>
@@ -259,7 +259,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Số điện thoại</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  readonly id="txtPhoneNumber" name="txtName">
+                            <input type="text" class="form-control" readonly id="txtPhoneNumber" name="txtName">
                         </div>
                     </div>
                     <div class="form-group">
@@ -392,7 +392,7 @@
                                                             <input type="text" hidden name="labTestTypeId" value="1" />
                                                             <input type="text" hidden id="lbllabTestResultId" name="labTestResultId" value="0" />
                                                         </form>
-                                                        <br/>
+                                                        <br />
                                                         <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
                                                             <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm sinh hoa
                                                             <input type="text" hidden name="labTestTypeId" value="3" />
@@ -414,16 +414,16 @@
                                                                     @{
                                                                         if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
                                                                         {
-                                                                    <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                        <option value="">--Chọn --</option>
-                                                                        <option value="Âm tính">Âm tính</option>
-                                                                        <option value="Dương tính">Dương tính</option>
-                                                                    </select>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                    <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                    }
+                                                                            <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                <option value="">--Chọn --</option>
+                                                                                <option value="Âm tính">Âm tính</option>
+                                                                                <option value="Dương tính">Dương tính</option>
+                                                                            </select>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                        }
                                                                     }
 
                                                                 </div>
@@ -431,7 +431,7 @@
                                                         }
 
                                                     </div>
-                                                   
+
                                                     <div hidden class="col-md-12 divExport" style="text-align:end">
                                                         <br /><form id="exportNuocTieu" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
                                                             <button type="button" id="btnExportNuocTieu" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả nước tiểu
@@ -443,16 +443,16 @@
 
                                                 <div id="menu2" class="tab-pane fade">
                                                     <div id="home" class="tab-pane fade in active">
-                                                        
+
                                                     </div>
                                                     @*<div hidden class="col-md-12 divExport" style="text-align:end">
-                                                        <br />
-                                                        <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                            <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
-                                                            <input type="text" hidden name="labTestTypeId" value="3" />
-                                                            <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
-                                                        </form>
-                                                    </div>*@
+                                                <br />
+                                                <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                    <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
+                                                    <input type="text" hidden name="labTestTypeId" value="3" />
+                                                    <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
+                                                </form>
+                                            </div>*@
                                                 </div>
                                                 <div id="menu3" class="tab-pane fade">
 
@@ -464,7 +464,7 @@
 
                                                     <div hidden class="col-md-12 divExport" style="text-align:end">
                                                         <br />
-                                                        
+
                                                         <form id="exportLoaiKhac" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
                                                             <button type="button" id="btnExportLoaiKhac" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả loại khác
                                                             <input type="text" hidden name="labTestTypeId" value="4" />
@@ -472,52 +472,59 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                       
-                                                    
-                                                </div>
+
+
                                             </div>
-
-
                                         </div>
+
+
                                     </div>
                                 </div>
-                       
                             </div>
 
-
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Ghi chú: </label>
-                        <div class="col-sm-10">
-                            <textarea rows="5" type="text" class="form-control" id="txtComment" name="txtName">
-</textarea>
-                        </div>
-                    </div>
 
-                    @*<div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Địa chỉ công ty</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtCompanyAddress" name="txtName">
-                            </div>
-                        </div>*@
-                    <!--<input type="file" id="FileUpload1" />
-                    <input type="button" id="btnUpload" value="Upload Files" />
-                    <img src="" id="avatar" width="160px" height="250px" style="display:block; margin-left:auto; margin-right:auto" />
-                                       -->
-                    <div class="form-group">
-                        <div class="text-right">
-
-                            <button type="button" class="btn btn-success" id="btnSave" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang lưu ...">Lưu</button>
-                            <button type="button" class="btn btn-default" id="btnClose" data-dismiss="modal">Đóng</button>
-                        </div>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="email">Ghi chú: </label>
+                    <div class="col-sm-10">
+                        <textarea rows="5" type="text" class="form-control" id="txtComment" name="txtName">
+</textarea>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Xét nghiệm</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody id="priceDetail">
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <div class="text-right">
+
+                        <button type="button" class="btn btn-success" id="btnSave" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang lưu ...">Lưu</button>
+                        <button type="button" class="btn btn-default" id="btnClose" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+
+            </div>
             </div>
         </div>
     </div>
-</div>
+
 <div id="myModal1" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" id="hoangdeptrai">
         <!-- Modal content-->
