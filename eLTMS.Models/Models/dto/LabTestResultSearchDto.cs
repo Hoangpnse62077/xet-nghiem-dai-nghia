@@ -8,7 +8,7 @@ namespace eLTMS.Models.Models.dto
 {
     public class LabTestResultSearchDto
     {
-        public int? PatientId { get; set; }
+        public string PatientId { get; set; }
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
     }

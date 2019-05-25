@@ -63,12 +63,12 @@ namespace eLTMS.Web.Controllers
         public JsonResult GetAllLabTest(LabTestResultSearchDto searchDto)
         {
             var result = _labTestResultService.GetAllLabTestResult(searchDto);
-            
+
             return Json(new
             {
                 success = true,
-                data = result,
-                total = result[0].TotalCount
+                data = result != null ? result : new List<LabTestResultDto>(),
+                total = (result != null && result.Any()) ? result[0].TotalCount : 0
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -308,7 +308,8 @@ namespace eLTMS.Web.Controllers
         [HttpPost]
         public JsonResult SaveRefPatientId(int patienId)
         {
-            Session["PatientIdRef"] = patienId;
+            var patient = _patientService.GetPatientById(patienId);
+            Session["PatientIdRef"] = patient.FullName;
             return Json(new
             {
                 success = true,
@@ -324,7 +325,5 @@ namespace eLTMS.Web.Controllers
                 success = result,
             });
         }
-
-
     }
 }

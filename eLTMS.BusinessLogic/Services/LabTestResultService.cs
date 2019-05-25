@@ -116,15 +116,15 @@ namespace eLTMS.BusinessLogic.Services
                           from LabTestResult a
                           inner join Patient b 
                           on a.PatientId = b.PatientID ";
-                if (searchDto.PatientId.HasValue)
+                if (!string.IsNullOrEmpty(searchDto.PatientId))
                 {
-                    sql += "where b.PatientId = @p0 ";
+                    sql += "where b.FullName LIKE @p0 ";
                 }
               
               sql += @"ORDER BY LabTestResultId desc
               OFFSET @p1 ROWS
               FETCH NEXT @p2 ROWS ONLY;";
-            var data = unitOfWork.Context.Database.SqlQuery<LabTestResultDto>(sql, searchDto.PatientId,(searchDto.PageIndex -1 ) * searchDto.PageSize, searchDto.PageSize).ToList();
+            var data = unitOfWork.Context.Database.SqlQuery<LabTestResultDto>(sql, $"%{searchDto.PatientId}%", (searchDto.PageIndex -1 ) * searchDto.PageSize, searchDto.PageSize).ToList();
             return data;
         }
 

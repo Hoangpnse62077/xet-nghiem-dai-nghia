@@ -5,7 +5,10 @@
 }
 @using eLTMS.Models.Models.dto;
 @using eLTMS.DataAccess.Models;
-@{ 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@{
     var allPatient = TempData["allPatients"] as List<PatientDto>;
     var allLabTestType = TempData["allLabTestTypes"] as List<LabTestType>;
     foreach (var item in allLabTestType)
@@ -25,10 +28,14 @@
     var huyethocLabTest = allLabTestType.SingleOrDefault(x => x.LabTestTypeId == 1).LabTestDetails.ToList();
     var nuoctieuLabTest = allLabTestType.SingleOrDefault(x => x.LabTestTypeId == 2).LabTestDetails.ToList();
     var sinhHoaLabTest = allLabTestType.SingleOrDefault(x => x.LabTestTypeId == 3).LabTestDetails.ToList();
-    int? patientIdRef = null;
+    string patientIdRef = null;
     if (TempData["patientIdRef"] != null)
     {
-        patientIdRef = int.Parse(TempData["patientIdRef"].ToString());
+        patientIdRef = TempData["patientIdRef"].ToString();
+    }
+    else
+    {
+        patientIdRef = "";
     }
     var currentAccount = Session[eLTMS.Models.ConstantManager.SESSION_ACCOUNT] as Account;
 }
@@ -78,6 +85,10 @@
         }
     </style>
 }
+
+<script>
+        var patients = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@allPatient));
+</script>
 <section class="content-header">
     <h1>
         Quản lí kết quả xét nghiệm
@@ -103,46 +114,46 @@
 
                             <div class="row-fluid col-md-3">
                                 <label for="validationCustom01">Tên bệnh nhân</label>
-                                <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatientChoose" data-live-search="true">
+                                @*<select class="selectpicker form-control" data-show-subtext="true" id="ddlPatientChoose" data-live-search="true">
                                     <option data-subtext=" --" value="">-- Chọn bệnh nhân</option>
                                     @foreach (var item in allPatient)
-                                    {
-                                        if (patientIdRef != null && patientIdRef.Value == item.PatientId)
-                                        {
-                                            <option selected value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                                        }
+            {
+                if (patientIdRef != null && patientIdRef.Value == item.PatientId)
+                {
+                    <option selected value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                }
+                else
+                {
+                    <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                }
 
-                                    }
+            }
 
-                                </select>
-
+                                </select>*@
+                                <input id="ddlPatientChoose" class="form-control" value="@patientIdRef">
                             </div>
                             @*<div class="col-md-3">
-                                <label for="validationCustom02">Số điện thoại</label>
-                                <input type="text" class="form-control" id="txtPhoneNumberSearch" value="" placeholder="">
+                                    <label for="validationCustom02">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="txtPhoneNumberSearch" value="" placeholder="">
 
-                            </div>
+                                </div>
 
-                            <div class="col-md-3 mb-3">
-                                <label for="validationCustom03">Địa chỉ </label>
-                                <input type="text" class="form-control" id="txtAddress" placeholder="">
-                            </div>*@
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom03">Địa chỉ </label>
+                                    <input type="text" class="form-control" id="txtAddress" placeholder="">
+                                </div>*@
 
                             @*<div class="col-md-3 mb-3">
-                                <label for="validationCustom03">Từ ngày</label>
-                                <input type="date" class="form-control" id="txtCreatedDateFrom">
-                              
-                            </div>
+                                    <label for="validationCustom03">Từ ngày</label>
+                                    <input type="date" class="form-control" id="txtCreatedDateFrom">
+
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="validationCustom03">Đến ngày</label>
+                                    <input type="date" class="form-control" id="txtCreatedDateTo">
+                                </div>*@
                             <div class="col-md-3 mb-3">
-                                <label for="validationCustom03">Đến ngày</label>
-                                <input type="date" class="form-control" id="txtCreatedDateTo">
-                            </div>*@
-                            <div class="col-md-3 mb-3">
-                               
+
                                 <div class="form-group" style="text-align:start;padding-top: 23px;">
                                     <button class="btn btn-success" id="btnSearch" type="button"><i class="fa fa-search"></i> Lọc</button>
                                     &nbsp;
@@ -158,7 +169,7 @@
 
 
                     @*<input type="text" id="txtSearch" placeholder="Tìm kiếm" />
-        <input type="text" id="txtSearchCode" placeholder="Mã xét nghiệm" />*@
+                        <input type="text" id="txtSearchCode" placeholder="Mã xét nghiệm" />*@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -201,14 +212,16 @@
                         <label class="control-label col-sm-2" for="email">Chọn bệnh nhân</label>
                         <div class="col-sm-10">
                             <div class="row-fluid">
+                                
+                                
                                 <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatients" data-live-search="true">
-                                    <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
-                                    @foreach (var item in allPatient)
-                                    {
-                                        <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                                    }
+                                        <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
+                                        @*@foreach (var item in allPatient)
+                                        {
+                                            <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                                        }*@
 
-                                </select>
+                                    </select>
 
                             </div>
                         </div>
@@ -221,11 +234,11 @@
 
                     </div>
                     @*<div class="form-group">
-                <label class="control-label col-sm-2" for="email">Account ID</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
-                </div>
-            </div>*@
+                            <label class="control-label col-sm-2" for="email">Account ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
+                            </div>
+                        </div>*@
 
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
@@ -446,13 +459,13 @@
 
                                                     </div>
                                                     @*<div hidden class="col-md-12 divExport" style="text-align:end">
-                                                <br />
-                                                <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                    <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
-                                                    <input type="text" hidden name="labTestTypeId" value="3" />
-                                                    <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
-                                                </form>
-                                            </div>*@
+                                                            <br />
+                                                            <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
+                                                                <input type="text" hidden name="labTestTypeId" value="3" />
+                                                                <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
+                                                            </form>
+                                                        </div>*@
                                                 </div>
                                                 <div id="menu3" class="tab-pane fade">
 
@@ -521,9 +534,9 @@
                 </div>
 
             </div>
-            </div>
         </div>
     </div>
+</div>
 
 <div id="myModal1" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg" id="hoangdeptrai">
@@ -627,6 +640,49 @@
 </script>
 <script src="~/Scripts/customScript/kqxn.js"></script>
 
+
+<script>
+    var availableTags = getData("");
+    $("#ddlPatientChoose").autocomplete({
+        source: availableTags
+    });
+    
+    $('#ddlPatientChoose').off('change').on('change', function () {
+        var searchKey = $(this).val();
+        
+        $("#ddlPatientChoose").autocomplete({
+            source: getData(searchKey)
+        });
+    });
+
+    $(document).ready(function () {
+
+        $.each(patients, function (i, item) {
+            $('#ddlPatients')
+                .append($("<option></option>")
+                    .attr("value", item.PatientId)
+                    .attr("data-subtext", item.HomeAddress)
+                    .text(item.FullName));
+        });
+    });
+    
+    
+    function getData(searchKey) {
+        var count = 0;
+        var list = [];
+        for (var i = 0; i < patients.length; i++) {
+            if (count > 30 ) {
+                break;
+            }
+            if ( searchKey == '' || patients[i].FullName.indexOf(searchKey) >= 0) {
+                list.push(patients[i].FullName);
+                count++;
+            }
+        }
+        return list;
+    }
+</script>
+
 @section scripts{
     <!-- Froala Editor -->
     @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>*@
@@ -666,9 +722,15 @@
     <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/word_paste.min.js"></script>
     <!-- /Froala Editor -->
     <script>
-    $('#txtCMTPT').froalaEditor({
+        $('#txtCMTPT').froalaEditor({
             height: 300
         })</script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
 }
 
+
+
+
+<script>
+
+</script>
