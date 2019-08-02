@@ -181,7 +181,6 @@ var homeController = {
         $('#btnSave').off('click').on('click', function () {
             
             var $this = $(this);
-            $this.button('loading');
             var labTestDetails = [];
             var patientId = $('#ddlPatients').val();
             var allTextboxs = $('.txtLabTestDetail');
