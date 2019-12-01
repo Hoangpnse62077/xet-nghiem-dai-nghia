@@ -1,12 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "Lịch sử xét nghiệm xét nghiệm";
+    ViewBag.Title = "Quản lí kết quả xét nghiệm";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 @using eLTMS.Models.Models.dto;
 @using eLTMS.DataAccess.Models;
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+@*<link rel="stylesheet" href="/resources/demos/style.css">*@
+
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_editor.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_style.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/code_view.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/draggable.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/colors.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/emoticons.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image_manager.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/line_breaker.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/table.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/char_counter.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/video.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/fullscreen.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/file.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/quick_insert.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/help.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/third_party/spell_checker.css">
+<link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/special_characters.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
 
 @{
     var allPatient = TempData["allPatients"] as List<PatientDto>;
@@ -41,26 +62,8 @@
 }
 @section styles{
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">*@
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_editor.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/froala_style.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/code_view.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/draggable.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/colors.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/emoticons.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image_manager.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/image.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/line_breaker.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/table.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/char_counter.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/video.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/fullscreen.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/file.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/quick_insert.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/help.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/third_party/spell_checker.css">
-    <link rel="stylesheet" href="~/Assets/plugins/froala_editor_2.9.1/css/plugins/special_characters.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.11/css/bootstrap-select.min.css" />
     <style>
 
         .modal {
@@ -87,7 +90,10 @@
 }
 
 <script>
-        var patients = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@allPatient));
+    console.log(new Date().toString());
+    var patients = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@allPatient));
+    console.log(patients);
+    console.log(new Date().toString());
 </script>
 <section class="content-header">
     <h1>
@@ -96,7 +102,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    <div class="row">
+    <div class="row" id="divList">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
@@ -115,21 +121,21 @@
                             <div class="row-fluid col-md-3">
                                 <label for="validationCustom01">Tên bệnh nhân</label>
                                 @*<select class="selectpicker form-control" data-show-subtext="true" id="ddlPatientChoose" data-live-search="true">
-                                    <option data-subtext=" --" value="">-- Chọn bệnh nhân</option>
-                                    @foreach (var item in allPatient)
-            {
-                if (patientIdRef != null && patientIdRef.Value == item.PatientId)
-                {
-                    <option selected value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                }
-                else
-                {
-                    <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                }
+                                                            <option data-subtext=" --" value="">-- Chọn bệnh nhân</option>
+                                                            @foreach (var item in allPatient)
+                                    {
+                                        if (patientIdRef != null && patientIdRef.Value == item.PatientId)
+                                        {
+                                            <option selected value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
+                                        }
 
-            }
+                                    }
 
-                                </select>*@
+                                                        </select>*@
                                 <input id="ddlPatientChoose" class="form-control" value="@patientIdRef">
                             </div>
                             @*<div class="col-md-3">
@@ -170,9 +176,9 @@
 
                     @*<input type="text" id="txtSearch" placeholder="Tìm kiếm" />
                         <input type="text" id="txtSearchCode" placeholder="Mã xét nghiệm" />*@
-                    <table id="example2" class="table table-bordered table-hover">
+                    <table id="example2" class="table table-responsive table-striped">
                         <thead>
-                            <tr>
+                            <tr style="background-color:#ddd;text-align:center;vertical-align: middle;">
                                 <th>Mã bệnh nhân</th>
                                 <th>Tên bệnh nhân</th>
                                 <th>Tuổi</th>
@@ -185,422 +191,360 @@
                         </thead>
                         <tbody id="tblData"></tbody>
                     </table>
+
+                    <div style="margin-left:35%" id="pagination" class="pagination">
+                    </div>
                 </div>
             </div>
         </div>
         <!-- /.col -->
     </div>
-    <!-- /.col -->
-</section>
-<!-- /.content -->
-<!-- Modal -->
-<div style="margin-left:35%" id="pagination" class="pagination">
-</div>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="lblPopupTitle">Mã bệnh nhân</h4>
-            </div>
-            <button class="btn btn-success" id="btnHistory">Lịch sử</button>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <input type="hidden" class="form-control" id="txtLabTestResultId" name="txtPatientId" value="0">
-                    <div class="form-group" id="patienDiv">
-                        <label class="control-label col-sm-2" for="email">Chọn bệnh nhân</label>
-                        <div class="col-sm-10">
-                            <div class="row-fluid">
-                                
-                                
-                                <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatients" data-live-search="true">
-                                        <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
-                                        @*@foreach (var item in allPatient)
-                                        {
-                                            <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
-                                        }*@
-
-                                    </select>
-
-                            </div>
-                        </div>
+    <div class="row" id="myModal" hidden>
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <!-- general form elements disabled -->
+                <div class="box box-warning ">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" id="lblTitle"></h3>
+                        <button type="button" class="btn btn-secondary btnCanel" style="float:left">Quay trở lại trang chính</button>
+                        <button type="button" class="btn btn-secondary btnCanel" style="float:right">Quay trở lại trang chính</button>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Mã bệnh nhân</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="txtCode" name="txtCode" value="@ViewBag.BN" readonly>
-                        </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" id="createUpdateProductFrm">
 
-                    </div>
-                    @*<div class="form-group">
-                            <label class="control-label col-sm-2" for="email">Account ID</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
-                            </div>
-                        </div>*@
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" readonly id="txtPatientName" name="txtCmnd">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Giới tính</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" id="ddlGender" disabled>
-                                <option value="">
-                                    ----- Chọn -----
-                                </option>
-                                <option value="Male">
-                                    Nam
-                                </option>
-                                <option value="Female">
-                                    Nữ
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Tuổi</label>
-                        <div class="col-sm-10">
-                            <input type="text" readonly class="form-control" id="txtDate">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Số điện thoại</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" readonly id="txtPhoneNumber" name="txtName">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Địa chỉ nhà</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" readonly id="txtHomeAddress" name="txtName">
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <div class="form-group" style="height:400px">
-                        <label class="control-label col-sm-2" for="email"><h3>Chi tiết kết quả xét nghiệm</h3></label>
-                        <div class="col-sm-10">
-
-                            <div class="tab-content">
-                                <div id="tab-1" class="tab-pane active">
-                                    <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <br />
-                                            <ul class="nav nav-tabs">
-                                                <li class="active"><a data-toggle="tab" href="#home">Xét nghiệm máu</a></li>
-                                                <li><a data-toggle="tab" href="#menu1">Xét nghiệm Nước Tiểu</a></li>
-                                                <li><a data-toggle="tab" href="#menu3">Xét nghiệm khác </a></li>
-
-                                            </ul>
-
-                                            <div class="tab-content">
-                                                <div id="home" class="tab-pane fade in active">
-                                                    <br />
-                                                    <div class="info-box bg-red">
-                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
-                                                        <div class="info-box-content">
-                                                            <span class="info-box-text"><h3>Huyết học</h3></span>
+                        <div class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-horizontal">
+                                    <input type="hidden" class="form-control" id="txtLabTestResultId" name="txtPatientId" value="0">
+                                    <div class="form-group" id="patienDiv">
+                                        <label class="control-label col-sm-2" for="email">Chọn bệnh nhân</label>
+                                        <div class="col-sm-10">
+                                            <div class="row-fluid">
 
 
-                                                        </div>
-                                                        <!-- /.info-box-content -->
-                                                    </div>
-                                                    <br />
-                                                    @foreach (var item in huyethocLabTest)
+                                                <select class="selectpicker form-control" data-show-subtext="true" id="ddlPatients" data-live-search="true">
+                                                    <option value="0" data-subtext="Bạn chưa chọn bệnh nhân nào">-- Chọn bệnh nhân --</option>
+                                                    @foreach (var item in allPatient)
                                                     {
-                                                        <div class="col-md-4 customize-column">
-                                                            <label class="control-label col-sm-4 lblTitle" for="email">@item.Name.Trim()</label>
-                                                            <div class="col-sm-6">
-                                                                @{
-                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
-                                                                    {
-                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                            <option value="">--Chọn --</option>
-                                                                            <option value="Âm tính">Âm tính</option>
-                                                                            <option value="Dương tính">Dương tính</option>
-                                                                        </select>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                    }
-                                                                }
-
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <br />
-
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <div class="info-box bg-green">
-                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
-
-                                                        <div class="info-box-content">
-                                                            <span class="info-box-text"><h3>Sinh hóa</h3></span>
-
-                                                        </div>
-                                                        <!-- /.info-box-content -->
-                                                    </div>
-                                                    @foreach (var item in sinhHoaLabTest)
-                                                    {
-                                                        <div class="col-md-4 customize-column">
-                                                            <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
-                                                            <div class="col-sm-8">
-
-                                                                @{
-                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
-                                                                    {
-                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                            <option value="">--Chọn --</option>
-                                                                            <option value="Âm tính">Âm tính</option>
-                                                                            <option value="Dương tính">Dương tính</option>
-                                                                        </select>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                    }
-                                                                }
-
-                                                            </div>
-
-                                                        </div>
+                                                        <option value="@item.PatientId" data-subtext="@item.HomeAddress">@item.FullName</option>
                                                     }
 
-                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
-                                                        <br />
-                                                        <form id="exportHuyetHoc" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                            <button type="button" id="btnExportHuyetHoc" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm máu
-                                                            <input type="text" hidden name="labTestTypeId" value="1" />
-                                                            <input type="text" hidden id="lbllabTestResultId" name="labTestResultId" value="0" />
-                                                        </form>
-                                                        <br />
-                                                        <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                            <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm sinh hoa
-                                                            <input type="text" hidden name="labTestTypeId" value="3" />
-                                                            <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
-                                                        </form>
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div id="menu1" class="tab-pane fade">
-                                                    <div id="home" class="tab-pane fade in active">
-                                                        <br />
-                                                        @foreach (var item in nuoctieuLabTest)
-                                                        {
-                                                            <div class="col-md-4 customize-column">
-                                                                <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
-                                                                <div class="col-sm-8">
-                                                                    @{
-                                                                        if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
-                                                                        {
-                                                                            <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                                <option value="">--Chọn --</option>
-                                                                                <option value="Âm tính">Âm tính</option>
-                                                                                <option value="Dương tính">Dương tính</option>
-                                                                            </select>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
-                                                                        }
-                                                                    }
-
-                                                                </div>
-                                                            </div>
-                                                        }
-
-                                                    </div>
-
-                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
-                                                        <br /><form id="exportNuocTieu" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                            <button type="button" id="btnExportNuocTieu" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả nước tiểu
-                                                            <input type="text" hidden name="labTestTypeId" value="2" />
-                                                            <input type="text" hidden id="lbllabTestResultIdNuocTieu" name="labTestResultId" value="0" />
-                                                        </form>
-                                                    </div>
-                                                </div>
-
-                                                <div id="menu2" class="tab-pane fade">
-                                                    <div id="home" class="tab-pane fade in active">
-
-                                                    </div>
-                                                    @*<div hidden class="col-md-12 divExport" style="text-align:end">
-                                                            <br />
-                                                            <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                                <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
-                                                                <input type="text" hidden name="labTestTypeId" value="3" />
-                                                                <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
-                                                            </form>
-                                                        </div>*@
-                                                </div>
-                                                <div id="menu3" class="tab-pane fade">
-
-                                                    <div class="form-group">
-                                                        <div style="padding: 0 15px">
-                                                            <div id="txtCMTPT" style="margin-top: 30px"></div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
-                                                        <br />
-
-                                                        <form id="exportLoaiKhac" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
-                                                            <button type="button" id="btnExportLoaiKhac" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả loại khác
-                                                            <input type="text" hidden name="labTestTypeId" value="4" />
-                                                            <input type="text" hidden id="lbllabTestResultIdLoaiKhac" name="labTestResultId" value="0" />
-                                                        </form>
-                                                    </div>
-                                                </div>
-
+                                                </select>
 
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Mã bệnh nhân</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="txtCode" name="txtCode" value="@ViewBag.BN" readonly>
+                                        </div>
+
+                                    </div>
+                                    @*<div class="form-group">
+                                            <label class="control-label col-sm-2" for="email">Account ID</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="txtAccountId" name="txtAccountId">
+                                            </div>
+                                        </div>*@
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Tên bệnh nhân</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly id="txtPatientName" name="txtCmnd">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="pwd">Giới tính</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="ddlGender" disabled>
+                                                <option value="">
+                                                    ----- Chọn -----
+                                                </option>
+                                                <option value="Male">
+                                                    Nam
+                                                </option>
+                                                <option value="Female">
+                                                    Nữ
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Tuổi</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" readonly class="form-control" id="txtDate">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Số điện thoại</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly id="txtPhoneNumber" name="txtName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Địa chỉ nhà</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" readonly id="txtHomeAddress" name="txtName">
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="form-group" style="height:400px">
+                                        <label class="control-label col-sm-2" for="email"><h3>Chi tiết kết quả xét nghiệm</h3></label>
+                                        <div class="col-sm-10">
+
+                                            <div class="tab-content">
+                                                <div id="tab-1" class="tab-pane active">
+                                                    <div class="panel-body">
+                                                        <div class="col-lg-12">
+                                                            <br />
+                                                            <ul class="nav nav-tabs">
+                                                                <li class="active"><a data-toggle="tab" href="#home">Xét nghiệm máu</a></li>
+                                                                <li><a data-toggle="tab" href="#menu1">Xét nghiệm Nước Tiểu</a></li>
+                                                                <li><a data-toggle="tab" href="#menu3">Xét nghiệm khác </a></li>
+
+                                                            </ul>
+
+                                                            <div class="tab-content">
+                                                                <div id="home" class="tab-pane fade in active">
+                                                                    <br />
+                                                                    <div class="info-box bg-red">
+                                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+                                                                        <div class="info-box-content">
+                                                                            <span class="info-box-text"><h3>Huyết học</h3></span>
+
+
+                                                                        </div>
+                                                                        <!-- /.info-box-content -->
+                                                                    </div>
+                                                                    <br />
+                                                                    @foreach (var item in huyethocLabTest)
+                                                                    {
+                                                                        <div class="col-md-4 customize-column">
+                                                                            <label class="control-label col-sm-4 lblTitle" for="email">@item.Name.Trim()</label>
+                                                                            <div class="col-sm-6">
+                                                                                @{
+                                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                                    {
+                                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                            <option value="">--Chọn --</option>
+                                                                                            <option value="Âm tính">Âm tính</option>
+                                                                                            <option value="Dương tính">Dương tính</option>
+                                                                                        </select>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                    }
+                                                                                }
+
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+
+                                                                    <br />
+                                                                    <br />
+                                                                    <br />
+                                                                    <div class="info-box bg-green">
+                                                                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+                                                                        <div class="info-box-content">
+                                                                            <span class="info-box-text"><h3>Sinh hóa</h3></span>
+
+                                                                        </div>
+                                                                        <!-- /.info-box-content -->
+                                                                    </div>
+                                                                    @foreach (var item in sinhHoaLabTest)
+                                                                    {
+                                                                        <div class="col-md-4 customize-column">
+                                                                            <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
+                                                                            <div class="col-sm-8">
+
+                                                                                @{
+                                                                                    if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                                    {
+                                                                                        <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                            <option value="">--Chọn --</option>
+                                                                                            <option value="Âm tính">Âm tính</option>
+                                                                                            <option value="Dương tính">Dương tính</option>
+                                                                                        </select>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                    }
+                                                                                }
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    }
+
+                                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                                        <br />
+                                                                        <form id="exportHuyetHoc" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                            <button type="button" id="btnExportHuyetHoc" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm máu
+                                                                            <input type="text" hidden name="labTestTypeId" value="1" />
+                                                                            <input type="text" hidden id="lbllabTestResultId" name="labTestResultId" value="0" />
+                                                                        </form>
+                                                                        <br />
+                                                                        <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                            <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả xét nghiệm sinh hoa
+                                                                            <input type="text" hidden name="labTestTypeId" value="3" />
+                                                                            <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
+                                                                        </form>
+                                                                    </div>
+
+
+
+                                                                </div>
+                                                                <div id="menu1" class="tab-pane fade">
+                                                                    <div id="home" class="tab-pane fade in active">
+                                                                        <br />
+                                                                        @foreach (var item in nuoctieuLabTest)
+                                                                        {
+                                                                            <div class="col-md-4 customize-column">
+                                                                                <label class="control-label col-sm-4 lblTitle" for="email">@item.Name</label>
+                                                                                <div class="col-sm-8">
+                                                                                    @{
+                                                                                        if (!String.IsNullOrEmpty(item.AverageValue) && item.AverageValue.Contains("Âm tính"))
+                                                                                        {
+                                                                                            <select class="form-control txtLabTestDetail dropdown" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                                <option value="">--Chọn --</option>
+                                                                                                <option value="Âm tính">Âm tính</option>
+                                                                                                <option value="Dương tính">Dương tính</option>
+                                                                                            </select>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <input type="text" class="form-control txtLabTestDetail" data-id="@item.LabTestDetailId" data-name="@item.Name">
+                                                                                        }
+                                                                                    }
+
+                                                                                </div>
+                                                                            </div>
+                                                                        }
+
+                                                                    </div>
+
+                                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                                        <br /><form id="exportNuocTieu" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                            <button type="button" id="btnExportNuocTieu" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả nước tiểu
+                                                                            <input type="text" hidden name="labTestTypeId" value="2" />
+                                                                            <input type="text" hidden id="lbllabTestResultIdNuocTieu" name="labTestResultId" value="0" />
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div id="menu2" class="tab-pane fade">
+                                                                    <div id="home" class="tab-pane fade in active">
+
+                                                                    </div>
+                                                                    @*<div hidden class="col-md-12 divExport" style="text-align:end">
+                                                                            <br />
+                                                                            <form id="exportSinhHoa" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                                <button type="button" id="btnExportSinhHoa" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả sinh hóa
+                                                                                <input type="text" hidden name="labTestTypeId" value="3" />
+                                                                                <input type="text" hidden id="lbllabTestResultIdSinhHoa" name="labTestResultId" value="0" />
+                                                                            </form>
+                                                                        </div>*@
+                                                                </div>
+                                                                <div id="menu3" class="tab-pane fade">
+
+                                                                    <div class="form-group">
+                                                                        <div style="padding: 0 15px">
+                                                                            <div id="txtCMTPT" style="margin-top: 30px"></div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div hidden class="col-md-12 divExport" style="text-align:end">
+                                                                        <br />
+
+                                                                        <form id="exportLoaiKhac" action="/LabTestResult/ExportLabTestResultToPdf" method="post">
+                                                                            <button type="button" id="btnExportLoaiKhac" class="btn btn-default"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></button> Xuất phiếu kết quả loại khác
+                                                                            <input type="text" hidden name="labTestTypeId" value="4" />
+                                                                            <input type="text" hidden id="lbllabTestResultIdLoaiKhac" name="labTestResultId" value="0" />
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
 
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2" for="email">Ghi chú: </label>
+                                        <div class="col-sm-10">
+                                            <textarea rows="5" type="text" class="form-control" id="txtComment" name="txtName"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
 
 
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Ghi chú: </label>
-                    <div class="col-sm-10">
-                        <textarea rows="5" type="text" class="form-control" id="txtComment" name="txtName">
-</textarea>
+
+                    <br />
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btnCanel" style="float:left">Quay trở lại trang chính</button>
+                        <button type="button" class="btn btn-secondary btnCanel" data-dismiss="modal">Hủy</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Lưu</button>
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                <div hidden>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Xét nghiệm</th>
-                                <th>Thành tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody id="priceDetail">
-                            <tr></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="form-group">
-                    <div class="text-right">
-
-                        <button type="button" class="btn btn-success" id="btnSave" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Đang lưu ...">Lưu</button>
-                        <button type="button" class="btn btn-default" id="btnClose" data-dismiss="modal">Đóng</button>
-                    </div>
-                </div>
-
+                <!-- /.box-body -->
             </div>
+            <!-- /.box -->
         </div>
     </div>
-</div>
+    <!-- /.col -->
+</section>
+<!-- /.content -->
+<!-- Modal -->
 
-<div id="myModal1" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg" id="hoangdeptrai">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="lblPopupTitle">CHỈNH SỬA NHẬN XÉT</h4>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" class="form-control" id="txtAppCode" name="txtAppCode" value="0">
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="email">Chẩn đoán:</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="txtResult" name="txtResult">
-                    </div>
-                    <br /><label class="control-label col-sm-2" for="email">Ghi chú: </label><br />
-                    <div style="padding: 0 15px">
-                        <div id="txtCMTPT" style="margin-top: 30px"></div>
-                    </div>
-                </div>
 
-                @*<div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="button" id="btnSaveResult" class="btn btn-success">Lưu</button>
-                        </div>
-                    </div>*@
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="btnSaveResult" class="btn btn-success">Lưu</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="myModalHistory" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="lblPopupTitle">Danh sách các kết quả xét nghiệm</h4>
-            </div>
-            <div class="modal-body">
-                <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Mã lịch hẹn</th>
-                            <th>Ngày xét nghiệm</th>
-                            <th>Kết luận xét nghiệm</th>
-                            <th>Trạng thái</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tblDataLabTestingResult"></tbody>
-                </table>
-                <div style="margin-left:35%" id="pagination" class="pagination"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+
+
+
+
 
 <script id="data-template" type="x-tmpl-mustache">
     <tr>
@@ -646,10 +590,10 @@
     $("#ddlPatientChoose").autocomplete({
         source: availableTags
     });
-    
+
     $('#ddlPatientChoose').off('change').on('change', function () {
         var searchKey = $(this).val();
-        
+
         $("#ddlPatientChoose").autocomplete({
             source: getData(searchKey)
         });
@@ -665,16 +609,16 @@
                     .text(item.FullName));
         });
     });
-    
-    
+
+
     function getData(searchKey) {
         var count = 0;
         var list = [];
         for (var i = 0; i < patients.length; i++) {
-            if (count > 30 ) {
+            if (count > 30) {
                 break;
             }
-            if ( searchKey == '' || patients[i].FullName.indexOf(searchKey) >= 0) {
+            if (searchKey == '' || patients[i].FullName.indexOf(searchKey) >= 0) {
                 list.push(patients[i].FullName);
                 count++;
             }
@@ -683,52 +627,46 @@
     }
 </script>
 
-@section scripts{
-    <!-- Froala Editor -->
-    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>*@
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/froala_editor.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/align.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/char_counter.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/code_beautifier.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/code_view.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/colors.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/draggable.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/emoticons.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/entities.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/file.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/font_size.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/font_family.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/fullscreen.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/image.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/image_manager.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/line_breaker.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/inline_style.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/link.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/lists.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/paragraph_format.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/paragraph_style.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/quick_insert.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/quote.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/table.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/save.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/url.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/video.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/help.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/print.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/third_party/spell_checker.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/special_characters.min.js"></script>
-    <script type="text/javascript" src="~/Assets/plugins/froala_editor_2.9.1/js/plugins/word_paste.min.js"></script>
-    <!-- /Froala Editor -->
-    <script>
-        $('#txtCMTPT').froalaEditor({
-            height: 300
-        })</script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-}
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.11/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/froala_editor.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/align.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/char_counter.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/code_beautifier.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/code_view.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/colors.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/draggable.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/emoticons.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/entities.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/file.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/font_size.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/font_family.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/fullscreen.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/image.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/image_manager.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/line_breaker.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/inline_style.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/link.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/lists.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/paragraph_format.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/paragraph_style.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/quick_insert.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/quote.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/table.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/save.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/url.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/video.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/help.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/print.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/third_party/spell_checker.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/special_characters.min.js"></script>
+<script type="text/javascript" src="/Assets/plugins/froala_editor_2.9.1/js/plugins/word_paste.min.js"></script>
+<!-- /Froala Editor -->
+<script>
+    $('#txtCMTPT').froalaEditor({
+        height: 300
+    })</script>
 
 
 <script>

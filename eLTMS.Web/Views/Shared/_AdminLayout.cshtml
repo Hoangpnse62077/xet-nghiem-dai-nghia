@@ -104,8 +104,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.10.6/jquery.typeahead.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.10.6/jquery.typeahead.min.css" />
 
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
+    <script>
+        $(document).ajaxStart(function () {
+            $.LoadingOverlay("show");
+        });
+        $(document).ajaxStop(function () {
+            $.LoadingOverlay("hide");
+        });
+    </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition sidebar-mini skin-black">
     <div class="wrapper">
         <header class="main-header">
             <!-- Content Header (Page header) -->
@@ -239,10 +248,7 @@
     </div>
     
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-messaging.js"></script>
+  
 
     <script id="menu-noti-item-template" type="x-tmpl-mustache">
         <li>
@@ -269,78 +275,8 @@
 
         // Receive notifications from Firebase
 
-        var config = {
-            apiKey: "AIzaSyBmErEOrR3HvYOALMjpqmP4dwiYUuAPK7E",
-            authDomain: "eltms-test1.firebaseapp.com",
-            databaseURL: "https://eltms-test1.firebaseio.com",
-            projectId: "eltms-test1",
-            storageBucket: "eltms-test1.appspot.com",
-            messagingSenderId: "1013768931631"
-        };
-        firebase.initializeApp(config);
-
-        const messaging = firebase.messaging();
-        messaging
-            .requestPermission() //Firebase
-            .then(function () {
-                console.log("Notification permission granted.");
-
-                // get the token in the form of promise
-                return messaging.getToken()
-            })
-            .then(function (token) {
-                //console.log("token: ", token);
-                $.ajax({
-                    url: '/api/token/create',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: { TokenString: token },
-                    success: function (result) {
-                        if (result.sucess) {
-                            console.log("Token has registered. Now you will receive notifications on this device.");
-                        }
-                        else {
-                            console.log("Token is existing.");
-                        }
-                    },
-                    fail: function () {
-                        console.log("Token registration failed.");
-                    }
-                });
-            })
-            .catch(function (err) {
-                console.log("Unable to get permission to notify. ", err);
-            });
-
-        var loadMessage = function (payload) {
-            var roleIds = payload.data.roleIds;
-            if (roleIds.includes(roleId)) {
-                console.log("Message received. ", payload);
-                var nNoti = $("#number-of-noti").html();
-                nNoti = parseInt(nNoti) + 1;
-                $("#number-of-noti").html(nNoti);
-                if (nNoti == 0) {
-                    $("#number-of-noti").hide(0);
-                } else {
-                    $("#number-of-noti").show(0);
-                }
-                var template = $("#menu-noti-item-template").html();
-                var data = {
-                    Url: "#",
-                    Message: payload.data.message
-                };
-                var html = Mustache.render(template, data);
-                $("#menu-noti").prepend(html);
-
-                // Toastr
-                toastr["success"](payload.data.message);
-
-                ////Reload table ajax
-                homeController.loadData();
-            }
-            homeController.loadAppBySample();
-        }
-        messaging.onMessage(loadMessage);
+      
+       
     </script>
 
     @RenderSection("scripts", required: false)

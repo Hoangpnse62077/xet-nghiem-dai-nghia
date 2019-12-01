@@ -198,7 +198,7 @@ var homeController = {
                     $('#txtName').val(data.FullName);
                     $('#txtDate').val(data.Age);
                     $('#ddlGender').val(data.Gender).change();
-                    $('#txtPhoneNumber').val(data.PhoneNumber.trim());
+                    $('#txtPhoneNumber').val(data.PhoneNumber);
                     $('#txtHomeAddress').val(data.HomeAddress);
                     $('#txtCompanyAddress').val(data.CompanyAddress);
                     $('#txtCmnd').val(data.IdentityCardNumber);

@@ -178,6 +178,11 @@ var homeController = {
                 }
             })
         });
+
+        $('.btnCanel').off('click').on('click', function () {
+            $('#divList').show();
+            $('#myModal').hide();
+        });
         $('#btnSave').off('click').on('click', function () {
             
             var $this = $(this);
@@ -256,23 +261,31 @@ var homeController = {
 
         });
         $('#btnAddNew').off('click').on('click', function () {
+            $('#divList').hide();
+            $('#myModal').show();
             $('.divExport').hide();
             $('#lblPopupTitle').text('Thêm mới kết quả xét nghiệm');
             homeController.resetForm();
-            $('#myModal').modal({ backdrop: 'static', keyboard: false });  
+            //$('#myModal').modal({ backdrop: 'static', keyboard: false });  
         });   
         $('.btn-edit').off('click').on('click', function () {
             $('.divExport').show();
-            $('#lblPopupTitle').text('Cập nhật thông tin bệnh nhân');    
-            $('#myModal').modal({ backdrop: 'static', keyboard: false });
+            $('#lblPopupTitle').text('Cập nhật thông tin bệnh nhân');
+            $('#divList').hide();
+            $('#myModal').show();
             var id = $(this).data('id');
             homeController.resetForm();
             homeController.loadDetail(id);
+            var needToRemove = true;
+            $('.modal-backdrop').remove();
+            
+            
+
         });
         $('.btn-editResult').off('click').on('click', function () {
             $('#lblPopupTitle').text('Cập nhật thông tin xét nghiệm');
             $('#myModalHistory').modal('hide');
-            $('#myModal1').modal('show');
+            //$('#myModal1').modal('show');
             var id = $(this).data('id');
             homeController.loadAppResult(id);
         });

@@ -224,13 +224,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <!-- === Mustache js=== -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.6/dist/loadingoverlay.min.js"></script>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.5.7/firebase-messaging.js"></script>
+
 
     <script>
+
+        $(document).ajaxStart(function () {
+            $.LoadingOverlay("show");
+        });
+        $(document).ajaxStop(function () {
+            $.LoadingOverlay("hide");
+        });
+
         roleId = @roleId;
         RoleEnum = {
             "Patient": 1,
@@ -243,70 +249,18 @@
             "Cashier": 8
         };
         Object.freeze(RoleEnum);
-        
-        //toastr.options = {
-        //    "debug": false,
-        //    "positionClass": "toast-bottom-right",
-        //    "onclick": null,
-        //    "fadeIn": 300,
-        //    "fadeOut": 1000,
-        //    "timeOut": 5000,
-        //    "extendedTimeOut": 1000
-        //}
 
-        var config = {
-            apiKey: "AIzaSyBmErEOrR3HvYOALMjpqmP4dwiYUuAPK7E",
-            authDomain: "eltms-test1.firebaseapp.com",
-            databaseURL: "https://eltms-test1.firebaseio.com",
-            projectId: "eltms-test1",
-            storageBucket: "eltms-test1.appspot.com",
-            messagingSenderId: "1013768931631"
-        };
-        firebase.initializeApp(config);
-
-        const messaging = firebase.messaging();
-        messaging
-            .requestPermission() //Firebase
-            .then(function () {
-                console.log("Notification permission granted.");
-
-                // get the token in the form of promise
-                return messaging.getToken()
-            })
-            .then(function (token) {
-                //console.log("token: ", token);
-                $.ajax({
-                    url: '/api/token/create',
-                    type: 'POST',
-                    dataType: 'JSON',
-                    data: { TokenString: token },
-                    success: function (result) {
-                        if (result.sucess) {
-                            console.log("Token has registered. Now you will receive notifications on this device.");
-                        }
-                        else {
-                            console.log("Token is existing.");
-                        }
-                    },
-                    fail: function () {
-                        console.log("Token registration failed.");
-                    }
-                });
-            })
-            .catch(function (err) {
-                console.log("Unable to get permission to notify. ", err);
-            });
-
-        var loadMessage = function (payload) {
-            var roleIds = payload.data.roleIds;
-            if (roleIds.includes(roleId)) {
-                // Toastr
-                console.log(payload);
-                toastr.options.positionClass = 'toast-top-right';
-                toastr["success"](payload.data.message);                
-            }
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
         }
-        messaging.onMessage(loadMessage);
+
+
     </script>
 
     @RenderSection("scripts", required: false)

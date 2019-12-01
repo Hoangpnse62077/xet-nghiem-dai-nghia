@@ -217,77 +217,87 @@ namespace eLTMS.Web.Controllers
         }///
         public ActionResult ExportLabTestResultToPdf(int labTestResultId, int labTestTypeId)
         {
-            var allData = string.Empty;
-            if (labTestTypeId != 4)
+            try
             {
-                allData =  System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result.html"));
-            }
-            else
-            {
-                allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result-other.html"));
-            }
-             
-            var labTestResult = this._labTestResultService.GetLabTestResultById(labTestResultId);
-            var patientName = labTestResult.Patient.FullName;
-            var homeAddress = labTestResult.Patient.HomeAddress;
-            var createdDate = labTestResult.CreatedDate.Value.ToString("dd/MM/yyyy");
-            var gender = labTestResult.Patient.Gender;
-            allData = allData.Replace("{{PatientName}}", patientName.ToUpper());
-            allData = allData.Replace("{{HomeAddress}}", homeAddress);
-            allData = allData.Replace("{{Gender}}", gender == "Male" ? "Nam" : "Nữ");
-            allData = allData.Replace("{{CreatedDate}}", createdDate);
-            
-            allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age);
-            StringBuilder sb = new StringBuilder();
-            //if (labTestTypeId == 1)
-            //{
-            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM HUYẾT HỌC");
-            //}
-            //else  if (labTestTypeId == 2)
-            //{
-            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
-            //}
-            //else
-            //{
-            //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM SINH HÓA");
-            //}
-
-            allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM");
-            if (labTestTypeId != 4)
-            {
-                foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
+                var allData = string.Empty;
+                if (labTestTypeId != 4)
                 {
-                    sb.AppendLine("<tr class='item' style='font-size:16px'>");
-                    sb.AppendLine($"<td align='right' style='font-size:16px'>{item.LabTestDetail.Name}</td>");
-                    sb.AppendLine($"<td align='center' style='font-size:16px'>{item.Value}</td>");
-                    sb.AppendLine($"<td  align='left' style='font-size:16px'>{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
-                    sb.AppendLine("</tr>");
+                    allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result.html"));
                 }
-                allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
-            }
-            else
-            {;
-                var comment = labTestResult.LabTestResultDetails.FirstOrDefault(x => x.LabTestDetail.LabTestTypeId == labTestTypeId);
-                allData = allData.Replace("{{LabTestDetails}}", comment?.Value);
-            }
-           
-            Byte[] res = null;
-            using (MemoryStream ms = new MemoryStream())
-            {
-                var pdf = TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerator.GeneratePdf(allData, PdfSharp.PageSize.A4);
-                pdf.Save(ms);
-                res = ms.ToArray();
-            }
-            
+                else
+                {
+                    allData = System.IO.File.ReadAllText(Server.MapPath("~/template-pdf/result-other.html"));
+                }
 
-            Response.Clear();
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("Content-Disposition", $"attachment;filename=\"KET_QUA_XET_NGHIEM_{patientName}.pdf\"");
+                var labTestResult = this._labTestResultService.GetLabTestResultById(labTestResultId);
+                var patientName = labTestResult.Patient.FullName;
+                var homeAddress = labTestResult.Patient.HomeAddress;
+                var createdDate = labTestResult.CreatedDate.Value.ToString("dd/MM/yyyy");
+                var gender = labTestResult.Patient.Gender;
+                allData = allData.Replace("{{PatientName}}", patientName.ToUpper());
+                allData = allData.Replace("{{HomeAddress}}", homeAddress);
+                allData = allData.Replace("{{Gender}}", gender == "Male" ? "Nam" : "Nữ");
+                allData = allData.Replace("{{CreatedDate}}", createdDate);
+
+                allData = allData.Replace(" {{Age}}", " " + labTestResult.Patient.Age);
+                StringBuilder sb = new StringBuilder();
+                //if (labTestTypeId == 1)
+                //{
+                //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM HUYẾT HỌC");
+                //}
+                //else  if (labTestTypeId == 2)
+                //{
+                //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM NƯỚC TIỂU");
+                //}
+                //else
+                //{
+                //    allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM SINH HÓA");
+                //}
+
+                allData = allData.Replace("{{LabTestType}}", "XÉT NGHIỆM");
+                if (labTestTypeId != 4)
+                {
+                    foreach (var item in labTestResult.LabTestResultDetails.Where(x => x.LabTestDetail.LabTestTypeId == labTestTypeId))
+                    {
+                        sb.AppendLine("<tr class='item' style='font-size:16px'>");
+                        sb.AppendLine($"<td align='right' style='font-size:16px'>{item.LabTestDetail.Name}</td>");
+                        sb.AppendLine($"<td align='center' style='font-size:16px'>{item.Value}</td>");
+                        sb.AppendLine($"<td  align='left' style='font-size:16px'>{item.LabTestDetail.AverageValue + " " + item.LabTestDetail.Unit }</td>");
+                        sb.AppendLine("</tr>");
+                    }
+                    allData = allData.Replace(" {{LabTestDetails}}", sb.ToString());
+                }
+                else
+                {
+                    ;
+                    var comment = labTestResult.LabTestResultDetails.FirstOrDefault(x => x.LabTestDetail.LabTestTypeId == labTestTypeId);
+                    allData = allData.Replace("{{LabTestDetails}}", comment?.Value);
+                }
+
+                Byte[] res = null;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    var pdf = TheArtOfDev.HtmlRenderer.PdfSharp.PdfGenerator.GeneratePdf(allData, PdfSharp.PageSize.A4);
+                    pdf.Save(ms);
+                    res = ms.ToArray();
+                }
+
+
+                Response.Clear();
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("Content-Disposition", $"attachment;filename=\"KET_QUA_XET_NGHIEM_{patientName}.pdf\"");
+
+                Response.BinaryWrite(res);
+                Response.Flush();
+                Response.End();
+                return null;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             
-            Response.BinaryWrite(res);
-            Response.Flush();
-            Response.End();
-            return null;
         }
         public ActionResult Test(string id)
         {
