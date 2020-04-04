@@ -4,6 +4,8 @@ using eLTMS.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,8 +20,21 @@ namespace eLTMS.Web.Controllers
         }
 
         // GET: Account
-        public ActionResult Login(string returnUrl)
+        public async Task<ActionResult> Login(string returnUrl)
         {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = new HttpRequestMessage(HttpMethod.Get, "http://nghialab.somee.com/account/login");
+                    var response = await client.SendAsync(request);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
